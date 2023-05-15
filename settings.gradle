@@ -9,3 +9,4 @@
 
 rootProject.name = 'capstone_project'
 include('app')
+//include 'MusicPlaylistServiceLambda'
