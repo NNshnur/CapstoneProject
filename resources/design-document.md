@@ -14,8 +14,9 @@ profitability and manage finances effectively.*
 
 1. Shall I pre-define the categories for the variable expenses or not?
 2. What data type to use for the date, shall I use a date picker (using a calendar)?
-3. Shall I put the data for fixed and variable expenses together and call it something like - Operating expenses;
-4. What if the owner operator has more than 1 truck;
+3. Shall I put the data for fixed and variable expenses together and call it something like - Operating expenses?
+4. What if the owner operator has more than 1 truck?
+5. After logging in - what the application should display - dashboard with reports overview YTD
 
 ## 3. Use Cases
 
@@ -57,20 +58,41 @@ profitability and manage finances effectively.*
 
 # 5. Proposed Architecture Overview
 
-_Describe broadly how you are proposing to solve for the requirements you described in Section 2. This may include class diagram(s) showing what components you are planning to build. You should argue why this architecture (organization of components) is reasonable. That is, why it represents a good data flow and a good separation of concerns. Where applicable, argue why this architecture satisfies the stated requirements._
+The landing page for my application will provide a concise summary of its features and highlight its unique qualities 
+compared to other available options in the market. Additionally, users will be presented with two button choices:
+Sign Up and Log In. To authenticate users, I will employ Cognito. For implementing the necessary CRUD functionality, 
+I will utilize API Gateway and Lambda to create endpoints. The required information will be stored in DynamoDB database 
+tables.
 
 # 6. API
 
 ## 6.1. Public Models
 
 **Profile Model**
-// To do 
+- String companyName;
+- String profileId;
+- Set <String> truckId;
 
 **Expense Model**
-// To do 
+- String expenseId;
+- String truckId;
+- LocalDate date;
+- String vendorName;
+- enum category;
+- double amount;
+- enum (or string) paymentType
 
 **Income Model**
-// To do
+- String incomeId;
+- String truckId;
+- LocalDate date;
+- double bedHeadMiles;
+- double loadedMiles;
+- double totalMiles;
+- double grossIncome; 
+- double costPerMile;
+- double profit;
+- double personalIncome;
 
 
 ## 6.2. Create an operating expense-entry endpoint
