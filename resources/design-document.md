@@ -1,16 +1,14 @@
 # Design Document
 
-## Instructions
-
-## TruckBizBook Design
+# TruckBizBook Design
 
 ## 1. Problem Statement
 
-Truck owner operators face challenges in effectively tracking their expenses and income, leading to difficulties 
+*Truck owner operators face challenges in effectively tracking their expenses and income, leading to difficulties 
 in managing their financial operations. I would like to develop an application that helps truck owner operators track 
 their expenses and income.  Users will be able to create new expense entries – like fuel, tolls, maintenance, permits, 
 etc… They can also log their income from completed jobs. The application will provide reports to help monitor 
-profitability and manage finances effectively.
+profitability and manage finances effectively.*
 
 ## 2. Top Questions to Resolve in Review
 
@@ -21,33 +19,41 @@ profitability and manage finances effectively.
 
 ## 3. Use Cases
 
-U1. As a user I want to create operating expense entry;
-U2. As a user I want to update operating expense entry;
-U3. As a user I want to view all operating expense;
-U4. As a user I want to 'soft delete' expense entry.
-U5. As a user I want to create an entry of income;
-U6. As a user I want to delete an entry of income;
-U7. As a user I want to filter by category;
-U8. As a user I want to filter by truck;
-U9. As a user I want to filter by date;
-U10. As a user I want to see a graph representation of my expenses and income by month (dashboard);
-U11. As I user I want to generate report and export it in PDF format.
+* U1. As a user I want to create operating expense entry;
+* U2. As a user I want to update operating expense entry;
+* U3. As a user I want to view all operating expense;
+* U4. As a user I want to 'soft delete' expense entry.
+* U5. As a user I want to create an entry of income;
+* U6. As a user I want to delete an entry of income;
+* U7. As a user I want to update an entry of income;
+* U8. As a user I want to view all income entries;
+* U9. As a user I want to filter by category;
+* U10. As a user I want to filter by truck;
+* U11. As a user I want to filter by date;
+* U12. As a user I want to see a graph representation of my expenses and income by month (dashboard);
+* U13. As I user I want to generate report and export it in PDF format.
 
 ## 4. Project Scope
 
-_Clarify which parts of the problem you intend to solve. It helps reviewers know what questions to ask to make sure you are solving for what you say and stops discussions from getting sidetracked by aspects you do not intend to handle in your design._
-
 ### 4.1. In Scope
 
-_Which parts of the problem defined in Sections 1 and 2 will you solve with this design? This should include the base functionality of your product. What pieces are required for your product to work?_
+1. As a user I want to create operating expense entry; 
+2. As a user I want to update operating expense entry; 
+3. As a user I want to view all operating expense; 
+4. As a user I want to 'soft delete' expense entry. 
+5. As a user I want to create an entry of income; 
+6. As a user I want to delete an entry of income; 
+7. As a user I want to update an entry of income; 
+8. As a user I want to view all income entries; 
+9. As a user I want to filter by category;
+10. As a user I want to filter by date;
+11. As a user I want to filter by truck;
 
-_The functionality described above should be what your design is focused on. You do not need to include the design for any out of scope features or expansions._
 
 ### 4.2. Out of Scope
 
-_Based on your problem description in Sections 1 and 2, are there any aspects you are not planning to solve? Do potential expansions or related problems occur to you that you want to explicitly say you are not worrying about now? Feel free to put anything here that you think your team can't accomplish in the unit, but would love to do with more time._
-
-_The functionality here does not need to be accounted for in your design._
+* Stretch Goal 1 - As a user I want to see a graph representation of my expenses and income by month (dashboard);
+* Stretch Goal 2 - As I user I want to generate report and export it in PDF format.
 
 # 5. Proposed Architecture Overview
 
@@ -57,22 +63,105 @@ _Describe broadly how you are proposing to solve for the requirements you descri
 
 ## 6.1. Public Models
 
-_Define the data models your service will expose in its responses via your *`-Model`* package. These will be equivalent to the *`PlaylistModel`* and *`SongModel`* from the Unit 3 project._
+**Profile Model**
+// To do 
 
-## 6.2. _First Endpoint_
+**Expense Model**
+// To do 
 
-_Describe the behavior of the first endpoint you will build into your service API. This should include what data it requires, what data it returns, and how it will handle any known failure cases. You should also include a sequence diagram showing how a user interaction goes from user to website to service to database, and back. This first endpoint can serve as a template for subsequent endpoints. (If there is a significant difference on a subsequent endpoint, review that with your team before building it!)_
+**Income Model**
+// To do
 
-_(You should have a separate section for each of the endpoints you are expecting to build...)_
 
-## 6.3 _Second Endpoint_
+## 6.2. Create an operating expense-entry endpoint
+POST/expenses/create
 
-_(repeat, but you can use shorthand here, indicating what is different, likely primarily the data in/out and error conditions. If the sequence diagram is nearly identical, you can say in a few words how it is the same/different from the first endpoint)_
+## 6.3. Update an operating expense-entry endpoint
+PUT/expenses/{id}
+
+## 6.4. View all operating expenses endpoint
+GET/expenses/all
+
+## 6.5. Delete an operating expense-entry endpoint
+DELETE/expenses/{id}
+
+## 6.6. Create an income-entry endpoint
+POST/incomes/create
+
+## 6.7. Update an income-entry endpoint
+PUT/incomes/{id}
+
+## 6.8. View all income entries endpoint
+GET/incomes/all
+
+## 6.9. Delete an income-entry endpoint
+DELETE/incomes/{id}
+
+## 6.10. Filter expense by category endpoint
+GET/expenses?category=nameOfCategoryNeeded
+
+## 6.11. Filter expenses by date endpoint
+GET/expenses?date=dateNeeded
+
 
 # 7. Tables
+`OperatingExpenseTable`
+``` 
+expenseId // partition key, string
+truckId // string (sort key)
+date // LocalDate
+vendorName // string
+category // enum
+amount // double 
+payment type // enum (or string)
+```
 
-_Define the DynamoDB tables you will need for the data your service will use. It may be helpful to first think of what objects your service will need, then translate that to a table structure, like with the *`Playlist` POJO* versus the `playlists` table in the Unit 3 project._
+`IncomeTable`
+``` 
+incomeId // partition key, string
+truckId // string (sort key)
+date // LocalDate
+bedHeadMiles // double
+loadedMiles // double
+totalMmiles // double
+grossIncome // double
+costPerMile // double
+profit // double
+personalIncome // double
+```
+
+`CategoryIndex`
+``` 
+category // partition key, enum
+truckId // string
+expenseId // string
+date //LocalDate
+vendorName //string
+amount //double
+payment type/enum
+```
+
+`DateIndex`
+``` 
+date //partition key, LocalDate
+truckId // string
+expenseId // string
+category // enum
+vendorName //string
+amount //double
+payment type/enum
+```
+
+`TruckIndex`
+``` 
+truckId // partition key, string
+expenseId // string
+date // LocalDate
+vendorName // string
+category // enum
+amount // double 
+payment type // enum (or string)
+```
 
 # 8. Pages
-
-_Include mock-ups of the web pages you expect to build. These can be as sophisticated as mockups/wireframes using drawing software, or as simple as hand-drawn pictures that represent the key customer-facing components of the pages. It should be clear what the interactions will be on the page, especially where customers enter and submit data. You may want to accompany the mockups with some description of behaviors of the page (e.g. “When customer submits the submit-dog-photo button, the customer is sent to the doggie detail page”)_
+ 
