@@ -64,7 +64,7 @@ comprehensive financial report and save it in a portable format.
 ### 4.2. Out of Scope
 
 * Stretch Goal 1 - As an owner operator I want to see a graph representation of my expenses and income by month (analytics);
-* Stretch Goal 2 - As an owner operator I want to generate report and export it in PDF format.
+* Stretch Goal 2 - As an owner operator I want to generate report and export it in PDF/CSV format.
 
 # 5. Proposed Architecture Overview
 
