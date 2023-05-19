@@ -15,7 +15,7 @@ profitability and manage finances effectively.*
 1. What data type to use for the date, shall I use a date picker (using a calendar)?
 2. What if the owner operator has more than 1 truck? Shall I include it in my base functionality?
 3. After logging in - what the application should display - the options the user can choose from - is the right option 
-4. to go with?
+to go with?
 
 ## 3. Use Cases
 
@@ -83,7 +83,7 @@ tables.
 - String emailAddress;
 - String firstName;
 - String lastName;
-- List <String> truckId;
+- List<String> truckId;
 
 **Expense Model**
 - String expenseId;
@@ -150,6 +150,18 @@ by the Trucking App Service.
 * Accepts date to be filtered by, returns the updated filtered list.
 
 # 7. Tables
+
+`ProfileTable`
+``` 
+companyName // partition key, string
+emailAddress // string
+firstName // string
+lastName // string
+truckId // List <String> 
+
+```
+
+
 `OperatingExpenseTable`
 ``` 
 expenseId // partition key, string
