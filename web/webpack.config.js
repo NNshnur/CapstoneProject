@@ -25,13 +25,7 @@ module.exports = {
   entry: {
     createPlaylist: path.resolve(__dirname, 'src', 'pages', 'createPlaylist.js'),
     viewPlaylist: path.resolve(__dirname, 'src', 'pages', 'viewPlaylist.js'),
-    viewProfile: path.resolve(__dirname, 'src', 'pages', 'viewProfile.js'),
-    viewAllEvents: path.resolve(__dirname,'src', 'pages', 'viewAllEvents.js'),
-    createProfile: path.resolve(__dirname, 'src', 'pages', 'createProfile.js'),
-    createEvents: path.resolve(__dirname, 'src', 'pages', 'createEvents.js'),
-    landingPage: path.resolve(__dirname, 'src', 'pages', 'landingPage.js'),
     searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
-    test: path.resolve(__dirname, 'src', 'pages', 'test.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

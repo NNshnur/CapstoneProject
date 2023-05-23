@@ -8,5 +8,5 @@
  */
 
 rootProject.name = 'capstone_project'
-include('TruckingAppServiceLambda')
+include('MusicPlaylistServiceLambda')
 
