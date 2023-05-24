@@ -1,6 +1,7 @@
 package truckingappservice.dependency;
 
 import dagger.Component;
+import truckingappservice.activity.GetAllExpensesActivity;
 
 import javax.inject.Singleton;
 
@@ -45,6 +46,6 @@ public interface ServiceComponent {
 //     * Provides the relevant activity.
 //     * @return UpdatePlaylistActivity
 //     */
-//    UpdatePlaylistActivity provideUpdatePlaylistActivity();
+    GetAllExpensesActivity provideGetAllExpensesActivity();
 
 }
