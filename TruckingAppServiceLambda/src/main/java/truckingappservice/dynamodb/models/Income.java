@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import truckingappservice.utils.UniqueIdGenerator;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -22,7 +23,9 @@ public class Income {
     public String getIncomeId() {
         return incomeId;
     }
-
+    public String generateId() {
+        return UniqueIdGenerator.generateUniqueId();
+    }
     public void setIncomeId(String incomeId) {
         this.incomeId = incomeId;
     }
@@ -60,7 +63,7 @@ public class Income {
     }
     @DynamoDBAttribute(attributeName = "totalMiles")
     public double getTotalMiles() {
-        return totalMiles;
+        return getLoadedMiles() + getDeadHeadMiles();
     }
 
     public void setTotalMiles(double totalMiles) {
@@ -76,7 +79,7 @@ public class Income {
     }
     @DynamoDBAttribute(attributeName = "ratePerMile")
     public double getRatePerMile() {
-        return ratePerMile;
+        return getGrossIncome() / getTotalMiles();
     }
 
     public void setRatePerMile(double ratePerMile) {

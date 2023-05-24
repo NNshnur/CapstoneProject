@@ -3,6 +3,7 @@ package truckingappservice.dynamodb.models;
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import truckingappservice.models.Category;
 import truckingappservice.models.PaymentType;
+import truckingappservice.utils.UniqueIdGenerator;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -22,7 +23,9 @@ public class Expense {
     public String getExpenseId() {
         return expenseId;
     }
-
+    public String generateId() {
+        return UniqueIdGenerator.generateUniqueId();
+    }
     public void setExpenseId(String expenseId) {
         this.expenseId = expenseId;
     }
