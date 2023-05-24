@@ -153,8 +153,8 @@ by the Trucking App Service.
 
 `ProfileTable`
 ``` 
-companyName // partition key, string
-emailAddress // string
+companyName //  string
+emailAddress // string, partition key
 firstName // string
 lastName // string
 truckId // List <String> 
@@ -165,7 +165,7 @@ truckId // List <String>
 `OperatingExpenseTable`
 ``` 
 expenseId // partition key, string
-truckId // sort key, string 
+truckId // string 
 vendorName // string
 category // enum
 date // LocalDate
@@ -176,7 +176,7 @@ payment type // enum
 `IncomeTable`
 ``` 
 incomeId // partition key, string
-truckId // sort key, string 
+truckId // string 
 date // LocalDate
 deadHeadMiles // double
 loadedMiles // double
@@ -189,7 +189,7 @@ ratePerMile // double
 `CategoryIndex`
 ``` 
 category // partition key, enum
-truckId // string
+truckId // sort key, string
 date //LocalDate
 vendorName //string
 amount //double

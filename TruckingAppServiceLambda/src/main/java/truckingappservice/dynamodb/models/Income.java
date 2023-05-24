@@ -2,7 +2,6 @@ package truckingappservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import truckingappservice.utils.UniqueIdGenerator;
 
@@ -29,7 +28,7 @@ public class Income {
     public void setIncomeId(String incomeId) {
         this.incomeId = incomeId;
     }
-    @DynamoDBRangeKey(attributeName = "truckId")
+
     public String getTruckId() {
         return truckId;
     }

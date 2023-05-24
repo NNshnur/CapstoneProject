@@ -29,7 +29,7 @@ public class Expense {
     public void setExpenseId(String expenseId) {
         this.expenseId = expenseId;
     }
-    @DynamoDBRangeKey(attributeName = "truckId")
+
     @DynamoDBIndexRangeKey(globalSecondaryIndexName = CATEGORY_INDEX, attributeName = "truckId")
     public String getTruckId() {
         return truckId;
@@ -46,8 +46,9 @@ public class Expense {
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
     }
-    @DynamoDBTypeConvertedEnum
+
     @DynamoDBAttribute(attributeName = "category")
+    @DynamoDBTypeConvertedEnum
     @DynamoDBIndexHashKey(globalSecondaryIndexName = CATEGORY_INDEX, attributeName = "category")
     public Category getCategory() {
         return category;
@@ -72,8 +73,9 @@ public class Expense {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-    @DynamoDBTypeConvertedEnum
+
     @DynamoDBAttribute(attributeName = "paymentType")
+    @DynamoDBTypeConvertedEnum
     public PaymentType getPaymentType() {
         return paymentType;
     }
