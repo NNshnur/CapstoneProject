@@ -224,6 +224,13 @@ Resources:
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/incomes"
 
+        - PolicyName: 'AccessCategoryTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/incomes/index/CategoryIndex"
   #-----------------------------------------------------
   # Lambda Functions Configuration
   #-----------------------------------------------------
@@ -362,10 +369,10 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "companyName"
+        - AttributeName: "id"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "companyName"
+        - AttributeName: "id"
           KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "profiles"
@@ -385,6 +392,19 @@ Resources:
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "expenses"
+      GlobalSecondaryIndexes:
+        - IndexName: "CategoryIndex"
+          KeySchema:
+            - AttributeName: "category"
+              KeyType: "HASH"
+            - AttributeName: "truckId"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "INCLUDE"
+            NonKeyAttributes:
+              - "vendorName"
+              - "date"
+              - "amount"
 
   IncomesTable:
     Type: AWS::DynamoDB::Table
