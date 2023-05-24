@@ -161,7 +161,6 @@ truckId // List <String>
 
 ```
 
-
 `OperatingExpenseTable`
 ``` 
 expenseId // partition key, string
