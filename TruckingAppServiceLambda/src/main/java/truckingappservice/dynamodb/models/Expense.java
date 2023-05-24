@@ -5,6 +5,8 @@ import truckingappservice.models.Category;
 import truckingappservice.models.PaymentType;
 
 import java.time.LocalDate;
+import java.util.Objects;
+
 @DynamoDBTable(tableName = "expenses")
 public class Expense {
 
@@ -41,6 +43,7 @@ public class Expense {
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
     }
+    @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "category")
     @DynamoDBIndexHashKey(globalSecondaryIndexName = CATEGORY_INDEX, attributeName = "category")
     public Category getCategory() {
@@ -66,6 +69,7 @@ public class Expense {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+    @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "paymentType")
     public PaymentType getPaymentType() {
         return paymentType;
@@ -73,5 +77,32 @@ public class Expense {
 
     public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "expenseId='" + expenseId + '\'' +
+                ", truckId='" + truckId + '\'' +
+                ", vendorName='" + vendorName + '\'' +
+                ", category=" + category +
+                ", date=" + date +
+                ", amount=" + amount +
+                ", paymentType=" + paymentType +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expense expense = (Expense) o;
+        return Double.compare(expense.amount, amount) == 0 && Objects.equals(expenseId, expense.expenseId) && Objects.equals(truckId, expense.truckId) && Objects.equals(vendorName, expense.vendorName) && category == expense.category && Objects.equals(date, expense.date) && paymentType == expense.paymentType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(expenseId, truckId, vendorName, category, date, amount, paymentType);
     }
 }

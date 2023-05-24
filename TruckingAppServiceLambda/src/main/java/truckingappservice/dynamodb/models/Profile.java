@@ -5,6 +5,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.List;
+import java.util.Objects;
 
 @DynamoDBTable(tableName = "profiles")
 public class Profile {
@@ -54,5 +55,29 @@ public class Profile {
 
     public void setTruckId(List<String> truckId) {
         this.truckId = truckId;
+    }
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id='" + id + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", truckId=" + truckId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profile profile = (Profile) o;
+        return Objects.equals(id, profile.id) && Objects.equals(companyName, profile.companyName) && Objects.equals(firstName, profile.firstName) && Objects.equals(lastName, profile.lastName) && Objects.equals(truckId, profile.truckId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, companyName, firstName, lastName, truckId);
     }
 }
