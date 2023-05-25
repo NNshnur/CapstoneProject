@@ -1,0 +1,48 @@
+{
+  "incomes": [
+    {
+      "PutRequest": {
+        "Item": {
+          "incomeId": { "S": "015JK" },
+          "truckId": { "S": "Volvo2527" },
+          "date": {"S": "2023-02-15"},
+          "deadHeadMiles": { "N": "125" },
+          "loadedMiles": { "N": "1025"},
+          "totalMiles": { "N": "1150" },
+          "grossIncome": { "N": "6500" },
+          "ratePerMile": { "N": "5.6521" }
+        }
+      }
+    }
+  ,
+    {
+      "PutRequest": {
+        "Item": {
+          "incomeId": { "S": "025LK" },
+          "truckId": { "S": "Volvo2527" },
+          "date": {"S": "2023-03-17"},
+          "deadHeadMiles": { "N": "645" },
+          "loadedMiles": { "N": "4578"},
+          "totalMiles": { "N": "5223" },
+          "grossIncome": { "N": "9300" },
+          "ratePerMile": { "N": "1.7" }
+        }
+      }
+    }
+  ,
+    {
+      "PutRequest": {
+        "Item": {
+          "incomeId": { "S": "027FD" },
+          "truckId": { "S": "Volvo2527" },
+          "date": {"S": "2023-05-20"},
+          "deadHeadMiles": { "N": "548" },
+          "loadedMiles": { "N": "1254"},
+          "totalMiles": { "N": "1802" },
+          "grossIncome": { "N": "8500" },
+          "ratePerMile": { "N": "4.7" }
+        }
+      }
+    }
+  ]
+}

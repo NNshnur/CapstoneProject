@@ -1,7 +1,5 @@
 package truckingappservice.converters;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import truckingappservice.dynamodb.models.Expense;
 import truckingappservice.models.ExpenseModel;
 

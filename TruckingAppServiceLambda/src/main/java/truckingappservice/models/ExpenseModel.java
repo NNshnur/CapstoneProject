@@ -8,13 +8,12 @@ public class ExpenseModel {
     private String expenseId;
     private String truckId;
     private String vendorName;
-//    private Category category;
-    private String category;
-    private LocalDate date;
+    private Category category;
+    private String date;
     private double amount;
     private String paymentType;
 
-    public ExpenseModel(String expenseId, String truckId, String vendorName, String category, LocalDate date, double amount, String paymentType) {
+    public ExpenseModel(String expenseId, String truckId, String vendorName, Category category, String date, double amount, String paymentType) {
         this.expenseId = expenseId;
         this.truckId = truckId;
         this.vendorName = vendorName;
@@ -36,11 +35,11 @@ public class ExpenseModel {
         return vendorName;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -75,8 +74,8 @@ public class ExpenseModel {
         private String expenseId;
         private String truckId;
         private String vendorName;
-        private String category;
-        private LocalDate date;
+        private Category category;
+        private String date;
         private double amount;
         private String paymentType;
 
@@ -96,12 +95,12 @@ public class ExpenseModel {
             return this;
         }
 
-        public Builder withCategory(String category) {
+        public Builder withCategory(Category category) {
             this.category = category;
             return this;
         }
 
-        public Builder withDate(LocalDate date) {
+        public Builder withDate(String date) {
             this.date = date;
             return this;
         }

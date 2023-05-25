@@ -1,0 +1,45 @@
+{
+  "expenses": [
+    {
+      "PutRequest": {
+        "Item": {
+          "expenseId": { "S": "01TN" },
+          "truckId": { "S": "Volvo2527" },
+          "vendorName": {"S": "MapCo"},
+          "category": { "S": "FUEL" },
+          "amount": { "N": "600.00"},
+          "paymentType": { "S": "CREDIT CARD" },
+          "date": { "S": "2023-01-20" }
+        }
+      }
+    }
+  ,
+    {
+      "PutRequest": {
+        "Item": {
+          "expenseId": { "S": "02FL" },
+          "truckId": { "S": "Volvo2527" },
+          "vendorName": {"S": "All Star Fleet LLC"},
+          "category": { "S": "MAINTENANCE" },
+          "amount": { "N": "200"},
+          "paymentType": { "S": "CREDIT CARD" },
+          "date": { "S": "2023-02-22" }
+        }
+      }
+    }
+    ,
+    {
+      "PutRequest": {
+        "Item": {
+          "expenseId": { "S": "03NY" },
+          "truckId": { "S": "Volvo2527" },
+          "vendorName": {"S": "Days Inn by Wyndham Ridgefield"},
+          "category": { "S": "LODGING" },
+          "amount": { "N": "98"},
+          "paymentType": { "S": "CREDIT CARD" },
+          "date": { "S": "2023-04-25" }
+        }
+      }
+    }
+  ]
+}

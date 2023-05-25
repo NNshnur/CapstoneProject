@@ -1,0 +1,48 @@
+{
+  "profiles": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "S": "nataliashnur@gmail.com" },
+          "companyName": { "S": "Oxiana" },
+          "firstName": {"S": "Natalia"},
+          "lastName": { "S": "Shnur" },
+          "truckId": {
+            "SS": [
+              "Volvo2527"
+            ]}
+        }
+      }
+    }
+  ,
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "S": "frazier.dyson@gmail.com" },
+          "companyName": { "S": "Dyson" },
+          "firstName": {"S": "Frazier"},
+          "lastName": { "S": "Dyson" },
+          "truckId": {
+            "SS": [
+              "9400i"
+            ]}
+        }
+      }
+    }
+  ,
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "S": "majzubee@gmail.com" },
+          "companyName": { "S": "CyberFleet" },
+          "firstName": {"S": "Ali"},
+          "lastName": { "S": "Mo" },
+          "truckId": {
+            "SS": [
+              "Volvo2017"
+            ]}
+        }
+      }
+    }
+  ]
+}
