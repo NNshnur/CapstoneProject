@@ -285,7 +285,7 @@ Resources:
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: TruckingAppServiceLambda
-      Handler: lambda.GetAllExpensesLambda::handleRequest
+      Handler: truckingappservice.lambda.GetAllExpensesLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
