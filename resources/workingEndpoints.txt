@@ -1,0 +1,5 @@
+'Retrieve all expenses endpoint' -> GET /expenses/all
+curl -v http://127.0.0.1:3000/expenses/all \
+-H 'Authorization: TOKEN'
+
+

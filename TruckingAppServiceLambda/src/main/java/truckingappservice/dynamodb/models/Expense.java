@@ -16,9 +16,9 @@ public class Expense {
     private String truckId;
     private String vendorName;
     private Category category;
-    private LocalDate date;
+    private String date;
     private double amount;
-    private PaymentType paymentType;
+    private String paymentType;
 
     @DynamoDBHashKey(attributeName = "expenseId")
     public String getExpenseId() {
@@ -50,9 +50,8 @@ public class Expense {
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
     }
-
-    @DynamoDBAttribute(attributeName = "category")
     @DynamoDBTypeConvertedEnum
+    @DynamoDBAttribute(attributeName = "category")
     @DynamoDBIndexHashKey(globalSecondaryIndexName = CATEGORY_INDEX, attributeName = "category")
     public Category getCategory() {
         return category;
@@ -63,11 +62,11 @@ public class Expense {
     }
 
     @DynamoDBAttribute(attributeName = "date")
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -79,14 +78,14 @@ public class Expense {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-
+//    @DynamoDBTypeConvertedEnum
+//    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.S)
     @DynamoDBAttribute(attributeName = "paymentType")
-    @DynamoDBTypeConvertedEnum
-    public PaymentType getPaymentType() {
+    public String getPaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(PaymentType paymentType) {
+    public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
     }
 
