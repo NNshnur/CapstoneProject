@@ -1,6 +1,7 @@
 package truckingappservice.dependency;
 
 import dagger.Component;
+import truckingappservice.activity.CreateExpenseActivity;
 import truckingappservice.activity.CreateProfileActivity;
 import truckingappservice.activity.GetAllExpensesActivity;
 import truckingappservice.activity.UpdateProfileActivity;
@@ -24,5 +25,7 @@ public interface ServiceComponent {
     CreateProfileActivity provideCreateProfileActivity();
 
     UpdateProfileActivity provideUpdateProfileActivity();
+
+    CreateExpenseActivity provideCreateExpenseActivity();
 
 }
