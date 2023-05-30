@@ -1,32 +1,141 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+
+<!--<head>-->
+<!--    <script type="text/javascript" src="assets/searchPlaylists.js"></script>-->
+<!--    <link rel="stylesheet" type="text/css" href="css/style.css">-->
+<!--</head>-->
+
+<!--<body class="background">-->
+<!--<header class="header" id="header"></header>-->
+<!--<div class="card">-->
+<!--    <h2>Search Playlists</h2>-->
+<!--    <form class="card-content" id="search-playlists-form">-->
+<!--        <p class="form-field">-->
+<!--            <label>Search by name or tag</label>-->
+<!--            <input type="text" class="validated-field" id="search-criteria" placeholder="smooth-jamz" autofocus>-->
+<!--            <sub>Search is case-sensitive and tags must match exactly.</sub>-->
+<!--        </p>-->
+<!--    </form>-->
+<!--    <p class="button-group">-->
+<!--        <a href="#" class="button" id="search-btn">Search</a>-->
+<!--        <a href="createPlaylist.html" class="button">New Playlist</a>-->
+<!--    </p>-->
+<!--</div>-->
+<!--<div class="card hidden" id='search-results-container'>-->
+<!--    <h3>Results for <span id="search-criteria-display"></span></h3>-->
+<!--    <div id="search-results-display">-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+
+<!--</html>-->
+
 <!DOCTYPE html>
 <html>
-
 <head>
-    <script type="text/javascript" src="assets/searchPlaylists.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-control" content="public">
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" href="css/frontal-truck-svgrepo-com.svg">
+    <script type="text/javascript" src="assets/landingPage.js"></script>
+    <title>TruckBizBook</title>
 </head>
 
-<body class="background">
-<header class="header" id="header"></header>
-<div class="card">
-    <h2>Search Playlists</h2>
-    <form class="card-content" id="search-playlists-form">
-        <p class="form-field">
-            <label>Search by name or tag</label>
-            <input type="text" class="validated-field" id="search-criteria" placeholder="smooth-jamz" autofocus>
-            <sub>Search is case-sensitive and tags must match exactly.</sub>
-        </p>
-    </form>
-    <p class="button-group">
-        <a href="#" class="button" id="search-btn">Search</a>
-        <a href="createPlaylist.html" class="button">New Playlist</a>
-    </p>
-</div>
-<div class="card hidden" id='search-results-container'>
-    <h3>Results for <span id="search-criteria-display"></span></h3>
-    <div id="search-results-display">
-    </div>
-</div>
-</body>
+<body>
+<section id="banner">
+    <h1 class="logoLanding">TruckBizBook</h1>
+    <div class="banner-text">
+        <h1><strong>STAYING ORGANIZED</strong><br><strong id="makes-life-portion" > MAKES LIFE</strong><br><strong>EASIER</strong></h1>
+        <br>
+        <p>Track Your Trucking Expenses and Income with<br> Our App</p> <br> <br>
 
+
+
+        <div class="banner-button">
+            <div class="button-container">
+
+                <button type="button" class="btn btn-dark" id="logout"><strong>Login</strong></button>
+                <button type="button" class="btn btn-dark" id="sign-up"><strong>SignUp</strong></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="navbar">
+    <ul>
+        <li><a href="#about-us"><strong>About Us</strong></a></li>
+        <li><a href="#features"><strong>Features</strong></a></li>
+        <li><a href="#why-to-choose-use"><strong>Why To Choose Us</strong></a></li>
+    </ul>
+</div>
+<hr>
+<section class="section-class">
+
+    <!-- <div class="container"> -->
+    <section id="about-us">
+        <h2>ABOUT <strong id="yellow-portion" >US</strong></h2> <br>
+        <br> <p class="about"><em>Our application is specifically designed to cater to the needs of truck owner operators. <br>
+        Unlike generic expense tracking apps,  our platform offers specialized features tailored <br> to  the trucking industry,
+        making it the ideal solution for your financial management needs. <br>
+        With our app, you can effortlessly track your expenses and income related to your trucking <br> operations. Our intuitive
+        interface allows you to log various expense categories like fuel, <br> tolls, maintenance, permits, and more. You can also
+        log your income from completed jobs, <br>ensuring a comprehensive view of your financial operations.</em></p>
+        <br> <br></section>
+
+    <section id="features">
+
+        <h2> APLICATION <strong id="yellow-portion" >FEATURES </strong></h2> <br>
+
+        <div class="container">
+            <div class="card">
+                <div class="front"><h2 id="card">Expense Tracking</h2></div>
+                <div class="back">
+                    <h1>Expense Tracking</h1> <br>
+                    <p>Effortlessly track your trucking-related expenses, such as fuel, tolls, maintenance, permits, and more.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="front"><h2 id="card">Income Logging</h2></div>
+                <div class="back">
+                    <h1>Income Logging</h1> <br>
+                    <p>Log your income from completed jobs within the app, ensuring a comprehensive view of your earnings.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="front"><h2 id="card">Specialized Categories</h2></div>
+                <div class="back">
+                    <h1>Specialized Categories</h1> <br>
+                    <p>Our app offers specialized expense categories tailored to the trucking industry for accurate expense tracking.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <br>
+
+    <section id="why-to-choose-use">
+
+        <h2 class="whytochooseus">WHY TO CHOOSE <strong id="yellow-portion" > US</strong></h2>
+        <br>
+        <ul class="diamond">
+            <li>Our app provides a user-friendly interface that makes it easy for truck owner operators to track their expenses related to fuel, tolls, maintenance, permits, and more. </li>
+            <li>Log your income from completed jobs directly within the app. Keep a clear record of your earnings and track payments, allowing for better financial management and accurate income reporting.</li>
+            <li>Gain control over your finances and improve overall efficiency. By having a clear picture of your expenses and income, you can optimize your budgeting, reduce unnecessary costs, and maximize profitability.</li>
+            <li>Rest assured that your financial data is safe and protected. Our app employs industry-standard security measures to safeguard your information, ensuring privacy and peace of mind.</li>
+
+        </ul>
+    </section>
+
+    <br>
+    <hr>
+    <footer>
+
+        <p>&copy; 2023 TruckBizBook Website. All rights reserved.</p>
+
+    </footer>
+    </body>
 </html>

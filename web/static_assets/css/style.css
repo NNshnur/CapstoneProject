@@ -1,5 +1,5 @@
-:root {
-    /* css variables: https://developer.mozilla.org/en-US/docs/Web/CSS/var */
+/*:root {
+    /* css variables: https://developer.mozilla.org/en-US/docs/Web/CSS/var
     --primary-color: #5D5E5E;
     --secondary-color: #ffffff;
     --tertiary-color: #F5881F;
@@ -14,7 +14,7 @@
 }
 
 .header {
-    /* Flexbox: https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+    /* Flexbox: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -108,7 +108,7 @@
 Flexbox on a lists removes the numbers. We use a counter here to add them back.
 https://stackoverflow.com/a/34316093
 https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters
-*/
+
 .song:before {
     counter-increment: section;
     content: counter(section) ".";
@@ -120,7 +120,7 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CS
     display: none;
 }
 
-/* table styles */
+/* table styles
 
 th, td {
     padding: 15px;
@@ -135,3 +135,259 @@ a {
     color: var(--tertiary-color);
     text-decoration: none;
 }
+*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+  }
+  #banner {
+    display: flex;
+    height: 90vh;
+
+  }
+
+  #banner .banner-text {
+    flex: 1;
+    background: #203965; /* Dark blue color */
+    color: #FFFFFF; /* Text color */
+    padding: 20px;
+  }
+
+  #banner .banner-text h1,
+  #banner .banner-text h4 {
+    margin: 0;
+  }
+
+  #banner::after {
+    content: "";
+    background: url(front-truck.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 90%;
+    width: 50%; /* Display the image in the right half */
+    position: absolute;
+    top: 0;
+    right: 0;
+    filter: grayscale(100%);
+
+  }
+
+  #banner::before {
+    content: "";
+    background-color: #FEBF0E; /* Yellow color for the vertical line */
+    width: 12px; /* Width of the vertical line */
+    height: 50%; /* Height of the vertical line */
+    position: absolute;
+    top: 50%;
+    right: 50%; /* Position the vertical line at the center */
+    transform: translate(50%, -50%);
+    border-radius: 5px; /* Rounded corners */
+    z-index: 1;
+  }
+
+
+  .logoLanding{
+    width:140px;
+    position:absolute;
+    top:4%;
+    left:10%;
+    color: #FFF7E9;
+    font-size: 30px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  .banner-text h1{
+    text-align:left;
+    color:#FFF7E9;
+    padding-top:300px;
+    padding-left:10%;
+    font-size:40px;
+    line-height: 1.5;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+  }
+  #makes-life-portion {
+    color: #FEBF0E; /* Yellow color for "MAKES LIFE" */
+  }
+
+  .banner-text p{
+    text-align:left;
+    color:#FFF7E9;
+    padding-left:10%;
+    font-size:20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  }
+
+
+  .button-container {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 10%;
+  align-items: center;
+  }
+
+
+  .button-container button + button {
+    margin-left: 30px;
+  }
+  .button-container button {
+    background-color: #FEBF0E;
+    color: #203965;
+    font-size: 18px;
+    padding: 8px 35px;
+    border-radius: 20px;
+    width: 150px;
+  }
+
+  .navbar {
+    position: absolute;
+    top: 10px; /* Adjust the top positioning as needed */
+    right: 10px; /* Adjust the right positioning as needed */
+  }
+
+  .navbar ul {
+    list-style: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin-top: 3%;
+    padding: 0;
+  }
+
+  .navbar li {
+    display: inline-block;
+    margin-right: 55px; /* Adjust the margin between list items as needed */
+  }
+
+  .navbar li:last-child {
+    margin-right: 25px;
+  }
+
+  .navbar a {
+    text-decoration: none;
+    color: #203965; /* Set the color for the links */
+  }
+
+  .about{
+    font-size: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    }
+
+    .section-class {
+        text-align: center;
+    }
+
+    .section-class h2 {
+        background-color: #203965;
+        color: white;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        font-size: 25px;
+    }
+
+    #yellow-portion {
+        color: #FEBF0E;
+    }
+
+hr{
+    border:2px solid #FEBF0E;
+    width: 50%;
+    margin:auto;
+
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  padding: 50px;
+}
+
+.card {
+  height: 300px;
+  width: 300px;
+  position: relative;
+  transition: transform 1500ms;
+  transform-style: preserve-3d;
+  border-radius: 50%; /* Added border-radius property */
+  border: 5px solid #FEBF0E; /* Added border property */
+  box-sizing: border-box; /* Added box-sizing property */
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.front,
+.back {
+  height: 100%;
+  width: 100%; /* Changed width to 100% */
+  border-radius: 50%; /* Added border-radius property */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.front {
+  background-color: #203965;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container:hover > .card {
+  cursor: pointer;
+  transform: rotateY(180deg);
+}
+
+.back {
+  background-color: #FEBF0E ;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.diamond{
+    counter-reset: list-counter;
+    list-style: none;
+    text-align: left;
+    padding: 50px;
+    font-size: 20px;
+
+}
+.diamond li{
+    margin: 1.5em 0;
+    display: block;
+}
+.diamond li:before{
+    content: counter(list-counter);
+    counter-increment: list-counter;
+    transform: rotate(45deg);
+    text-transform: rotate(90deg);
+    width: 1em;
+    height: 1em;
+    padding: .5em;
+    margin-right: 1em;
+    border: .25em solid #ccc;
+    background: #203965;
+    color:#FEBF0E;
+    font-family: arial;
+    font-weight: bold;
+    display: inline-block;
+    text-align: right;
+
+}
+footer {
+    background-color: #f2f2f2;
+    color: #777;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 16px;
+  }
