@@ -2,7 +2,6 @@ package truckingappservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import truckingappservice.models.Category;
-import truckingappservice.models.PaymentType;
 import truckingappservice.utils.UniqueIdGenerator;
 
 import java.time.LocalDate;
