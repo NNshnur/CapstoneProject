@@ -45,7 +45,7 @@ public class GetAllExpensesResult {
     public static class Builder {
         private List<Expense> allExpenseList;
 
-        public Builder withEventList(List<Expense> allExpenseList) {
+        public Builder withExpenseList(List<Expense> allExpenseList) {
             this.allExpenseList = new ArrayList<>(allExpenseList);
             return this;
         }

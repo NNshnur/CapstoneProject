@@ -1,18 +1,20 @@
 package truckingappservice.converters;
 
 import truckingappservice.dynamodb.models.Expense;
+import truckingappservice.dynamodb.models.Profile;
 import truckingappservice.models.ExpenseModel;
+import truckingappservice.models.ProfileModel;
 
 public class ModelConverter {
 
 
     /**
      * Converts a provided Expenses into a ExpenseModel representation.
-
+     *
      * @return the converted EventModel
      */
 
-    public ExpenseModel toExpenseModel(Expense expense){
+    public ExpenseModel toExpenseModel(Expense expense) {
         return ExpenseModel.builder()
                 .withCategory(expense.getCategory())
                 .withAmount(expense.getAmount())
@@ -24,5 +26,14 @@ public class ModelConverter {
                 .build();
     }
 
+    public ProfileModel toProfileModel(Profile profile) {
+        return ProfileModel.builder()
+                .withProfileId(profile.getId())
+                .withFirstName(profile.getFirstName())
+                .withLastName(profile.getLastName())
+                .withCompanyName(profile.getCompanyName())
+                .withTruckId(profile.getTruckId())
+                .build();
+    }
 }
 

@@ -29,7 +29,7 @@ public class GetAllExpensesActivity {
         List<Expense> listExpenses = expenseDao.getAllExpenses();
 
         return GetAllExpensesResult.builder()
-                .withEventList(listExpenses)
+                .withExpenseList(listExpenses)
                 .build();
     }
 }
