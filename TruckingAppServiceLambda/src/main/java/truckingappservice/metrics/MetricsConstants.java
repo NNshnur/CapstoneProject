@@ -4,12 +4,13 @@ package truckingappservice.metrics;
  * Constant values for use with metrics.
  */
 public class MetricsConstants {
-    public static final String GETPLAYLIST_PLAYLISTNOTFOUND_COUNT = "GetPlaylist.PlaylistNotFoundException.Count";
-    public static final String UPDATEPLAYLIST_INVALIDATTRIBUTEVALUE_COUNT =
-            "UpdatePlaylist.InvalidAttributeValueException.Count";
-    public static final String UPDATEPLAYLIST_INVALIDATTRIBUTECHANGE_COUNT =
-            "UpdatePlaylist.InvalidAttributeChangeException.Count";
+    public static final String GETPROFILE_PROFILENOTFOUND_COUNT = "GetProfile.ProfileNotFoundException.Count";
+
     public static final String SERVICE = "Service";
     public static final String SERVICE_NAME = "MusicPlaylistService";
     public static final String NAMESPACE_NAME = "U3/MusicPlaylistService";
+    public static final String UPDATEEVENT_INVALIDATTRIBUTECHANGE_COUNT =
+            "UpdateEvent.InvalidAttributeValueException.Count";
+    public static final String UPDATEPROFILE_INVALIDATTRIBUTECHANGE_COUNT = "UpdateProfile.InvalidAttributeChangeException.Count";
+    public static final String UPDATEPROFILE_INVALIDATTRIBUTEVALUE_COUNT = "UpdateProfile.InvalidAttributeValueException.Count";
 }

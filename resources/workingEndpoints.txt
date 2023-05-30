@@ -2,4 +2,12 @@
 curl -v http://127.0.0.1:3000/expenses/all \
 -H 'Authorization: TOKEN'
 
+'Create profile endpoint' -> POST /profiles/create
+curl -v -X POST http://127.0.0.1:3000/profiles/create \
+-H 'Authorization: TOKEN' \
+-d '{"companyName": "Ciccinnati LLC", "lastName": "Stulov", "firstName": "Kirill", "truckId": ["12345"]}'
 
+'Update profile endpoint' -> PUT profiles/{id}
+curl -v -X PUT http://127.0.0.1:3000/profiles/{profileId} \
+-H 'Authorization: TOKEN' \
+-d '{"companyName": "Ciccinnati LLC", "lastName": "Zubaydulaev", "firstName": "Ali", "truckId": ["12345"]}'
