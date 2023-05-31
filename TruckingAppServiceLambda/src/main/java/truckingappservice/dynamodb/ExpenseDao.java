@@ -5,6 +5,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import truckingappservice.dynamodb.models.Expense;
+import truckingappservice.exceptions.ExpenseNotFoundException;
+import truckingappservice.metrics.MetricsConstants;
 import truckingappservice.metrics.MetricsPublisher;
 import truckingappservice.models.Category;
 
@@ -34,7 +36,19 @@ public class ExpenseDao {
          * Returns the Expenses list
          * @return the stored Event, or null if none was found.
          */
+        public Expense getExpense(String expenseId) {
 
+            Expense expense = this.dynamoDbMapper.load(Expense.class, expenseId);
+
+
+            if (expense == null) {
+                metricsPublisher.addCount(MetricsConstants.GETEXPENSE_EXPENSENOTFOUND_COUNT, 1);
+                throw new ExpenseNotFoundException("Could not find event with id " + expenseId);
+            }
+
+            metricsPublisher.addCount(MetricsConstants.GETEXPENSE_EXPENSENOTFOUND_COUNT, 0);
+            return expense;
+        }
 
         public List<Expense> getAllExpenses() {
             DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
@@ -56,6 +70,10 @@ public class ExpenseDao {
             expense.setPaymentType(paymentType);
 
         } else {
+
+            if (expenseId!=null & !expenseId.isEmpty()) {
+                expense.setExpenseId(expenseId);
+            }
             if(truckId != null && !truckId.isEmpty()){
                 expense.setTruckId(truckId);
             }

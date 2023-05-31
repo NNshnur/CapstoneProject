@@ -11,3 +11,13 @@ curl -v -X POST http://127.0.0.1:3000/profiles/create \
 curl -v -X PUT http://127.0.0.1:3000/profiles/{profileId} \
 -H 'Authorization: TOKEN' \
 -d '{"companyName": "Ciccinnati LLC", "lastName": "Zubaydulaev", "firstName": "Ali", "truckId": ["12345"]}'
+
+'Create expense entry endpoint' -> POST expenses/create
+curl -v -X POST http://127.0.0.1:3000/expenses/create \
+-H 'Authorization: TOKEN' \
+-d '{"truckId":"775533", "vendorName":"CostCo","category":"FUEL", "date":"2023-05-30", "amount":"600.05","paymentType":"CREDIT_CARD"}'
+
+'Update expense entry endpoint' -> PUT expenses/{id}
+curl -v -X PUT http://127.0.0.1:3000/expenses/{id} \
+-H 'Authorization: TOKEN' \
+-d '{"profileId":"nataliashnur@gmail.com","expenseId":"TLX4Y","truckId":"Volvo775533","vendorName":"Frazier-Company","category":"FUEL","date":"2023-05-15","amount":500.05,"paymentType":"CREDIT_CARD"}'

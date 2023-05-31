@@ -27,19 +27,11 @@ public class UpdateProfileActivity {
     public UpdateProfileResult handleRequest(final UpdateProfileRequest updateProfileRequest)  {
         log.info("Received UpdateProfileRequest{}", updateProfileRequest);
 
-        //checks if the profile is valid or throws an error
         Profile profile = profileDao.getProfile(updateProfileRequest.getProfileId());
 
-        //don't let them change there id number or havoc ensues in the database
         Profile newProfile = profileDao.saveProfile(false, profile.getId(),
                 updateProfileRequest.getFirstName(), updateProfileRequest.getLastName(), updateProfileRequest.getCompanyName(),
                 updateProfileRequest.getTruckId());
-
-
-        //this publishedExceptionMetrics isn't really helpful information the way that it is implemented because there is no
-        // other case in which it is executed. if you want to use something like this check both cases
-        //otherwise you are always getting the same result all the time. What if the value is invalid and what attributeChange
-        // are you not allowing to change??
 
         publishExceptionMetrics(false,false);
         return UpdateProfileResult.builder()
