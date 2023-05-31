@@ -30,15 +30,8 @@ public class UpdateExpenseLambda extends LambdaActivityRunner<UpdateExpenseReque
                                     .withPaymentType(unauthenticatedRequest.getPaymentType())
                                     .build());
                 },
-                (request, serviceComponent) -> {
-                    try {
-                        return serviceComponent.provideUpdateExpenseActivity().handleRequest(request);
-                    } catch (Exception e) {
-                         e.printStackTrace();
-                         throw e;
-                    }
-                }
-
+                (request, serviceComponent) ->
+                        serviceComponent.provideUpdateExpenseActivity().handleRequest(request)
         );
     }
 }
