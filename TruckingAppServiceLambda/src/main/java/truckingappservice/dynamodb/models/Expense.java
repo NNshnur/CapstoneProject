@@ -4,7 +4,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import truckingappservice.models.Category;
 import truckingappservice.utils.UniqueIdGenerator;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 @DynamoDBTable(tableName = "expenses")

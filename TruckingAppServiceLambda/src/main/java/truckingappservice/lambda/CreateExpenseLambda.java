@@ -5,7 +5,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import truckingappservice.activity.request.CreateExpenseRequest;
 import truckingappservice.activity.results.CreateExpenseResult;
 
-public class CreateEventLambda
+public class CreateExpenseLambda
         extends LambdaActivityRunner<CreateExpenseRequest, CreateExpenseResult>
         implements RequestHandler<AuthenticatedLambdaRequest<CreateExpenseRequest>, LambdaResponse> {
     @Override
