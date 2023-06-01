@@ -18,11 +18,7 @@ public class GetAllExpensesActivity {
     public GetAllExpensesActivity(ExpenseDao expenseDao) {
         this.expenseDao = expenseDao;
     }
-    /**
-     * Handles a  GetAllExpensesRequest and returns a {@link GetAllExpensesResult} containing a list of all events.
-     *
-     * @return a {@link GetAllExpensesResult} containing a list of all events
-     */
+
     public GetAllExpensesResult handleRequest(){
         log.info("Receive GetAllExpensesRequest {} ", "called Get All Expenses");
 

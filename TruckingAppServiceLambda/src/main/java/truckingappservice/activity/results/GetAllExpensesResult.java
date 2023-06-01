@@ -12,11 +12,7 @@ public class GetAllExpensesResult {
     private GetAllExpensesResult(List<Expense> allExpenseList) {
         this.allExpenseList = allExpenseList;
     }
-    /**
-     * Returns a list of all the events in the DynamoDB table.
-     *
-     * @return A List object containing all the events.
-     */
+
     public List<Expense> getAllExpenseList() {
         return allExpenseList;
     }
@@ -28,20 +24,14 @@ public class GetAllExpensesResult {
                 '}';
     }
 
-    /**
-     * Returns a string representation of the GetAllEventsResult object.
-     *
-     * @return A string containing the list of all events.
-     */
+
 
 
     //CHECKSTYLE:OFF:Builder
     public static Builder builder() {
         return new Builder();
     }
-    /**
-     * The Builder class for creating GetAllEventsResult objects.
-     */
+
     public static class Builder {
         private List<Expense> allExpenseList;
 

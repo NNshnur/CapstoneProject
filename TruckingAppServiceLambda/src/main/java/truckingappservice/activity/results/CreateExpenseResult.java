@@ -14,11 +14,7 @@ public class CreateExpenseResult {
         return expense;
     }
 
-    /**
-     * Gets the event that was created.
-     *
-     * @return The created event.
-     */
+
     @Override
     public String toString() {
         return "CreateExpenseResult{" +
@@ -28,11 +24,7 @@ public class CreateExpenseResult {
 
 
     //CHECKSTYLE:OFF:Builder
-    /**
-     * Creates a new builder for this class.
-     *
-     * @return A new builder instance.
-     */
+
     public static Builder builder() {
         return new Builder();
     }

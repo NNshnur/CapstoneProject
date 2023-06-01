@@ -37,11 +37,7 @@ public class UpdateExpenseActivity {
                 .build();
     }
 
-    /**
-     * Helper method to publish exception metrics.
-     * @param isInvalidAttributeValue indicates whether InvalidAttributeValueException is thrown
-     * @param isInvalidAttributeChange indicates whether InvalidAttributeChangeException is thrown
-     */
+
     private void publishExceptionMetrics(final boolean isInvalidAttributeValue,
                                          final boolean isInvalidAttributeChange) {
 

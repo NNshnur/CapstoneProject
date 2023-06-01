@@ -15,11 +15,7 @@ public class CreateProfileActivity {
 
     private final Logger log = LogManager.getLogger();
     private final ProfileDao profileDao;
-    /**
-     * Instantiates a new CreateProfileActivity object.
-     *
-     * @param profileDao ProfileDao to access the profile table.
-     */
+
     @Inject
     public CreateProfileActivity(ProfileDao profileDao){
         this.profileDao = profileDao;

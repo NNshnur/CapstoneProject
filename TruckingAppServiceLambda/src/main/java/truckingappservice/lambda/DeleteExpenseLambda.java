@@ -24,27 +24,13 @@ public class DeleteExpenseLambda extends LambdaActivityRunner<DeleteExpenseReque
                                     .build());
                 },
 
-                (request, serviceComponent) -> {
-                    try {
-                        return serviceComponent.provideDeleteExpenseActivity().handleRequest(request);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        throw e;
-                    }
-                });
+                (request, serviceComponent) ->
+
+                      serviceComponent.provideDeleteExpenseActivity().handleRequest(request)
+
+                );
         }
     }
 
-//            log.info("handleRequest");
-//            return super.runActivity( //this returns lambda response
-//                    () -> input.fromPath(path ->
-//                            DeleteExpenseRequest.builder()
-//                                    .withExpenseId(path.get("expenseId"))
-//                                    .build()),
-//                    (request, serviceComponent) ->
-//                            serviceComponent.provideDeleteExpenseActivity().handleRequest(request)
-//            );
-//        }
-//    }
 
 
