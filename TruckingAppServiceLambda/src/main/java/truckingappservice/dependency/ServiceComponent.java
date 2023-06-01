@@ -27,4 +27,6 @@ public interface ServiceComponent {
 
     UpdateExpenseActivity provideUpdateExpenseActivity();
 
+    DeleteExpenseActivity provideDeleteExpenseActivity();
+
 }
