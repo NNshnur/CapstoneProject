@@ -1,6 +1,7 @@
 package truckingappservice.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import truckingappservice.dynamodb.models.Expense;
 import truckingappservice.dynamodb.models.Profile;
 import truckingappservice.exceptions.InvalidAttributeException;
 import truckingappservice.exceptions.ProfileNotFoundException;
@@ -62,5 +63,9 @@ public class ProfileDao {
         return saveProfile;
     }
 }
+
+
+
+
 
 
