@@ -15,29 +15,13 @@ public class CreateExpenseActivity {
     private final Logger log = LogManager.getLogger();
     private final ExpenseDao expenseDao;
 
-    /**
-     * Instantiates a new CreateEventActivity object.
-     *
-     * @param expenseDao EventDao to access the events table.
-     */
+
     @Inject
     public CreateExpenseActivity(ExpenseDao expenseDao) {
         this.expenseDao = expenseDao;
     }
 
-    /**
-     * This method handles the incoming request by persisting a new event
-     * with the provided event name and user from the request.
-     * <p>
-     * It then returns the newly created event.
-     * <p>
-     * If the provided event name or user has invalid characters, throws an
-     * InvalidAttributeValueException
-     *
-     * @param createExpenseRequest request object containing the event name and customer ID
-     *                              associated with it
-     * @return createEventResult result object containing the API defined {@link ExpenseModel}
-     */
+
     public CreateExpenseResult handleRequest(final CreateExpenseRequest createExpenseRequest) {
         log.info("Received CreateExpenseRequest {}", createExpenseRequest);
 

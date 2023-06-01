@@ -4,17 +4,11 @@ import truckingappservice.models.ExpenseModel;
 
 public class UpdateExpenseResult {
     private final ExpenseModel expenseModel;
-    /**
-     * Constructs a new UpdateEventResult object with the specified event model.
-     * @param expenseModel The event model that was updated.
-     */
+
     public UpdateExpenseResult(ExpenseModel expenseModel) {
         this.expenseModel = expenseModel;
     }
-    /**
-     * Returns the event model that was updated.
-     * @return The updated event model.
-     */
+
     public ExpenseModel getExpenseModel() {
         return expenseModel;
     }
@@ -26,9 +20,7 @@ public class UpdateExpenseResult {
                 '}';
     }
 
-    /**
-     * Builder class for constructing UpdateEventResult objects.
-     */
+
     public static class Builder{
         private ExpenseModel expenseModel;
 

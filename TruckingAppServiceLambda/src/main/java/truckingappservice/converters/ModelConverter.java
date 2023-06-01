@@ -8,11 +8,7 @@ import truckingappservice.models.ProfileModel;
 public class ModelConverter {
 
 
-    /**
-     * Converts a provided Expenses into a ExpenseModel representation.
-     *
-     * @return the converted EventModel
-     */
+
 
     public ExpenseModel toExpenseModel(Expense expense) {
         return ExpenseModel.builder()

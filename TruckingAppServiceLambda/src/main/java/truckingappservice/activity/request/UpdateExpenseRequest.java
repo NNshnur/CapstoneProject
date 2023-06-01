@@ -75,12 +75,6 @@ public class UpdateExpenseRequest {
                 '}';
     }
 
-    /**
-     * Returns a string representation of the UpdateEventRequest object.
-     *
-     * @return The string representation.
-     */
-
 
     //CHECKSTYLE:OFF:Builder
     public static Builder builder() {

@@ -61,11 +61,7 @@ public class CreateExpenseRequest {
     }
 
     //CHECKSTYLE:OFF:Builder
-    /**
-     * Returns a new instance of the Builder class for creating a CreateEventRequest object.
-     *
-     * @return a new instance of the Builder class
-     */
+
     public static Builder builder() {
         return new Builder();
     }
