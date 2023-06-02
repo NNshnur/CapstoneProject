@@ -15,7 +15,7 @@ export default class TruckingClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getProfile',
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getProfile', 'createProfile','updateProfile',
                                  'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
@@ -96,6 +96,48 @@ export default class TruckingClient extends BindingClass {
             this.handleError(error, errorCallback)
         }
     }
+
+    async createProfile(companyName, firstName, lastName, truckId, errorCallback) {
+            try {
+                const token = await this.getTokenOrThrow("Only authenticated users can create a profile.");
+                const response = await this.axiosClient.post(`profiles/create`, {
+                    companyName: companyName,
+                    firstName: firstName,
+                    lastName: lastName,
+                    truckIds: truckId,
+
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                console.log(response.data);
+                return response.data;
+            } catch (error) {
+                this.handleError(error, errorCallback)
+            }
+        }
+
+        async updateProfile(id, companyName, firstName, lastName, truckId, errorCallback) {
+                try {
+                    const token = await this.getTokenOrThrow("Only authenticated users can update a profile.");
+                    const response = await this.axiosClient.put(`profiles/${id}`, {
+                        companyName: companyName,
+                        firstName: firstName,
+                        lastName: lastName,
+                        truckIds: truckId,
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    return response.data;
+                } catch (error) {
+                    this.handleError(error, errorCallback)
+                }
+            }
 
     /**
      * Helper method to log the error and run any error functions.

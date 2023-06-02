@@ -25,22 +25,28 @@ class ViewProfile extends BindingClass {
      * Add the header to the page and load the dannaClient.
      */
     mount() {
-
+        document.getElementById('profilePic').addEventListener('click', this.redirectEditProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
-
-
         this.client = new truckingClient();
         this.clientLoaded();
     }
 
-    async logout(){
+
+redirectEditProfile(){
+        window.location.href = '/createProfile.html';
+    }
+
+redirectProfile() {
+         window.location.href = '/profile.html';
+        }
+
+async logout(){
         await this.client.logout();
         if(!this.client.isLoggedIn()){
-            window.location.href ='/landingPage.html';
+            window.location.href ='/index.html';
         }
 
     }
-
 }
 /**
  * Main method to run when the page contents have loaded.
