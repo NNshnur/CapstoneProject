@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: TruckingApp Service
+  description: "This is the API definition for the TruckingApp Service."
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+
+tags:
+  - name: Profiles
+    description: Create and update profile
+
+  - name: Expenses
+    description: Create, view, update and delete expense entry
+
+  - name: Income
+      description: Create, view, update and delete income entry
+
+paths:
+
+  /profiles/create:
+    post:
+      tags:
+        - Profiles
+      summary: Create a new profile (CreateProfileLambda)
+      operationId: createProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                companyName:
+                  type: string
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                truckId:
+                  type: array
+                    items:
+                      type: string
+                    uniqueItems: true
+
+      responses:
+        "200":
+          description: A profile object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                companyName:
+                  type: string
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                truckId:
+                  type: array
+                  items:
+                    type: string
+                  uniqueItems: true
+
+        "500":
+          description: "Invalid input parameters"
+
+    put:
+      tags:
+        - Profiles
+      summary: Update the info of an existing profile (UpdateProfileLambda)
+      parameters:
+        - name: id
+          in: path
+          description: ID of profile to retrieve
+          required: true
+          schema:
+            type: string
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  companyName:
+                    type: string
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+                  truckId:
+                    type: array
+                    items:
+                      type: string
+                    uniqueItems: true
+
+      responses:
+        "200":
+          description: A profile object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                companyName:
+                  type: string
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                truckId:
+                  type: array
+                  items:
+                    type: string
+                  uniqueItems: true
+
+        "500":
+          description: "Invalid input parameters"

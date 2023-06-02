@@ -2,12 +2,15 @@ package truckingappservice.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import truckingappservice.activity.request.UpdateProfileRequest;
 import truckingappservice.activity.results.UpdateProfileResult;
 
 public class UpdateProfileLambda extends LambdaActivityRunner<UpdateProfileRequest, UpdateProfileResult>
         implements RequestHandler<AuthenticatedLambdaRequest<UpdateProfileRequest>,LambdaResponse> {
 
+    private final Logger log = LogManager.getLogger();
     /**
      * Handles a Lambda Function request
      *
@@ -17,6 +20,7 @@ public class UpdateProfileLambda extends LambdaActivityRunner<UpdateProfileReque
      */
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<UpdateProfileRequest> input, Context context) {
+        log.error("Called Update profile Lambda.");
         return super.runActivity(
                 () -> {
                     UpdateProfileRequest unauthenticatedRequest = input.fromBody(UpdateProfileRequest.class);
