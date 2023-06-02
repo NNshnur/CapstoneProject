@@ -22,7 +22,7 @@ curl -v -X PUT http://127.0.0.1:3000/expenses/{id} \
 -H 'Authorization: TOKEN' \
 -d '{"profileId":"nataliashnur@gmail.com","expenseId":"TLX4Y","truckId":"Volvo775533","vendorName":"Frazier-Company","category":"FUEL","date":"2023-05-15","amount":500.05,"paymentType":"CREDIT_CARD"}'
 
-'Delete expense entry endpoint' -> DELETE expenses/{removeExpense}
-curl -v -X DELETE http://127.0.0.1:3000/expenses/{removeExpense} \
+'Delete expense entry endpoint' -> DELETE expenses/removeExpense
+curl -v -X DELETE http://127.0.0.1:3000/expenses/removeExpense \
 -H 'Authorization: TOKEN' \
 -d '{"expenseId":"8N51O"}'
