@@ -57,7 +57,10 @@ class CreateProfile extends BindingClass {
             document.getElementById('truckIds').setAttribute('placeholder',profile.profileModel.truckIds);
         }
 
-        document.getElementById("loading").remove();
+         const loadingElement = document.getElementById("loading");
+          if (loadingElement) {
+            loadingElement.remove();
+          }
     }
 
 

@@ -26,3 +26,7 @@ curl -v -X PUT http://127.0.0.1:3000/expenses/{id} \
 curl -v -X DELETE http://127.0.0.1:3000/expenses/removeExpense \
 -H 'Authorization: TOKEN' \
 -d '{"expenseId":"8N51O"}'
+
+'Retrieve profile by ID' -> GET profiles/{id}
+curl -X GET http://127.0.0.1:3000/profiles/nataliashnur@gmail.com \
+-H 'Authorization: TOKEN' \

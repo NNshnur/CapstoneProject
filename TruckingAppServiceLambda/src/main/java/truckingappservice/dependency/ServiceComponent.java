@@ -25,4 +25,6 @@ public interface ServiceComponent {
 
     DeleteExpenseActivity provideDeleteExpenseActivity();
 
+    GetProfileActivity provideGetProfileActivity();
+
 }
