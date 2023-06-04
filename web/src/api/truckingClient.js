@@ -15,8 +15,8 @@ export default class TruckingClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getProfile', 'createProfile','updateProfile',
-                                 'isLoggedIn'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getProfile', 'getAllExpenses', 'createExpense', 'createProfile','updateProfile',
+        'updateExpense', 'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -97,6 +97,21 @@ export default class TruckingClient extends BindingClass {
         }
     }
 
+    async getAllExpenses(errorCallback) {
+            try {
+                const token = await this.getTokenOrThrow("Only authenticated users can get all expenses.");
+                const response = await this.axiosClient.get(`expenses/all/`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                this.handleError(error, errorCallback)
+            }
+        }
+
     async createProfile(companyName, firstName, lastName, truckId, errorCallback) {
             try {
                 const token = await this.getTokenOrThrow("Only authenticated users can create a profile.");
@@ -104,7 +119,7 @@ export default class TruckingClient extends BindingClass {
                     companyName: companyName,
                     firstName: firstName,
                     lastName: lastName,
-                    truckIds: truckId,
+                    truckId: truckId,
 
                 }, {
                     headers: {
@@ -126,7 +141,49 @@ export default class TruckingClient extends BindingClass {
                         companyName: companyName,
                         firstName: firstName,
                         lastName: lastName,
-                        truckIds: truckId,
+                        truckId: truckId,
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    return response.data;
+                } catch (error) {
+                    this.handleError(error, errorCallback)
+                }
+            }
+        async createExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
+                    try {
+                        const token = await this.getTokenOrThrow("Only authenticated users can create an expense.");
+                        const response = await this.axiosClient.post(`expenses/create`, {
+                            truckId: truckId,
+                            vendorName: vendorName,
+                            category: category,
+                            date: date,
+                            amount: amount,
+                            paymentType: paymentType
+                        }, {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        return response.data;
+                    } catch (error) {
+                        this.handleError(error, errorCallback);
+                    }
+                }
+        async updateExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
+                try {
+                    const token = await this.getTokenOrThrow("Only authenticated users can update expenses.");
+                    const response = await this.axiosClient.put(`expenses/${id}`, {
+                        truckId: truckId,
+                        vendorName: vendorName,
+                        category: category,
+                        date: date,
+                        amount: amount,
+                        paymentType: paymentType,
                     }, {
                         headers: {
                             Authorization: `Bearer ${token}`,

@@ -12,21 +12,31 @@ class CreateProfile extends BindingClass {
 
     }
 
-    async clientLoaded() {
-        const identity = await this.client.getIdentity();
-        this.dataStore.set('id', identity.email);
-        const profile = await this.client.getProfile(identity.email);
-        this.dataStore.set('profile', profile);
-        if(profile == null) {
-            document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>"
-        }
-        document.getElementById("fname").setAttribute('placeholder', 'First Name');
-        document.getElementById("lname").setAttribute('placeholder', 'Last Name');
-        document.getElementById("companyName").setAttribute('placeholder', 'Company Name');
-        document.getElementById("truckIds").setAttribute('placeholder', 'Truck ID(s)');
-        this.setPlaceholders();
-
+//    async clientLoaded() {
+//        const identity = await this.client.getIdentity();
+//        this.dataStore.set('id', identity.email);
+//        const profile = await this.client.getProfile(identity.email);
+//        this.dataStore.set('profile', profile);
+//        if(profile == null) {
+//            document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>"
+//        }
+//        document.getElementById("fname").setAttribute('placeholder', 'First Name');
+//        document.getElementById("lname").setAttribute('placeholder', 'Last Name');
+//        document.getElementById("companyName").setAttribute('placeholder', 'Company Name');
+//        document.getElementById("truckIds").setAttribute('placeholder', 'Truck ID(s)');
+//        this.setPlaceholders();
+//
+//    }
+async clientLoaded() {
+    const identity = await this.client.getIdentity();
+    this.dataStore.set('id', identity.email);
+    const profile = await this.client.getProfile(identity.email);
+    this.dataStore.set('profile', profile);
+    if (profile == null) {
+        document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>";
     }
+    this.setPlaceholders();
+}
 
     mount() {
 
@@ -46,17 +56,6 @@ class CreateProfile extends BindingClass {
         if (profile == null) {
             return;
         }
-        if (profile.profileModel.firstName && profile.profileModel.lastName) {
-            document.getElementById('fname').setAttribute('placeholder', profile.profileModel.firstName);
-            document.getElementById('lname').setAttribute('placeholder', profile.profileModel.lastName);
-        }
-        if (profile.profileModel.companyName) {
-            document.getElementById('companyName').setAttribute('placeholder',profile.profileModel.companyName);
-        }
-        if (profile.profileModel.truckIds) {
-            document.getElementById('truckIds').setAttribute('placeholder',profile.profileModel.truckIds);
-        }
-
          const loadingElement = document.getElementById("loading");
           if (loadingElement) {
             loadingElement.remove();
@@ -66,12 +65,14 @@ class CreateProfile extends BindingClass {
 
     async submitFormData(evt){
         evt.preventDefault();
-        const firstName = document.getElementById('fname').value || document.getElementById('fname').getAttribute('placeholder');
-        const lastName = document.getElementById('lname').value ||  document.getElementById('lname').getAttribute('placeholder');
-        const companyName = document.getElementById('companyName').value ||  document.getElementById('companyName').getAttribute('placeholder');
-        const truckIds = document.getElementById('truckIds').value ||  document.getElementById('truckIds').getAttribute('placeholder');
+        const firstName = document.getElementById('fname').value ;
+        const lastName = document.getElementById('lname').value;
+        const companyName = document.getElementById('companyName').value;
+        let truckIds = document.getElementById('truckIds').value;
         console.log(firstName, lastName, companyName, truckIds);
         let profile;
+        truckIds = truckIds.split(",");
+
         if(document.getElementById('welcome').innerText == "Welcome! First of all, let us create your profile!"){
             profile = await this.client.createProfile(companyName, firstName, lastName, truckIds, (error) => {
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
