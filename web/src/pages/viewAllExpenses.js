@@ -16,7 +16,7 @@ class ViewAllExpenses extends BindingClass {
               'displayExpenses',
               'getHTMLForSearchResults'
             ];
-this.bindClassMethods(methodsToBind, this);
+        this.bindClassMethods(methodsToBind, this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.displayExpenses);
         this.header = new Header(this.dataStore);
