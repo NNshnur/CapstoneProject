@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public class LambdaActivityRunner<TRequest, TResult> {
     private ServiceComponent service;
-    private final Logger log = LogManager.getLogger();
+    protected final Logger log = LogManager.getLogger();
 
     /**
      * Handles running the activity and returning a LambdaResponse (either success or failure).

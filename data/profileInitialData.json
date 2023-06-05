@@ -8,7 +8,7 @@
           "firstName": {"S": "Natalia"},
           "lastName": { "S": "Shnur" },
           "truckId": {
-            "SS": [
+            "L": [
               "Volvo2527"
             ]}
         }
@@ -23,7 +23,7 @@
           "firstName": {"S": "Frazier"},
           "lastName": { "S": "Dyson" },
           "truckId": {
-            "SS": [
+            "L": [
               "9400i"
             ]}
         }
@@ -38,7 +38,7 @@
           "firstName": {"S": "Ali"},
           "lastName": { "S": "Mo" },
           "truckId": {
-            "SS": [
+            "L": [
               "Volvo2017"
             ]}
         }
