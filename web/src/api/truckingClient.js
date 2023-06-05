@@ -15,7 +15,7 @@ export default class TruckingClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getProfile', 'getAllExpenses', 'createExpense', 'createProfile','updateProfile',
+        const methodsToBind = ['clientLoaded', 'getIdentity','login', 'logout', 'getProfile', 'getAllExpenses', 'createExpense', 'createProfile','updateProfile',
         'updateExpense', 'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
@@ -97,7 +97,7 @@ export default class TruckingClient extends BindingClass {
         }
     }
 
-    async getAllExpenses(errorCallback) {
+   async getAllExpenses(errorCallback) {
             try {
                 const token = await this.getTokenOrThrow("Only authenticated users can get all expenses.");
                 const response = await this.axiosClient.get(`expenses/all/`, {

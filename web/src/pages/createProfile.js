@@ -2,11 +2,13 @@ import truckingClient from '../api/truckingClient';
 import BindingClass from "../util/bindingClass";
 import Header from '../components/truckingHeader';
 import DataStore from "../util/DataStore";
+import 'bootstrap';
+
 
 class CreateProfile extends BindingClass {
   constructor() {
     super();
-    this.bindClassMethods(['clientLoaded', 'mount', 'confirmRedirect', 'submitFormData', 'redirectEditProfile', 'logout', 'setPlaceholders'], this);
+    this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect', 'submitFormData', 'redirectEditProfile', 'logout', 'setPlaceholders'], this);
     this.dataStore = new DataStore();
     this.header = new Header(this.dataStore);
   }
@@ -23,7 +25,7 @@ class CreateProfile extends BindingClass {
   }
 
   mount() {
-    document.getElementById('profilePic').addEventListener('click', this.redirectEditProfile);
+//    document.getElementById('profilePic').addEventListener('click', this.redirectEditProfile);
     document.getElementById('logout').addEventListener('click', this.logout);
     document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
     document.getElementById('submitted').addEventListener('click', this.submitFormData);
@@ -57,9 +59,11 @@ async submitFormData(evt) {
 
     if (document.getElementById('welcome').innerText == "Welcome! First of all, let us create your profile!") {
       profile = await this.client.createProfile(firstName, lastName, companyName, truckIds);
+
     } else {
       const id = this.dataStore.get('id');
       profile = await this.client.updateProfile(id, firstName, lastName, companyName, truckIds);
+
     }
 
     this.dataStore.set('profile', profile);
@@ -68,6 +72,7 @@ async submitFormData(evt) {
     document.getElementById('companyNameC').innerText = companyName || profile.profileModel.companyName;
     document.getElementById('truckIdsC').innerText = truckIds.join(",") || profile.profileModel.truckIds;
     document.getElementById('loading-modal').remove();
+
   } catch (error) {
     const errorMessageDisplay = document.getElementById('errorMessage');
     if (errorMessageDisplay) {
