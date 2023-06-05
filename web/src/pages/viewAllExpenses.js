@@ -38,14 +38,11 @@ class ViewAllExpenses extends BindingClass {
 
     }
 
-
-
     /**
      * Add the header to the page and load the dannaClient.
      */
     mount() {
         document.getElementById('expenses-link').addEventListener('click', this.redirectAllExpenses);
-//        document.getElementById('createEvents').addEventListener('click', this.redirectCreateEvents);
         document.getElementById('logout').addEventListener('click', this.logout);
         this.client = new truckingClient();
         this.clientLoaded();
