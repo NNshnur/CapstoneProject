@@ -5,8 +5,13 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 @JsonDeserialize(builder = GetAllExpensesRequest.Builder.class)
 public class GetAllExpensesRequest {
+    private String id;
 
     public GetAllExpensesRequest() {
+    }
+
+    public String getId() {
+        return id;
     }
 
     public static Builder builder() {
@@ -15,9 +20,17 @@ public class GetAllExpensesRequest {
 
     @JsonPOJOBuilder
     public static class Builder {
+        private String id;
+
+        public Builder withId (String id) {
+            this.id = id;
+            return this;
+        }
 
         public GetAllExpensesRequest build() {
-            return new GetAllExpensesRequest();
+            GetAllExpensesRequest request = new GetAllExpensesRequest();
+            request.id = this.id;
+            return request;
         }
     }
 

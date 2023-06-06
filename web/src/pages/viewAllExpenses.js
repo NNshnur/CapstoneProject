@@ -29,7 +29,7 @@ class ViewAllExpenses extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         const profile = await this.client.getProfile(identity.email);
-        const expenses = await this.client.getAllExpenses();
+        const expenses = await this.client.getAllExpenses(identity.email);
         this.dataStore.set("email", identity.email);
         this.dataStore.set('profile', profile);
         this.dataStore.set('expenses', expenses);
@@ -118,7 +118,7 @@ class ViewAllExpenses extends BindingClass {
     async logout(){
         await this.client.logout();
         if(!this.client.isLoggedIn()){
-            window.location.href ='/landingPage.html';
+            window.location.href ='/index.html';
         }
 
     }
