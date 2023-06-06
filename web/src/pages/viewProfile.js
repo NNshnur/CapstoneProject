@@ -10,11 +10,11 @@ class ViewProfile extends BindingClass {
         'clientLoaded',
         'mount',
         'redirectAllExpenses',
-        'delay',
         'redirectProfile',
         'redirectAllIncome',
         'redirectRunningBalance',
         'logout',
+        'addName'
       ]
         this.bindClassMethods(methodsToBind, this);
         this.dataStore = new DataStore();
@@ -27,9 +27,10 @@ class ViewProfile extends BindingClass {
         const profile = await this.client.getProfile(identity.email);
         this.dataStore.set("email", identity.email);
         this.dataStore.set('profile', profile);
-//        this.dataStore.set('companyName', profile.profileModel.companyName);
+        this.dataStore.set('companyNameC', profile.profileModel.companyName);
 //        console.log(JSON.stringify(this.dataStore));
-//        this.addName();
+        this.addName();
+        console.log("addname() called")
 
     }
 
@@ -45,25 +46,22 @@ class ViewProfile extends BindingClass {
         document.getElementById('backToProfile').addEventListener('click', this.redirectProfile);
         document.getElementById('running-balance').addEventListener('click', this.redirectRunningBalance);
         document.getElementById('logout').addEventListener('click', this.logout);
+        document.getElementById('coName').innerText = "Loading ...";
         this.client = new truckingClient();
         this.clientLoaded();
 
     }
-    async delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 
+ async addName() {
 
-// async addName() {
-//
-//   const companyName = this.dataStore.get("companyName");
-//   console.log("Company Name is " + companyName);
-//   if (companyName == null) {
-//     document.getElementById("coName").innerText = "Something went wrong. Unable to load the company name.";
-//   } else {
-//     document.getElementById("coName").innerText = "You logged in as: " + companyName;
-//   }
-// }
+   const companyName = this.dataStore.get("companyNameC");
+   console.log("Company Name is " + companyName);
+   if (companyName == null) {
+     document.getElementById("coName").innerText = "Something went wrong. Unable to load the company name.";
+   } else {
+     document.getElementById("coName").innerText = "You logged in as: " + companyName;
+   }
+ }
 
        redirectAllExpenses(){
             window.location.href = '/expenses.html';
