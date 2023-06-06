@@ -253,7 +253,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /expenses/all/{id}
+            Path: /expenses/all
             Method: get
 
   GetProfileLambda:

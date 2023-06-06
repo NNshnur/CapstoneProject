@@ -2,6 +2,7 @@ package truckingappservice.activity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import truckingappservice.activity.request.GetAllExpensesRequest;
 import truckingappservice.activity.results.GetAllExpensesResult;
 import truckingappservice.dynamodb.ExpenseDao;
 import truckingappservice.dynamodb.ProfileDao;
@@ -24,14 +25,16 @@ public class GetAllExpensesActivity {
         this.profileDao = profileDao;
     }
 
-    public GetAllExpensesResult handleRequest(String id){
-        Profile profile = profileDao.getProfile(id);
+    public GetAllExpensesResult handleRequest(GetAllExpensesRequest request){
+        Profile profile = profileDao.getProfile(request.getId());
+        log.error("profile{}", profile);
         if (profile == null) {
-            log.error("Profile not found for id: {}", id);
+            log.error("Profile not found for id: {}", request.getId());
             return GetAllExpensesResult.builder().withExpenseList(Collections.emptyList()).build();
         }
 
         List<Expense> listExpenses = expenseDao.getAllExpenses(profile.getTruckId());
+        log.error("listExpenses {}", listExpenses);
 
         return GetAllExpensesResult.builder()
                 .withExpenseList(listExpenses)

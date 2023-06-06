@@ -24,35 +24,16 @@ public class GetAllExpensesLambda extends LambdaActivityRunner<GetAllExpensesReq
          */
         @Override
         public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetAllExpensesRequest> input, Context context) {
-        log.error("We are in Lambda of Get All Expenses");
         return super.runActivity(
                 () -> {
-                    GetAllExpensesRequest unauthenticatedRequest = input.fromBody(GetAllExpensesRequest.class);
-                    log.error("unauthenticatedRequest{}", unauthenticatedRequest);
                     return input.fromUserClaims(claims ->
                         GetAllExpensesRequest.builder()
                                 .withId(claims.get("email"))
                                 .build());
 
                 },
-                (request,serviceComponent) -> {
-                    try {
-                        return serviceComponent.provideGetAllExpensesActivity().handleRequest(request.getId());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        throw e;
-                    }
-
-                }
-
-        );
-        }
-    }
-
-
-//                },
-//                        (request,serviceComponent) ->
-//                        serviceComponent.provideGetAllExpensesActivity().handleRequest(request.getId())
-//                        );
-//                        }
-//                        }
+                        (request,serviceComponent) ->
+                        serviceComponent.provideGetAllExpensesActivity().handleRequest(request)
+);
+ }
+ }
