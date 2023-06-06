@@ -1,6 +1,7 @@
-'Retrieve all expenses endpoint' -> GET /expenses/all
+'Retrieve all expenses endpoint' -> GET /expenses/all/{profile}
 curl -v http://127.0.0.1:3000/expenses/all \
 -H 'Authorization: TOKEN'
+-d '{"id":"nataliashnur@gmail.com"}'
 
 'Create profile endpoint' -> POST /profiles/create
 curl -v -X POST http://127.0.0.1:3000/profiles/create \

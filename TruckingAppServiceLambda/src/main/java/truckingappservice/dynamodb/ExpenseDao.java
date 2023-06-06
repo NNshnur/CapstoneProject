@@ -51,12 +51,26 @@ public class ExpenseDao {
         return expense;
     }
 
-    public List<Expense> getAllExpenses() {
+//    public List<Expense> getAllExpenses(List<String> truckIds) {
+//        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+//        List<Expense> expenseList = dynamoDbMapper.scan(Expense.class, scanExpression);
+//        return expenseList;
+//    }
+
+    public List<Expense> getAllExpenses(List<String> truckIds) {
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         List<Expense> expenseList = dynamoDbMapper.scan(Expense.class, scanExpression);
-        return expenseList;
-    }
 
+        // Filter expenses based on the truck IDs and email address
+        List<Expense> filteredExpenses = new ArrayList<>();
+        for (Expense expense : expenseList) {
+            if (truckIds.contains(expense.getTruckId())) {
+                filteredExpenses.add(expense);
+            }
+        }
+
+        return filteredExpenses;
+    }
     public Expense saveExpense(boolean isNew, String expenseId, String truckId, String vendorName, Category category,
                                String date, double amount, String paymentType) {
         Expense expense = new Expense();
@@ -103,28 +117,55 @@ public class ExpenseDao {
     }
 
 
-    public List<String> deleteExpense(String expenseId) {
-        List<Expense> list = getAllExpenses();
+//    public List<String> deleteExpense(String expenseId) {
+//        List<Expense> list = getAllExpenses();
+//
+//        Expense expenseToRemove = null;
+//
+//        for (Expense expense : list) {
+//            if (expense.getExpenseId().equals(expenseId)) {
+//                expenseToRemove = expense;
+//                break;
+//            }
+//        }
+//
+//        if (expenseToRemove != null) {
+//            dynamoDbMapper.delete(expenseToRemove);
+//        }
+//
+//        List<String> stringList = new ArrayList<>();
+//        for (Expense expense : list) {
+//            stringList.add(expense.toString());
+//        }
+//        return stringList;
+//    }
+public List<String> deleteExpense(String expenseId) {
+    DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+    List<Expense> expenseList = dynamoDbMapper.scan(Expense.class, scanExpression);
 
-        Expense expenseToRemove = null;
+    Expense expenseToRemove = null;
 
-        for (Expense expense : list) {
-            if (expense.getExpenseId().equals(expenseId)) {
-                expenseToRemove = expense;
-                break;
-            }
+    for (Expense expense : expenseList) {
+        if (expense.getExpenseId().equals(expenseId)) {
+            expenseToRemove = expense;
+            break;
         }
-
-        if (expenseToRemove != null) {
-            dynamoDbMapper.delete(expenseToRemove);
-        }
-
-        List<String> stringList = new ArrayList<>();
-        for (Expense expense : list) {
-            stringList.add(expense.toString());
-        }
-        return stringList;
     }
+
+    if (expenseToRemove != null) {
+        dynamoDbMapper.delete(expenseToRemove);
+    }
+
+    // Remove the deleted expense from the list
+    expenseList.remove(expenseToRemove);
+
+    List<String> stringList = new ArrayList<>();
+    for (Expense expense : expenseList) {
+        stringList.add(expense.toString());
+    }
+    return stringList;
+}
+
 }
 
 

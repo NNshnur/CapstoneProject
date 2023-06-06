@@ -3,6 +3,7 @@ package truckingappservice.lambda;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import truckingappservice.activity.request.CreateProfileRequest;
+import truckingappservice.activity.request.GetAllExpensesRequest;
 import truckingappservice.activity.results.CreateProfileResult;
 
 public class CreateProfileLambda extends LambdaActivityRunner<CreateProfileRequest, CreateProfileResult>
@@ -14,7 +15,7 @@ public class CreateProfileLambda extends LambdaActivityRunner<CreateProfileReque
      * @param context The Lambda execution environment context object.
      * @return The Lambda Function output
      */
-    //?? we only want exactly what is needed to create a minimum profile
+
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateProfileRequest> input, Context context) {
         return super.runActivity(
@@ -35,3 +36,4 @@ public class CreateProfileLambda extends LambdaActivityRunner<CreateProfileReque
         );
     }
 }
+

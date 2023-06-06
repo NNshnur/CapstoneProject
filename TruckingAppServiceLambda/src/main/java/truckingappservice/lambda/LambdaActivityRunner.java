@@ -29,6 +29,7 @@ public class LambdaActivityRunner<TRequest, TResult> {
             TResult result = handleRequest.apply(request, serviceComponent);
             return LambdaResponse.success(result);
         } catch (Exception e) {
+            log.error("error type" + e);
             return LambdaResponse.error(e);
         }
     }

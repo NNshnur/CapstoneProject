@@ -17,6 +17,7 @@ class CreateProfile extends BindingClass {
     const identity = await this.client.getIdentity();
     this.dataStore.set('id', identity.email);
     const profile = await this.client.getProfile(identity.email);
+
     this.dataStore.set('profile', profile);
     if (profile == null) {
       document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>";

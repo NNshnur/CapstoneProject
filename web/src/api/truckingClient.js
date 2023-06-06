@@ -100,7 +100,7 @@ export default class TruckingClient extends BindingClass {
    async getAllExpenses(errorCallback) {
             try {
                 const token = await this.getTokenOrThrow("Only authenticated users can get all expenses.");
-                const response = await this.axiosClient.get(`expenses/all/`, {
+                const response = await this.axiosClient.get(`expenses/all`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json'

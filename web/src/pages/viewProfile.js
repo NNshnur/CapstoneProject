@@ -9,7 +9,7 @@ class ViewProfile extends BindingClass {
         const methodsToBind = [
         'clientLoaded',
         'mount',
-        'redirectAllExpenses',
+      //  'redirectAllExpenses',
         'redirectProfile',
         'redirectAllIncome',
         'redirectRunningBalance',
@@ -25,6 +25,10 @@ class ViewProfile extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         const profile = await this.client.getProfile(identity.email);
+        if (profile == null) {
+          redirectEditProfile();
+          document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>";
+         }
         this.dataStore.set("email", identity.email);
         this.dataStore.set('profile', profile);
         this.dataStore.set('companyNameC', profile.profileModel.companyName);
@@ -41,7 +45,7 @@ class ViewProfile extends BindingClass {
      * Add the header to the page and load the dannaClient.
      */
     mount() {
-        document.getElementById('expenses').addEventListener('click', this.redirectAllExpenses);
+       // document.getElementById('expenses').addEventListener('click', this.redirectAllExpenses);
         document.getElementById('income').addEventListener('click', this.redirectAllIncome);
         document.getElementById('backToProfile').addEventListener('click', this.redirectProfile);
         document.getElementById('running-balance').addEventListener('click', this.redirectRunningBalance);
@@ -63,7 +67,7 @@ class ViewProfile extends BindingClass {
    }
  }
 
-       redirectAllExpenses(){
+    redirectAllExpenses(){
             window.location.href = '/expenses.html';
         }
 
