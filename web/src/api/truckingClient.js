@@ -134,7 +134,7 @@ export default class TruckingClient extends BindingClass {
             }
         }
 
-        async updateProfile(id, companyName, firstName, lastName, truckId, errorCallback) {
+    async updateProfile(id, companyName, firstName, lastName, truckId, errorCallback) {
                 try {
                     const token = await this.getTokenOrThrow("Only authenticated users can update a profile.");
                     const response = await this.axiosClient.put(`profiles/${id}`, {
@@ -153,7 +153,7 @@ export default class TruckingClient extends BindingClass {
                     this.handleError(error, errorCallback)
                 }
             }
-        async createExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
+    async createExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
                     try {
                         const token = await this.getTokenOrThrow("Only authenticated users can create an expense.");
                         const response = await this.axiosClient.post(`expenses/create`, {
@@ -174,7 +174,7 @@ export default class TruckingClient extends BindingClass {
                         this.handleError(error, errorCallback);
                     }
                 }
-        async updateExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
+    async updateExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
                 try {
                     const token = await this.getTokenOrThrow("Only authenticated users can update expenses.");
                     const response = await this.axiosClient.put(`expenses/${id}`, {

@@ -48,6 +48,7 @@ class ViewAllExpenses extends BindingClass {
      */
     mount() {
         document.getElementById('expenses-link').addEventListener('click', this.redirectAllExpenses);
+        document.getElementById('addEx').addEventListener('click', this.redirectCreateExpense);
         document.getElementById('logout').addEventListener('click', this.logout);
         this.client = new truckingClient();
         this.clientLoaded();
