@@ -134,7 +134,7 @@ export default class TruckingClient extends BindingClass {
             }
         }
 
-        async updateProfile(id, companyName, firstName, lastName, truckId, errorCallback) {
+    async updateProfile(id, companyName, firstName, lastName, truckId, errorCallback) {
                 try {
                     const token = await this.getTokenOrThrow("Only authenticated users can update a profile.");
                     const response = await this.axiosClient.put(`profiles/${id}`, {
@@ -153,7 +153,7 @@ export default class TruckingClient extends BindingClass {
                     this.handleError(error, errorCallback)
                 }
             }
-        async createExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
+    async createExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
                     try {
                         const token = await this.getTokenOrThrow("Only authenticated users can create an expense.");
                         const response = await this.axiosClient.post(`expenses/create`, {
@@ -174,7 +174,7 @@ export default class TruckingClient extends BindingClass {
                         this.handleError(error, errorCallback);
                     }
                 }
-        async updateExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
+    async updateExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
                 try {
                     const token = await this.getTokenOrThrow("Only authenticated users can update expenses.");
                     const response = await this.axiosClient.put(`expenses/${id}`, {
@@ -195,6 +195,22 @@ export default class TruckingClient extends BindingClass {
                     this.handleError(error, errorCallback)
                 }
             }
+    async deleteExpense(expenseId, errorCallback) {
+            try {
+                const token = await this.getTokenOrThrow("Only authenticated users can remove a profile.");
+                const response = await this.axiosClient.put(`expenses/removeExpense`, {
+                    expenseId: expenseId
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                this.handleError(error, errorCallback)
+            }
+        }
 
     /**
      * Helper method to log the error and run any error functions.

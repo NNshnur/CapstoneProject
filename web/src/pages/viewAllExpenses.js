@@ -15,7 +15,8 @@ class ViewAllExpenses extends BindingClass {
               'logout',
               'displayExpenses',
               'redirectEditProfile',
-              'getHTMLForSearchResults'
+              'getHTMLForSearchResults',
+              'deleteEntryExpense',
             ];
         this.bindClassMethods(methodsToBind, this);
         this.dataStore = new DataStore();
@@ -48,27 +49,54 @@ class ViewAllExpenses extends BindingClass {
      */
     mount() {
         document.getElementById('expenses-link').addEventListener('click', this.redirectAllExpenses);
+        document.getElementById('addEx').addEventListener('click', this.redirectCreateExpense);
+
+//        var elements = document.getElementsByClassName('delete-button')
+//            for (var i = 0; i < elements.length; i++) {
+//            console.log(elements.length + " elements length " + elements);
+//            elements[i].addEventListener('click', this.deleteEntryExpense, false);
+//            }
+            const deleteButtons = document.getElementsByClassName('delete-button');
+                for (let i = 0; i < deleteButtons.length; i++) {
+                    deleteButtons[i].addEventListener('click', this.deleteEntryExpense.bind(this));
+                }
+
+
         document.getElementById('logout').addEventListener('click', this.logout);
         this.client = new truckingClient();
         this.clientLoaded();
     }
 
 
-    displayExpenses(){
-            let expenses = this.dataStore.get("expenses");
-            console.log(expenses , "from displayExpenses");
-            if (expenses == null) {
-                document.getElementById("expense-list").innerText = "No Expenses found";
-            }
-            document.getElementById("expense-list").innerHTML = this.getHTMLForSearchResults(expenses);
+//    displayExpenses(){
+//            let expenses = this.dataStore.get("expenses");
+//            console.log(expenses , "from displayExpenses");
+//            if (expenses == null) {
+//                document.getElementById("expense-list").innerText = "No Expenses found";
+//            }
+//            document.getElementById("expense-list").innerHTML = this.getHTMLForSearchResults(expenses);
+//    }
+
+    displayExpenses() {
+    let expenses = this.dataStore.get("expenses");
+    console.log(expenses, "from displayExpenses");
+    if (expenses == null) {
+        document.getElementById("expense-list").innerText = "No Expenses found";
+    } else {
+        document.getElementById("expense-list").innerHTML = this.getHTMLForSearchResults(expenses);
+        const deleteButtons = document.getElementsByClassName('delete-button');
+        for (let i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].addEventListener('click', this.deleteEntryExpense.bind(this));
+        }
     }
+}
 
     getHTMLForSearchResults(searchResults) {
      console.log(searchResults , "from getHTMLForSearchResults");
             if (!searchResults || !searchResults.allExpenseList || searchResults.allExpenseList.length === 0) {
                 return '<h4>No results found</h4>';
             }
-            let html = "";
+            let html = "<div id = 'expenseEditList'>";
             for (const res of searchResults.allExpenseList) {
                 html += `
                 <tr>
@@ -95,15 +123,26 @@ class ViewAllExpenses extends BindingClass {
                     </td>
                     <td>
                     <div class="d-flex justify-content-center">
-                    <button class="edit-button btn btn-success rounded me-4" onclick="editExpense(${res.expenseId})">Edit</button>
-                    <button class="delete-button btn btn-danger rounded me-4" onclick="deleteExpense(${res.expenseId})">Delete</button>
+                    <a class="edit-button btn btn-success rounded me-4 editExpense" href="updateExpense.html?expense=${res.expenseId}">Edit</a>
+                    <button class="delete-button btn btn-danger rounded me-4 deleteExpense" data-expenseId="${res.expenseId}">Delete</button>
+
                     </td>
                     </div>
                 </tr>`;
-            }
+                }
+               html+= "</div>";
             return html;
         }
+    deleteEntryExpense() {
+       console.log("we are deleting - just a test message")
 
+    }
+
+
+
+    redirectEditUpdate() {
+    window.location.href = '/updateExpense.html';
+    }
 
     redirectEditProfile(){
         window.location.href = '/createProfile.html';

@@ -14,7 +14,7 @@ class ViewProfile extends BindingClass {
         'redirectAllIncome',
         'redirectRunningBalance',
         'logout',
-        'addName'
+        'addCompanyName'
       ]
         this.bindClassMethods(methodsToBind, this);
         this.dataStore = new DataStore();
@@ -31,10 +31,10 @@ class ViewProfile extends BindingClass {
          }
         this.dataStore.set("email", identity.email);
         this.dataStore.set('profile', profile);
-        this.dataStore.set('companyNameC', profile.profileModel.companyName);
+        this.dataStore.set('companyName', profile.profileModel.companyName);
 //        console.log(JSON.stringify(this.dataStore));
-        this.addName();
-        console.log("addname() called")
+        this.addCompanyName();
+        console.log("addCompanyName() called")
 
     }
 
@@ -56,9 +56,9 @@ class ViewProfile extends BindingClass {
 
     }
 
- async addName() {
+ async addCompanyName() {
 
-   const companyName = this.dataStore.get("companyNameC");
+   const companyName = this.dataStore.get("companyName");
    console.log("Company Name is " + companyName);
    if (companyName == null) {
      document.getElementById("coName").innerText = "Something went wrong. Unable to load the company name.";
