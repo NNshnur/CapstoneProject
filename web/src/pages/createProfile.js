@@ -26,7 +26,6 @@ class CreateProfile extends BindingClass {
   }
 
   mount() {
-//    document.getElementById('profilePic').addEventListener('click', this.redirectEditProfile);
     document.getElementById('logout').addEventListener('click', this.logout);
     document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
     document.getElementById('submitted').addEventListener('click', this.submitFormData);

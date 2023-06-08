@@ -19,7 +19,7 @@ class UpdateExpense extends BindingClass {
         'logout'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-
+        this.urlParams = new URLSearchParams(window.location.search);
     }
 
   /**
@@ -58,143 +58,96 @@ mount() {
   this.client = new truckingClient();
   this.clientLoaded();
 
-  const categoryOptions = document.querySelectorAll('#categoryOptionss .dropdown-item');
-    categoryOptions.forEach(option => {
-      option.addEventListener('click', this.showCategoryOptions.bind(this));
-    });
+  // Extract the expenseId from the URL parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const expenseId = urlParams.get('expense');
 
+  const categoryOptions = document.querySelectorAll('#categoryOptionss .dropdown-item');
+  categoryOptions.forEach(option => {
+    option.addEventListener('click', this.showCategoryOptions.bind(this));
+  });
+
+  // Use the expenseId as needed
+  console.log(expenseId);
 }
+
 
 async submit(evt) {
   evt.preventDefault();
   const updateButton = document.getElementById('submitted');
   const errorMessageDisplay = document.getElementById('errorMessageDisplay');
+  const expenseId = this.urlParams.get('expense'); // Get the expense ID from urlParams
   const truckId = document.getElementById('t_idz').value;
   const vendorName = document.getElementById('vName').value;
   const category = document.getElementById('categoryCc').value;
   const date = document.getElementById('dDate').value;
   const amount = document.getElementById('amo').value;
   const paymentType = document.getElementById('ptypeC').value;
+
   try {
     // Check if the user is authenticated
     const user = await this.client.getIdentity();
     if (!user) {
       // If not authenticated, show error message
-      throw new Error('Only authenticated users can create an expense.');
+      throw new Error('Only authenticated users can update an expense.');
     }
-    const expenseCreator = user.email;
-    const expense = await this.client.createExpense(
-      truckId,
-      vendorName,
-      category,
-      date,
-      amount,
-      paymentType,
-      (error) => {
-        createButton.innerText = 'Submit';
+
+    // Populate the modal fields with the input values
+    document.getElementById('truckC').textContent = truckId;
+    document.getElementById('VendorNameC').textContent = vendorName;
+    document.getElementById('dateC').textContent = date;
+    document.getElementById('categoryC').textContent = category;
+    document.getElementById('amountC').textContent = amount;
+    document.getElementById('paymentTypeC').textContent = paymentType;
+
+    // Show the "Please verify" modal
+    const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    confirmModal.show();
+
+    // Handle the confirm button click
+    const confirmButton = document.getElementById('confirmButton');
+    confirmButton.addEventListener('click', async () => {
+      // Perform the update operation after confirmation
+      try {
+        // Update the expense entry
+        const updatedExpense = await this.client.updateExpense(
+          expenseId,
+          truckId,
+          vendorName,
+          category,
+          date,
+          amount,
+          paymentType
+        );
+
+        // Show success message or perform other actions
+        updateButton.innerText = 'Expense Updated';
+
+        window.location.href = 'expenses.html';
+
+      } catch (error) {
+        updateButton.innerText = 'Submit';
         errorMessageDisplay.innerText = `Error: ${error.message}`;
         errorMessageDisplay.classList.remove('hidden');
       }
-    );
-
-    // Show the verification modal
-    const truckC = document.getElementById('truckC');
-    truckC.innerText = truckId;
-    const VendorNameC = document.getElementById('VendorNameC');
-    VendorNameC.innerText = vendorName;
-    const categoryC = document.getElementById('categoryC');
-    categoryC.innerText = category;
-    const dateC = document.getElementById('dateC');
-    dateC.innerText = date;
-    const amountC = document.getElementById('amountC');
-    amountC.innerText = amount;
-    const paymentTypeC = document.getElementById('paymentTypeC');
-    paymentTypeC.innerText = paymentType;
-
-    const confirmButton = document.getElementById('confirm');
-    confirmButton.addEventListener('click', this.confirmRedirect.bind(this));
-
-    const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-    confirmModal.show();
-  } catch (error) {
-    updateButton.innerText = 'Submit';
-    errorMessageDisplay.innerText = `Error: ${error.message}`;
-    errorMessageDisplay.classList.remove('hidden');
-  }
-}
-
-async function editExpense(expenseId) {
-  try {
-    const expense = await this.client.getExpense(expenseId);
-    if (!expense) {
-      throw new Error('Expense not found.');
+    });
+    } catch (error) {
+        updateButton.innerText = 'Submit';
+        errorMessageDisplay.innerText = `Error: ${error.message}`;
+        errorMessageDisplay.classList.remove('hidden');
+      }
     }
-    // Populate the form fields with the expense data
-    document.getElementById('t_idz').value = expense.truckId;
-    document.getElementById('vName').value = expense.vendorName;
-    document.getElementById('categoryCc').value = expense.category;
-    document.getElementById('dDate').value = expense.date;
-    document.getElementById('amo').value = expense.amount;
-    document.getElementById('ptypeC').value = expense.paymentType;
-
-    const editButton = document.getElementById('editConfirm');
-    editButton.addEventListener('click', () => saveChanges(expenseId));
-
-    // Redirect to updateExpense.html
-    const updateButton = document.getElementById('updateExpense');
-    updateButton.addEventListener('click', this.redirectUpdateExpense);
-
-    const editModal = new bootstrap.Modal(document.getElementById('editModal'));
-    editModal.show();
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
-}
-
-
-
-        async function saveChanges(expenseId) {
-            const truckId = document.getElementById('t_idz').value;
-            const vendorName = document.getElementById('vName').value;
-            const category = document.getElementById('categoryCc').value;
-            const date = document.getElementById('dDate').value;
-            const amount = document.getElementById('amo').value;
-            const paymentType = document.getElementById('ptypeC').value;
-
-            try {
-                // Update the expense with the new data
-                const updatedExpense = await this.client.updateExpense(
-                    expenseId,
-                    truckId,
-                    vendorName,
-                    category,
-                    date,
-                    amount,
-                    paymentType
-                );
-
-                console.log('Expense updated:', updatedExpense);
-
-                // Close the edit modal
-                const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
-                editModal.hide();
-
-                // Refresh the expenses list or perform any other necessary actions
-                // ...
-
-            } catch (error) {
-                console.error('Error:', error.message);
-            }
-        }
 
   redirectUpdateExpense() {
-  window.location.href = '/updateExpense.html';
+  window.location.href = '/expenses.html';
    }
 
     redirectToExpenses() {
         console.log("redirectToExpenses");
             window.location.href = `/expenses.html`;
     }
+
+
     confirmRedirect() {
     window.location.href = '/expenses.html';
     console.log("updateExpense button clicked");
@@ -228,7 +181,7 @@ async function editExpense(expenseId) {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const createExpense = new CreateExpense();
-    createExpense.mount();
+    const updateExpense = new UpdateExpense();
+    updateExpense.mount();
 };
 window.addEventListener('DOMContentLoaded', main);
