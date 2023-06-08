@@ -373,8 +373,9 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /expenses/removeExpense
+            Path: /expenses/{expenseId}
             Method: delete
+
 
 
   #-----------------------------------------------------
