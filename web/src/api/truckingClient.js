@@ -174,10 +174,10 @@ export default class TruckingClient extends BindingClass {
                         this.handleError(error, errorCallback);
                     }
                 }
-    async updateExpense(expenseId, truckId, vendorName, category, date, amount, paymentType, errorCallback) {
+    async updateExpense(id, truckId, vendorName, category, date, amount, paymentType, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can update expenses.");
-            const response = await this.axiosClient.put(`expenses/${expenseId}`, {
+            const response = await this.axiosClient.put(`expenses/${id}`, {
                 truckId: truckId,
                 vendorName: vendorName,
                 category: category,
@@ -192,7 +192,7 @@ export default class TruckingClient extends BindingClass {
             });
             return response.data;
         } catch (error) {
-            this.handleError(error, errorCallback);
+            this.handleError(error, errorCallback)
         }
     }
     async deleteExpense(expenseId, errorCallback) {

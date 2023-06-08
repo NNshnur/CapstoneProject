@@ -22,6 +22,7 @@ class ViewAllExpenses extends BindingClass {
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.displayExpenses);
         this.header = new Header(this.dataStore);
+        this.urlParams = new URLSearchParams(window.location.search);
 
     }
 
@@ -61,10 +62,14 @@ class ViewAllExpenses extends BindingClass {
                     deleteButtons[i].addEventListener('click', this.deleteEntryExpense.bind(this));
                 }
 
+        const urlParams = new URLSearchParams(window.location.search);
+        const expenseId = urlParams.get('expense');
+
 
         document.getElementById('logout').addEventListener('click', this.logout);
         this.client = new truckingClient();
         this.clientLoaded();
+        console.log(expenseId);
     }
 
 
@@ -133,11 +138,52 @@ class ViewAllExpenses extends BindingClass {
                html+= "</div>";
             return html;
         }
-    deleteEntryExpense() {
-       console.log("we are deleting - just a test message")
 
+//    deleteEntryExpense() {
+//       console.log("we are deleting - just a test message")
+//
+//    }
+
+async deleteEntryExpense() {
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const expenseId = urlParams.get('expense');
+
+    if (!expenseId) {
+      console.error('Expense ID not found in URL parameters.');
+      return;
     }
 
+    // Check if the user is authenticated
+    const user = await this.client.getIdentity();
+    if (!user) {
+      throw new Error('Only authenticated users can delete an expense.');
+    }
+
+    // Delete the expense entry
+    const response = await this.client.deleteExpense(expenseId);
+
+    // Handle the response based on your requirements
+    // For example, check response status and show success message or perform other actions
+    if (response.status === 200) {
+      console.log('Expense deleted successfully');
+    } else {
+      console.error('Error deleting expense:', response.data);
+    }
+
+    // Remove the expense entry from the data store
+    const expenses = this.dataStore.get('expenses');
+    const updatedExpenses = expenses.filter((expense) => expense.expenseId !== expenseId);
+    this.dataStore.set('expenses', updatedExpenses);
+
+    // Re-render the expenses list
+    this.displayExpenses();
+
+  } catch (error) {
+    console.error('Error deleting expense:', error);
+    // Handle error as needed
+  }
+}
 
 
     redirectEditUpdate() {
