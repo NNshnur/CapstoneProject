@@ -174,27 +174,27 @@ export default class TruckingClient extends BindingClass {
                         this.handleError(error, errorCallback);
                     }
                 }
-    async updateExpense(truckId, vendorName, category, date, amount, paymentType, errorCallback) {
-                try {
-                    const token = await this.getTokenOrThrow("Only authenticated users can update expenses.");
-                    const response = await this.axiosClient.put(`expenses/${id}`, {
-                        truckId: truckId,
-                        vendorName: vendorName,
-                        category: category,
-                        date: date,
-                        amount: amount,
-                        paymentType: paymentType,
-                    }, {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                    return response.data;
-                } catch (error) {
-                    this.handleError(error, errorCallback)
+    async updateExpense(id, truckId, vendorName, category, date, amount, paymentType, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can update expenses.");
+            const response = await this.axiosClient.put(`expenses/${id}`, {
+                truckId: truckId,
+                vendorName: vendorName,
+                category: category,
+                date: date,
+                amount: amount,
+                paymentType: paymentType,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
                 }
-            }
+            });
+            return response.data;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
     async deleteExpense(expenseId, errorCallback) {
             try {
                 const token = await this.getTokenOrThrow("Only authenticated users can remove a profile.");

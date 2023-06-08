@@ -1,6 +1,7 @@
 package truckingappservice.models;
 
 public enum Category {
+    TRUCK,
     TRAILER,
     INSURANCE,
     FUEL,

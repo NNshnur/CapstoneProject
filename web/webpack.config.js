@@ -28,6 +28,7 @@ module.exports = {
     createProfile: path.resolve(__dirname, 'src', 'pages', 'createProfile.js'),
     viewAllExpenses: path.resolve(__dirname,'src', 'pages', 'viewAllExpenses.js'),
     createExpense: path.resolve(__dirname, 'src', 'pages', 'createExpense.js'),
+    updateExpense: path.resolve(__dirname, 'src', 'pages', 'updateExpense.js'),
 
   },
   output: {

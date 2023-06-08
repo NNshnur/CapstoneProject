@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="shortcut icon" href="css/frontal-truck-svgrepo-com.svg">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script type="text/javascript" src="assets/editExpense.js"></script>
+    <script type="text/javascript" src="assets/updateExpense.js"></script>
     <title>TruckBizBook</title>
 
 </head>
@@ -75,7 +75,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-dark" id="confirm">Confirm</button>
+<!--                <button type="button" class="btn btn-dark" id="confirm">Confirm</button>-->
+                <button id="confirmButton" type="button" class="btn btn-primary">Confirm</button>
             </div>
         </div>
     </div>
@@ -102,10 +103,20 @@
                             <div class="mb-3">
                                 <label for="categoryCc" class="form-label">Category</label>
                                 <select class="form-select form-select-lg" id="categoryCc" name="categoryC">
-                                    <option value="TRAILER">TRAILER</option>
-                                    <option value="INSURANCE">INSURANCE</option>
-                                    <option value="FUEL">FUEL</option>
-                                    <!-- to add mor-->
+                                    <option value="TRAILER">Trailer</option>
+                                    <option value="TRUCK">Truck</option>
+                                    <option value="INSURANCE">Insurance</option>
+                                    <option value="FUEL">Fuel</option>
+                                    <option value="MAINTENANCE">Maintenance</option>
+                                    <option value="DEF">DEF</option>
+                                    <option value="TOLL">Toll</option>
+                                    <option value="PERMIT">Permit</option>
+                                    <option value="FINE">Fine</option>
+                                    <option value="LODGING">Lodging</option>
+                                    <option value="WASH">Wash</option>
+                                    <option value="TAXES">Taxes</option>
+                                    <option value="SELF_PAY">Self pay</option>
+                                    <option value="MISC">Miscellaneous</option>
                                 </select>
                             </div>
                             <div class="mb-3">
