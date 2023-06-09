@@ -51,12 +51,6 @@ class ViewAllExpenses extends BindingClass {
     mount() {
         document.getElementById('expenses-link').addEventListener('click', this.redirectAllExpenses);
         document.getElementById('addEx').addEventListener('click', this.redirectCreateExpense);
-
-//        var elements = document.getElementsByClassName('delete-button')
-//            for (var i = 0; i < elements.length; i++) {
-//            console.log(elements.length + " elements length " + elements);
-//            elements[i].addEventListener('click', this.deleteEntryExpense, false);
-//            }
             const deleteButtons = document.getElementsByClassName('delete-button');
                 for (let i = 0; i < deleteButtons.length; i++) {
                     deleteButtons[i].addEventListener('click', this.deleteEntryExpense.bind(this));
@@ -69,18 +63,8 @@ class ViewAllExpenses extends BindingClass {
         document.getElementById('logout').addEventListener('click', this.logout);
         this.client = new truckingClient();
         this.clientLoaded();
-        console.log(expenseId);
+
     }
-
-
-//    displayExpenses(){
-//            let expenses = this.dataStore.get("expenses");
-//            console.log(expenses , "from displayExpenses");
-//            if (expenses == null) {
-//                document.getElementById("expense-list").innerText = "No Expenses found";
-//            }
-//            document.getElementById("expense-list").innerHTML = this.getHTMLForSearchResults(expenses);
-//    }
 
     displayExpenses() {
     let expenses = this.dataStore.get("expenses");
@@ -91,10 +75,14 @@ class ViewAllExpenses extends BindingClass {
         document.getElementById("expense-list").innerHTML = this.getHTMLForSearchResults(expenses);
         const deleteButtons = document.getElementsByClassName('delete-button');
         for (let i = 0; i < deleteButtons.length; i++) {
-            deleteButtons[i].addEventListener('click', this.deleteEntryExpense.bind(this));
+           // deleteButtons[i].addEventListener('click', this.deleteEntryExpense.bind(this));
+            deleteButtons[i].addEventListener('click', this.deleteEntryExpense);
         }
     }
 }
+
+
+
 
     getHTMLForSearchResults(searchResults) {
      console.log(searchResults , "from getHTMLForSearchResults");
@@ -128,9 +116,8 @@ class ViewAllExpenses extends BindingClass {
                     </td>
                     <td>
                     <div class="d-flex justify-content-center">
-                    <a class="edit-button btn btn-success rounded me-4 editExpense" href="updateExpense.html?expense=${res.expenseId}">Edit</a>
-                    <button class="delete-button btn btn-danger rounded me-4 deleteExpense" data-expenseId="${res.expenseId}">Delete</button>
-
+                    <a class="edit-button btn btn-warning rounded me-4 editExpense" href="updateExpense.html?expense=${res.expenseId}">Edit</a>
+                      <button class="delete-button btn btn-warning rounded me-4 deleteExpense" data-expense-id="${res.expenseId}" data-id="123">Delete</button>
                     </td>
                     </div>
                 </tr>`;
@@ -139,15 +126,10 @@ class ViewAllExpenses extends BindingClass {
             return html;
         }
 
-//    deleteEntryExpense() {
-//       console.log("we are deleting - just a test message")
-//
-//    }
-
-async deleteEntryExpense() {
+async deleteEntryExpense(event) {
   try {
-    const urlParams = new URLSearchParams(window.location.search);
-    const expenseId = urlParams.get('expense');
+    const expenseId = event.target.dataset.expenseId;
+    console.log("ExpenseId", expenseId);
 
     if (!expenseId) {
       console.error('Expense ID not found in URL parameters.');
@@ -161,30 +143,61 @@ async deleteEntryExpense() {
     }
 
     // Delete the expense entry
-    const response = await this.client.deleteExpense(expenseId);
-
-    // Handle the response based on your requirements
-    // For example, check response status and show success message or perform other actions
-    if (response.status === 200) {
-      console.log('Expense deleted successfully');
-    } else {
-      console.error('Error deleting expense:', response.data);
-    }
+    await this.client.deleteExpense(expenseId);
 
     // Remove the expense entry from the data store
-    const expenses = this.dataStore.get('expenses');
-    const updatedExpenses = expenses.filter((expense) => expense.expenseId !== expenseId);
-    this.dataStore.set('expenses', updatedExpenses);
+    let expenses = this.dataStore.get('expenses');
+    if (expenses) {
+      let updatedExpenses = expenses.allExpenseList.filter(
+        (expense) => expense.expenseId !== expenseId
+      );
+      this.dataStore.set('expenses', { allExpenseList: updatedExpenses });
+    }
 
     // Re-render the expenses list
     this.displayExpenses();
-
   } catch (error) {
     console.error('Error deleting expense:', error);
-    // Handle error as needed
   }
 }
 
+
+//    async deleteEntryExpense(event) {
+//    try {
+//
+//    const expenseId = event.target.dataset.expenseId;
+//    console.log("ExpenseId", expenseId);
+//
+//
+//
+//    if (!expenseId) {
+//      console.error('Expense ID not found in URL parameters.');
+//      return;
+//    }
+//
+//    // Check if the user is authenticated
+//    const user = await this.client.getIdentity();
+//    if (!user) {
+//      throw new Error('Only authenticated users can delete an expense.');
+//    }
+//
+//    // Delete the expense entry
+//    const response = await this.client.deleteExpense(expenseId);
+//
+//    // Remove the expense entry from the data store
+//    const expenses = this.dataStore.get('expenses');
+//    let updatedExpenses = expenses.allExpenseList.filter((expense) => expense.expenseId !== expenseId);
+//    let updatedDataStore = { ...expenses, allExpenseList: updatedExpenses };
+//    this.dataStore.set('expenses', updatedDataStore);
+//
+//    // Re-render the expenses list
+//    this.displayExpenses();
+//
+//  } catch (error) {
+//    console.error('Error deleting expense:', error);
+//
+//  }
+//}
 
     redirectEditUpdate() {
     window.location.href = '/updateExpense.html';

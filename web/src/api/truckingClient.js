@@ -195,22 +195,28 @@ export default class TruckingClient extends BindingClass {
             this.handleError(error, errorCallback)
         }
     }
-    async deleteExpense(expenseId, errorCallback) {
-            try {
-                const token = await this.getTokenOrThrow("Only authenticated users can remove a profile.");
-                const response = await this.axiosClient.put(`expenses/removeExpense`, {
-                    expenseId: expenseId
-                }, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                return response.data;
-            } catch (error) {
-                this.handleError(error, errorCallback)
-            }
-        }
+
+
+   async deleteExpense(expenseId, errorCallback) {
+       try {
+           const token = await this.getTokenOrThrow("Only authenticated users can remove an expense.");
+           console.log('Token:', token); // Log the value of the token
+
+           const response = await this.axiosClient.delete(`expenses/${expenseId}`, {
+               headers: {
+                   Authorization: `Bearer ${token}`,
+                   'Content-Type': 'application/json'
+               }
+           });
+
+
+           console.log("response is " + response);
+
+           return response.data;
+       } catch (error) {
+           this.handleError(error, errorCallback);
+       }
+   }
 
     /**
      * Helper method to log the error and run any error functions.

@@ -11,24 +11,17 @@ public class DeleteExpenseLambda extends LambdaActivityRunner<DeleteExpenseReque
         implements RequestHandler<AuthenticatedLambdaRequest<DeleteExpenseRequest>, LambdaResponse>
 
     {
-        private final Logger log = LogManager.getLogger();
         @Override
         public LambdaResponse handleRequest(AuthenticatedLambdaRequest<DeleteExpenseRequest> input, Context context) {
-            log.error("in Lambda");
-        return super.runActivity(
-                () -> {
-                    DeleteExpenseRequest unauthenticatedRequest = input.fromBody(DeleteExpenseRequest.class);
-                    return input.fromUserClaims(claims ->
+     return super.runActivity( //this returns lambda response
+                    () -> input.fromPath(path ->
                             DeleteExpenseRequest.builder()
-                                    .withExpenseId(unauthenticatedRequest.getExpenseId())
-                                    .build());
-                },
+                                    .withExpenseId(path.get("expenseId"))
+                                    .build()),
+                    (request, serviceComponent) ->
+                            serviceComponent.provideDeleteExpenseActivity().handleRequest(request)
 
-                (request, serviceComponent) ->
-
-                      serviceComponent.provideDeleteExpenseActivity().handleRequest(request)
-
-                );
+            );
         }
     }
 

@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Income {
     private String incomeId;
     private String truckId;
-    private LocalDate date;
+    private String date;
     private double deadHeadMiles;
     private double loadedMiles;
     private double totalMiles;
@@ -37,11 +37,11 @@ public class Income {
         this.truckId = truckId;
     }
     @DynamoDBAttribute(attributeName = "date")
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
     @DynamoDBAttribute(attributeName = "deadHeadMiles")
