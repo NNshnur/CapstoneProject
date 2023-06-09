@@ -31,3 +31,8 @@ curl -v -X DELETE http://127.0.0.1:3000/expenses/removeExpense \
 'Retrieve profile by ID' -> GET profiles/{id}
 curl -X GET http://127.0.0.1:3000/profiles/nataliashnur@gmail.com \
 -H 'Authorization: TOKEN' \
+
+'Retrieve all income endpoint' -> GET /incomes/all/{profile}
+curl -v http://127.0.0.1:3000/expenses/all \
+-H 'Authorization: TOKEN'
+-d '{"id":"nataliashnur@gmail.com"}'

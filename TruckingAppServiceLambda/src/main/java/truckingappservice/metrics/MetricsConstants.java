@@ -16,4 +16,7 @@ public class MetricsConstants {
     public static final String UPDATEEXPENSE_INVALIDATTRIBUTEVALUE_COUNT = "UpdateExpense.InvalidAttributeValueException.Count";
     public static final String GETEXPENSE_EXPENSENOTFOUND_COUNT = "GetExpense.ExpenseNotFoundException.Count";
 
+
+    public static final String GETINCOME_INCOMENOTFOUND_COUNT = "GetIncome.IncomeNotFoundException.Count";
+
 }

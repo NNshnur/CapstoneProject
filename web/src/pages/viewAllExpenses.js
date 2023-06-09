@@ -126,13 +126,10 @@ class ViewAllExpenses extends BindingClass {
             return html;
         }
 
-    async deleteEntryExpense(event) {
-    try {
-
+async deleteEntryExpense(event) {
+  try {
     const expenseId = event.target.dataset.expenseId;
     console.log("ExpenseId", expenseId);
-
-
 
     if (!expenseId) {
       console.error('Expense ID not found in URL parameters.');
@@ -146,29 +143,61 @@ class ViewAllExpenses extends BindingClass {
     }
 
     // Delete the expense entry
-    const response = await this.client.deleteExpense(expenseId);
+    await this.client.deleteExpense(expenseId);
 
     // Remove the expense entry from the data store
-    const expenses = this.dataStore.get('expenses');
-    console.log('Type of expenses:', typeof expenses);
-    console.log('Value of expenses:', expenses);
-
-    const updatedExpenses = expenses.allExpenseList.filter((expense) => expense.expenseId !== expenseId);
-    console.log('Type of updatedExpenses:', typeof updatedExpenses);
-    console.log('Value of updatedExpenses:', updatedExpenses);
-
-    this.dataStore.set('expenses', { allExpenseList: updatedExpenses });
+    let expenses = this.dataStore.get('expenses');
+    if (expenses) {
+      let updatedExpenses = expenses.allExpenseList.filter(
+        (expense) => expense.expenseId !== expenseId
+      );
+      this.dataStore.set('expenses', { allExpenseList: updatedExpenses });
+    }
 
     // Re-render the expenses list
     this.displayExpenses();
-
   } catch (error) {
     console.error('Error deleting expense:', error);
-
   }
 }
 
 
+//    async deleteEntryExpense(event) {
+//    try {
+//
+//    const expenseId = event.target.dataset.expenseId;
+//    console.log("ExpenseId", expenseId);
+//
+//
+//
+//    if (!expenseId) {
+//      console.error('Expense ID not found in URL parameters.');
+//      return;
+//    }
+//
+//    // Check if the user is authenticated
+//    const user = await this.client.getIdentity();
+//    if (!user) {
+//      throw new Error('Only authenticated users can delete an expense.');
+//    }
+//
+//    // Delete the expense entry
+//    const response = await this.client.deleteExpense(expenseId);
+//
+//    // Remove the expense entry from the data store
+//    const expenses = this.dataStore.get('expenses');
+//    let updatedExpenses = expenses.allExpenseList.filter((expense) => expense.expenseId !== expenseId);
+//    let updatedDataStore = { ...expenses, allExpenseList: updatedExpenses };
+//    this.dataStore.set('expenses', updatedDataStore);
+//
+//    // Re-render the expenses list
+//    this.displayExpenses();
+//
+//  } catch (error) {
+//    console.error('Error deleting expense:', error);
+//
+//  }
+//}
 
     redirectEditUpdate() {
     window.location.href = '/updateExpense.html';
