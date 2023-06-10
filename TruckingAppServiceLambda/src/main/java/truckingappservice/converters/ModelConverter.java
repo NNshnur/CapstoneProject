@@ -1,8 +1,10 @@
 package truckingappservice.converters;
 
 import truckingappservice.dynamodb.models.Expense;
+import truckingappservice.dynamodb.models.Income;
 import truckingappservice.dynamodb.models.Profile;
 import truckingappservice.models.ExpenseModel;
+import truckingappservice.models.IncomeModel;
 import truckingappservice.models.ProfileModel;
 
 public class ModelConverter {
@@ -29,6 +31,19 @@ public class ModelConverter {
                 .withLastName(profile.getLastName())
                 .withCompanyName(profile.getCompanyName())
                 .withTruckId(profile.getTruckId())
+                .build();
+    }
+
+    public IncomeModel toIncomeModel(Income income) {
+        return IncomeModel.builder()
+                .withIncomeId(income.getIncomeId())
+                .withTruckId(income.getTruckId())
+                .withDate(income.getDate())
+                .withDeadHeadMiles(income.getDeadHeadMiles())
+                .withLoadedMiles(income.getLoadedMiles())
+                .withTotalMiles(income.getTotalMiles())
+                .withGrossIncome(income.getGrossIncome())
+                .withRatePerMile(income.getRatePerMile())
                 .build();
     }
 }

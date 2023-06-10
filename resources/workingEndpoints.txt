@@ -36,3 +36,8 @@ curl -X GET http://127.0.0.1:3000/profiles/nataliashnur@gmail.com \
 curl -v http://127.0.0.1:3000/expenses/all \
 -H 'Authorization: TOKEN'
 -d '{"id":"nataliashnur@gmail.com"}'
+
+'Create income entry endpoint' -> POST incomes/create
+curl -v -X POST http://127.0.0.1:3000/incomes/create \
+-H 'Authorization: TOKEN' \
+-d '{"truckId":"777-55-33", "date":"2023-05-30","deadHeadMiles":20.00, "loadedMiles":507.08, "grossIncome":4200.00}'
