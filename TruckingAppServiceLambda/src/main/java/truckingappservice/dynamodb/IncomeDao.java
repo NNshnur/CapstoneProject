@@ -117,6 +117,21 @@ public class IncomeDao {
         return income;
     }
 
+
+
+
+    public Income deleteIncome(String incomeId) {
+
+        Income incomeToRemove;
+        try {
+            incomeToRemove = getIncome(incomeId);
+        } catch (IncomeNotFoundException e) {
+            throw new IncomeNotFoundException("Error:The income ID is not found", e);
+        }
+        this.dynamoDbMapper.delete(incomeToRemove);
+        return incomeToRemove;
+    }
+
 }
 
 
