@@ -95,6 +95,11 @@ public class IncomeModel {
             return this;
         }
 
+        public Builder withDate(String date) {
+            this.date = date;
+            return this;
+        }
+
         public Builder withDeadHeadMiles(double deadHeadMiles) {
             this.deadHeadMiles = deadHeadMiles;
             return this;

@@ -62,6 +62,61 @@ public class IncomeDao {
 
         return filteredExpenses;
     }
+
+    public Income saveIncome(boolean isNew, String incomeId, String truckId, String date, double deadHeadMiles,
+        double loadedMiles, double totalMiles, double grossIncome, double ratePerMile) {
+
+        Income income = new Income();
+
+        if (isNew) {
+            income.setIncomeId(income.generateId());
+            income.setTruckId(truckId);
+            income.setDate(date);
+            income.setDeadHeadMiles(deadHeadMiles);
+            income.setLoadedMiles(loadedMiles);
+            income.setTotalMiles(loadedMiles + deadHeadMiles);
+            income.setGrossIncome(grossIncome);
+            income.setRatePerMile(grossIncome/totalMiles);
+
+
+        } else {
+
+            if (incomeId != null & !incomeId.isEmpty()) {
+                income.setIncomeId(incomeId);
+            }
+            if (truckId != null && !truckId.isEmpty()) {
+                income.setTruckId(truckId);
+            }
+
+            if (date != null && !date.isEmpty()) {
+                income.setDate(date);
+            }
+
+            if (deadHeadMiles != 0) {
+                income.setDeadHeadMiles(deadHeadMiles);
+            }
+
+            if (loadedMiles != 0) {
+                income.setLoadedMiles(loadedMiles);
+            }
+            if (totalMiles != 0) {
+                income.setTotalMiles(loadedMiles + deadHeadMiles);
+            }
+
+            if (grossIncome != 0) {
+                income.setGrossIncome(grossIncome);
+            }
+
+            if (ratePerMile != 0) {
+                income.setRatePerMile(grossIncome/totalMiles);
+            }
+
+        }
+        this.dynamoDbMapper.save(income);
+
+        return income;
+    }
+
 }
 
 
