@@ -33,4 +33,6 @@ public interface ServiceComponent {
 
     UpdateIncomeActivity provideUpdateIncomeActivity();
 
+    DeleteIncomeActivity provideDeleteIncomeActivity();
+
 }
