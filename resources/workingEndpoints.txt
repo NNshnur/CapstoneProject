@@ -41,3 +41,8 @@ curl -v http://127.0.0.1:3000/expenses/all \
 curl -v -X POST http://127.0.0.1:3000/incomes/create \
 -H 'Authorization: TOKEN' \
 -d '{"truckId":"777-55-33", "date":"2023-05-30","deadHeadMiles":20.00, "loadedMiles":507.08, "grossIncome":4200.00}'
+
+'Update income entry endpoint' -> PUT incomes/{incomeId}
+curl -v -X PUT http://127.0.0.1:3000/incomes/{incomeId} \
+-H 'Authorization: TOKEN' \
+-d '{"profileId":"nataliashnur@gmail.com" , "incomeId":"AYCZ4", "truckId":"777-55-33", "date":"2023-03-31","deadHeadMiles":25.00, "loadedMiles":607.08, "grossIncome":4200.00}'
