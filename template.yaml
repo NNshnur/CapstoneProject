@@ -416,6 +416,26 @@ Resources:
             Path: /incomes/create
             Method: post
 
+  UpdateIncomeLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: TruckingAppServiceLambda
+      Handler: truckingappservice.lambda.UpdateIncomeLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /incomes/{incomeId}
+            Method: put
+
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------
