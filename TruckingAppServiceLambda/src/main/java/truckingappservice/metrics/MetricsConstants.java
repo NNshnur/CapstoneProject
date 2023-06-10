@@ -19,4 +19,7 @@ public class MetricsConstants {
 
     public static final String GETINCOME_INCOMENOTFOUND_COUNT = "GetIncome.IncomeNotFoundException.Count";
 
+    public static final String UPDATEINCOME_INVALIDATTRIBUTEVALUE_COUNT = "UpdateIncome.InvalidAttributeValueException.Count";
+
+
 }

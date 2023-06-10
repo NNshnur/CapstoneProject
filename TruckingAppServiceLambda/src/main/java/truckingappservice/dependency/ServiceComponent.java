@@ -31,4 +31,6 @@ public interface ServiceComponent {
 
     CreateIncomeActivity provideCreateIncomeActivity();
 
+    UpdateIncomeActivity provideUpdateIncomeActivity();
+
 }
