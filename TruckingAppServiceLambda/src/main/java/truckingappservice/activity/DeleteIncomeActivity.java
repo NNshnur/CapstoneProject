@@ -7,9 +7,13 @@ import truckingappservice.activity.results.DeleteIncomeResult;
 import truckingappservice.converters.ModelConverter;
 import truckingappservice.dynamodb.IncomeDao;
 import truckingappservice.dynamodb.models.Income;
+import truckingappservice.exceptions.ExpenseNotFoundException;
+import truckingappservice.exceptions.IncomeNotFoundException;
 import truckingappservice.models.IncomeModel;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeleteIncomeActivity {
     private final Logger log = LogManager.getLogger();
@@ -23,10 +27,16 @@ public class DeleteIncomeActivity {
     public DeleteIncomeResult handleRequest(final DeleteIncomeRequest deleteIncomeRequest) {
         log.info("Received deleteIncomeRequest {}", deleteIncomeRequest);
         String incomeId = deleteIncomeRequest.getIncomeId();
-        Income income = incomeDao.deleteIncome(incomeId);
-        IncomeModel incomeModel = new ModelConverter().toIncomeModel(income);
+        Income income = incomeDao.getIncome(incomeId);
+        if (income == null) {
+            throw new IncomeNotFoundException("Income with ID " + deleteIncomeRequest.getIncomeId() + "not found.");
+        }
+        List<String> list = incomeDao.deleteIncome(incomeId);
+        List<String> updatedList = new ArrayList<>(list);
+
+        log.error("list {}", list);
         return DeleteIncomeResult.builder()
-                .withIncome(incomeModel)
+                .withIncomeList(updatedList)
                 .build();
     }
 }

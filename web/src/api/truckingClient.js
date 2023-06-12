@@ -16,7 +16,7 @@ export default class TruckingClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity','login', 'logout', 'getProfile', 'getAllExpenses', 'createExpense', 'createProfile','updateProfile',
-        'updateExpense', 'deleteExpense', 'getAllIncome', 'createIncome', 'updateExpense', 'isLoggedIn'];
+        'updateExpense', 'deleteExpense', 'getAllIncome', 'createIncome', 'updateExpense', 'deleteExpense', 'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -275,26 +275,27 @@ export default class TruckingClient extends BindingClass {
         }
     }
 
-//   async deleteIncome(incomeId, errorCallback) {
-//       try {
-//           const token = await this.getTokenOrThrow("Only authenticated users can remove an expense.");
-//           console.log('Token:', token); // Log the value of the token
-//
-//           const response = await this.axiosClient.delete(`incomes/${incomeId}`, {
-//               headers: {
-//                   Authorization: `Bearer ${token}`,
-//                   'Content-Type': 'application/json'
-//               }
-//           });
+   async deleteIncome(incomeId, errorCallback) {
+       try {
+           const token = await this.getTokenOrThrow("Only authenticated users can remove an expense.");
+           console.log('Token:', token); // Log the value of the token
+
+           const response = await this.axiosClient.delete(`incomes/${incomeId}`, {
+               headers: {
+                   Authorization: `Bearer ${token}`,
+                   'Content-Type': 'application/json'
+               }
+           });
 
 
-//           console.log("response is " + response);
-//
-//           return response.data;
-//       } catch (error) {
-//           this.handleError(error, errorCallback);
-//       }
-//   }
+           console.log("response is " + response);
+
+           return response.data;
+       } catch (error) {
+           console.error('Error deleting income:', error); // Log the error object
+           this.handleError(error, errorCallback);
+       }
+   }
 
     /**
      * Helper method to log the error and run any error functions.

@@ -2,21 +2,23 @@ package truckingappservice.activity.results;
 
 import truckingappservice.models.IncomeModel;
 
-public class DeleteIncomeResult {
-        private final IncomeModel income;
+import java.util.List;
 
-        private DeleteIncomeResult(IncomeModel income) {
-            this.income = income;
+public class DeleteIncomeResult {
+        private final List<String> incomeList;
+
+        private DeleteIncomeResult(List<String> incomeList) {
+            this.incomeList = incomeList;
         }
 
-        public IncomeModel getIncome() {
-            return income;
+        public List<String> getIncomeList() {
+            return incomeList;
         }
 
         @Override
         public String toString() {
             return "CreateIncomeResult{" +
-                    "income=" + income +
+                    "income=" + incomeList +
                     '}';
         }
 
@@ -28,15 +30,15 @@ public class DeleteIncomeResult {
         }
 
         public static class Builder {
-            private IncomeModel income;
+            private List<String> incomeList;
 
-            public Builder withIncome(IncomeModel income) {
-                this.income = income;
+            public Builder withIncomeList(List<String> incomeList) {
+                this.incomeList = incomeList;
                 return this;
             }
 
             public DeleteIncomeResult build() {
-                return new DeleteIncomeResult(income);
+                return new DeleteIncomeResult(incomeList);
             }
         }
     }
