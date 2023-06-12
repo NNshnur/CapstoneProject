@@ -57,7 +57,7 @@ class ViewAllIncome extends BindingClass {
             if (!searchResults || !searchResults.allIncomeList || searchResults.allIncomeList.length === 0) {
                 return '<h4>No results found</h4>';
             }
-            let html = "";
+            let html = "<div id = 'incomeEditList'>";
             for (const res of searchResults.allIncomeList) {
 
                 html += `
@@ -88,13 +88,14 @@ class ViewAllIncome extends BindingClass {
                     </td>
                     <td>
                     <div class="d-flex justify-content-center">
-                    <a class="edit-button btn btn-warning rounded me-4 editExpense" href="updateIncome.html?income=${res.incomeId}">Edit</a>
+                    <a class="edit-button btn btn-warning rounded me-4 editIncome" href="updateIncome.html?income=${res.incomeId}">Edit</a>
                     <button class="delete-button btn btn-warning rounded me-4 deleteIncome" data-expense-id="${res.incomeId}" data-id="777">Delete</button>
                     </td>
                     </div>
                 </tr>`;
                 }
-            return html;
+                html+= "</div>";
+                return html;
         }
 
     redirectAllIncomes(){

@@ -19,7 +19,7 @@ public class UpdateIncomeLambda extends LambdaActivityRunner<UpdateIncomeRequest
         return super.runActivity(
                 () -> {
                     UpdateIncomeRequest unauthenticatedRequest = input.fromBody(UpdateIncomeRequest.class);
-                    String incomeIdFromPath = input.getPathParameters().get("incomeId");
+                    String incomeIdFromPath = input.getPathParameters().get("id");
                     return input.fromUserClaims(claims ->
                             UpdateIncomeRequest.builder()
                                     .withProfileId(claims.get("email"))
