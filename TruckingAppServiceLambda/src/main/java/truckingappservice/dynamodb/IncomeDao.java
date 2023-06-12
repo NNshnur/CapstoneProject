@@ -118,21 +118,36 @@ public class IncomeDao {
     }
 
 
+    public List<String> deleteIncome(String incomeId) {
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        List<Income> incomeList = dynamoDbMapper.scan(Income.class, scanExpression);
 
+        Income incomeToRemove = null;
 
-    public Income deleteIncome(String incomeId) {
-
-        Income incomeToRemove;
-        try {
-            incomeToRemove = getIncome(incomeId);
-        } catch (IncomeNotFoundException e) {
-            throw new IncomeNotFoundException("Error:The income ID is not found", e);
+        for (Income income : incomeList) {
+            if (income.getIncomeId().equals(incomeId)) {
+                incomeToRemove = income;
+                break;
+            }
         }
-        this.dynamoDbMapper.delete(incomeToRemove);
-        return incomeToRemove;
+
+        if (incomeToRemove != null) {
+            dynamoDbMapper.delete(incomeToRemove);
+        }
+
+        // Remove the deleted expense from the list
+        incomeList.remove(incomeToRemove);
+
+        List<String> stringList = new ArrayList<>();
+        for (Income income : incomeList) {
+            stringList.add(income.toString());
+        }
+        return stringList;
     }
 
 }
+
+
 
 
 
