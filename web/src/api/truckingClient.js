@@ -16,7 +16,7 @@ export default class TruckingClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity','login', 'logout', 'getProfile', 'getAllExpenses', 'createExpense', 'createProfile','updateProfile',
-        'updateExpense', 'getAllIncome','deleteExpense', 'isLoggedIn'];
+        'updateExpense', 'deleteExpense', 'getAllIncome', 'createIncome', 'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -231,6 +231,26 @@ export default class TruckingClient extends BindingClass {
                } catch (error) {
                    this.handleError(error, errorCallback)
                }
+           }
+   async createIncome(truckId, date, deadHeadMiles, loadedMiles, grossIncome, errorCallback) {
+                       try {
+                           const token = await this.getTokenOrThrow("Only authenticated users can create an expense.");
+                           const response = await this.axiosClient.post(`incomes/create`, {
+                               truckId: truckId,
+                               date: date,
+                               deadHeadMiles: deadHeadMiles,
+                               loadedMiles: loadedMiles,
+                               grossIncome: grossIncome,
+                           }, {
+                               headers: {
+                                   Authorization: `Bearer ${token}`,
+                                   'Content-Type': 'application/json'
+                               }
+                           });
+                           return response.data;
+                       } catch (error) {
+                           this.handleError(error, errorCallback);
+                       }
            }
 
     /**

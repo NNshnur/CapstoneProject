@@ -161,44 +161,6 @@ async deleteEntryExpense(event) {
   }
 }
 
-
-//    async deleteEntryExpense(event) {
-//    try {
-//
-//    const expenseId = event.target.dataset.expenseId;
-//    console.log("ExpenseId", expenseId);
-//
-//
-//
-//    if (!expenseId) {
-//      console.error('Expense ID not found in URL parameters.');
-//      return;
-//    }
-//
-//    // Check if the user is authenticated
-//    const user = await this.client.getIdentity();
-//    if (!user) {
-//      throw new Error('Only authenticated users can delete an expense.');
-//    }
-//
-//    // Delete the expense entry
-//    const response = await this.client.deleteExpense(expenseId);
-//
-//    // Remove the expense entry from the data store
-//    const expenses = this.dataStore.get('expenses');
-//    let updatedExpenses = expenses.allExpenseList.filter((expense) => expense.expenseId !== expenseId);
-//    let updatedDataStore = { ...expenses, allExpenseList: updatedExpenses };
-//    this.dataStore.set('expenses', updatedDataStore);
-//
-//    // Re-render the expenses list
-//    this.displayExpenses();
-//
-//  } catch (error) {
-//    console.error('Error deleting expense:', error);
-//
-//  }
-//}
-
     redirectEditUpdate() {
     window.location.href = '/updateExpense.html';
     }
