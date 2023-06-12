@@ -433,7 +433,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /incomes/{incomeId}
+            Path: /incomes/{id}
             Method: put
 
   DeleteIncomeLambda:

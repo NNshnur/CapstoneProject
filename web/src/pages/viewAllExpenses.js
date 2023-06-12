@@ -51,7 +51,7 @@ class ViewAllExpenses extends BindingClass {
     mount() {
         document.getElementById('expenses-link').addEventListener('click', this.redirectAllExpenses);
         document.getElementById('addEx').addEventListener('click', this.redirectCreateExpense);
-            const deleteButtons = document.getElementsByClassName('delete-button');
+        const deleteButtons = document.getElementsByClassName('delete-button');
                 for (let i = 0; i < deleteButtons.length; i++) {
                     deleteButtons[i].addEventListener('click', this.deleteEntryExpense.bind(this));
                 }

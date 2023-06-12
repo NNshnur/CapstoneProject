@@ -16,7 +16,7 @@ export default class TruckingClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity','login', 'logout', 'getProfile', 'getAllExpenses', 'createExpense', 'createProfile','updateProfile',
-        'updateExpense', 'deleteExpense', 'getAllIncome', 'createIncome', 'isLoggedIn'];
+        'updateExpense', 'deleteExpense', 'getAllIncome', 'createIncome', 'updateExpense', 'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -232,6 +232,7 @@ export default class TruckingClient extends BindingClass {
                    this.handleError(error, errorCallback)
                }
            }
+
    async createIncome(truckId, date, deadHeadMiles, loadedMiles, grossIncome, errorCallback) {
                        try {
                            const token = await this.getTokenOrThrow("Only authenticated users can create an expense.");
@@ -252,6 +253,48 @@ export default class TruckingClient extends BindingClass {
                            this.handleError(error, errorCallback);
                        }
            }
+
+   async updateIncome(id, truckId, date, deadHeadMiles, loadedMiles, grossIncome, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can update income.");
+            const response = await this.axiosClient.put(`incomes/${id}`, {
+                truckId: truckId,
+                date: date,
+                deadHeadMiles: deadHeadMiles,
+                loadedMiles: loadedMiles,
+                grossIncome: grossIncome,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            return response.data;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+//   async deleteIncome(incomeId, errorCallback) {
+//       try {
+//           const token = await this.getTokenOrThrow("Only authenticated users can remove an expense.");
+//           console.log('Token:', token); // Log the value of the token
+//
+//           const response = await this.axiosClient.delete(`incomes/${incomeId}`, {
+//               headers: {
+//                   Authorization: `Bearer ${token}`,
+//                   'Content-Type': 'application/json'
+//               }
+//           });
+
+
+//           console.log("response is " + response);
+//
+//           return response.data;
+//       } catch (error) {
+//           this.handleError(error, errorCallback);
+//       }
+//   }
 
     /**
      * Helper method to log the error and run any error functions.

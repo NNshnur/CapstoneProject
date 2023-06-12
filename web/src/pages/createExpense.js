@@ -33,16 +33,6 @@ class CreateExpense extends BindingClass {
 
      }
 
-//    mount() {
-//        document.getElementById('createExpense').addEventListener('click', this.submit);
-//        document.getElementById('createExpense').addEventListener('click', this.redirectCreateExpense);
-//        document.getElementById('logout').addEventListener('click', this.logout);
-//        document.getElementById('createExpense').addEventListener('click', this.submit);
-//        this.header.addHeaderToPage();
-//        this.client = new truckingClient();
-//        this.clientLoaded();
-//    }
-
 
 mount() {
   const createExpenseButton = document.getElementById('createExpense');
