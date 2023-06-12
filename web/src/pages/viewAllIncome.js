@@ -13,6 +13,7 @@ class ViewAllIncome extends BindingClass {
               'logout',
               'displayIncomes',
               'getHTMLForSearchResults',
+              'redirectCreateIncome',
 
             ];
         this.bindClassMethods(methodsToBind, this);
@@ -37,6 +38,7 @@ class ViewAllIncome extends BindingClass {
 
     mount() {
             document.getElementById('logout').addEventListener('click', this.logout);
+            document.getElementById('addInc').addEventListener('click', this.redirectCreateIncome);
             this.client = new truckingClient();
             this.clientLoaded();
         }
@@ -97,6 +99,10 @@ class ViewAllIncome extends BindingClass {
 
     redirectAllIncomes(){
         window.location.href = '/income.html';
+    }
+
+    redirectCreateIncome() {
+        window.location.href = '/createIncome.html';
     }
 
     async logout(){
