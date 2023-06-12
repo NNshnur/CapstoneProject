@@ -16,7 +16,7 @@ export default class TruckingClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity','login', 'logout', 'getProfile', 'getAllExpenses', 'createExpense', 'createProfile','updateProfile',
-        'updateExpense', 'deleteExpense', 'isLoggedIn'];
+        'updateExpense', 'getAllIncome','deleteExpense', 'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -217,6 +217,21 @@ export default class TruckingClient extends BindingClass {
            this.handleError(error, errorCallback);
        }
    }
+
+   async getAllIncome(errorCallback) {
+               try {
+                   const token = await this.getTokenOrThrow("Only authenticated users can get all incomes.");
+                   const response = await this.axiosClient.get(`incomes/all`, {
+                       headers: {
+                           Authorization: `Bearer ${token}`,
+                           'Content-Type': 'application/json'
+                       }
+                   });
+                   return response.data;
+               } catch (error) {
+                   this.handleError(error, errorCallback)
+               }
+           }
 
     /**
      * Helper method to log the error and run any error functions.

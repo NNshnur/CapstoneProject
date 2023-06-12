@@ -29,6 +29,7 @@ module.exports = {
     viewAllExpenses: path.resolve(__dirname,'src', 'pages', 'viewAllExpenses.js'),
     createExpense: path.resolve(__dirname, 'src', 'pages', 'createExpense.js'),
     updateExpense: path.resolve(__dirname, 'src', 'pages', 'updateExpense.js'),
+    viewAllIncome: path.resolve(__dirname,'src', 'pages', 'viewAllIncome.js'),
 
   },
   output: {
