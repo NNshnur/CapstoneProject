@@ -127,7 +127,7 @@
 
   .navbar li {
     display: inline-block;
-    margin-right: 55px; /* Adjust the margin between list items as needed */
+    margin-right: 55px; /* Adjust the margin between list items */
   }
 
   .navbar li:last-child {
