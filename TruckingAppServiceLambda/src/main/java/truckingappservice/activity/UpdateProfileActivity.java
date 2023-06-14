@@ -31,7 +31,7 @@ public class UpdateProfileActivity {
 
         Profile newProfile = profileDao.saveProfile(false, profile.getId(),
                 updateProfileRequest.getFirstName(), updateProfileRequest.getLastName(), updateProfileRequest.getCompanyName(),
-                updateProfileRequest.getTruckId());
+                updateProfileRequest.getTruckId(), updateProfileRequest.getStartingBalance());
 
         publishExceptionMetrics(false,false);
         return UpdateProfileResult.builder()

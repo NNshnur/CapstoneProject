@@ -28,6 +28,7 @@ public class CreateProfileLambda extends LambdaActivityRunner<CreateProfileReque
                                     .withLastName(unauthenticatedRequest.getLastName())
                                     .withCompanyName(unauthenticatedRequest.getCompanyName())
                                     .withTruckId(unauthenticatedRequest.getTruckId())
+                                    .withStartingBalance(unauthenticatedRequest.getStartingBalance())
                                     .build());
 
                 },

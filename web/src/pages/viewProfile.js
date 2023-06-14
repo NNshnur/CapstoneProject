@@ -7,15 +7,15 @@ class ViewProfile extends BindingClass {
     constructor() {
         super();
         const methodsToBind = [
-        'clientLoaded',
-        'mount',
-      //  'redirectAllExpenses',
-        'redirectProfile',
-        'redirectAllIncome',
-        'redirectRunningBalance',
-        'logout',
-        'addCompanyName'
-      ]
+          'clientLoaded',
+          'mount',
+          'redirectEditProfile',
+          'redirectProfile',
+          'redirectAllIncome',
+          'redirectRunningBalance',
+          'logout',
+          'addCompanyName'
+        ];
         this.bindClassMethods(methodsToBind, this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
@@ -26,12 +26,13 @@ class ViewProfile extends BindingClass {
         const identity = await this.client.getIdentity();
         const profile = await this.client.getProfile(identity.email);
         if (profile == null) {
-          redirectEditProfile();
+          this.redirectEditProfile();
           document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>";
          }
         this.dataStore.set("email", identity.email);
         this.dataStore.set('profile', profile);
-        this.dataStore.set('companyName', profile.profileModel.companyName);
+        this.dataStore.set('companyName', profile.profileModel.lastName);
+
 //        console.log(JSON.stringify(this.dataStore));
         this.addCompanyName();
         console.log("addCompanyName() called")
@@ -50,22 +51,27 @@ class ViewProfile extends BindingClass {
         document.getElementById('backToProfile').addEventListener('click', this.redirectProfile);
         document.getElementById('running-balance').addEventListener('click', this.redirectRunningBalance);
         document.getElementById('logout').addEventListener('click', this.logout);
-        document.getElementById('coName').innerText = "Loading ...";
+        document.getElementById('companyNameC').innerText = "Loading ...";
         this.client = new truckingClient();
         this.clientLoaded();
 
     }
 
- async addCompanyName() {
+async addCompanyName() {
+  const profile = this.dataStore.get('profile');
+  const lastName = profile && profile.profileModel && profile.profileModel.lastName;
 
-   const companyName = this.dataStore.get("companyName");
-   console.log("Company Name is " + companyName);
-   if (companyName == null) {
-     document.getElementById("coName").innerText = "Something went wrong. Unable to load the company name.";
-   } else {
-     document.getElementById("coName").innerText = "You logged in as: " + companyName;
-   }
- }
+  console.log("Profile: ", profile);
+  console.log("Profile structure: ", JSON.stringify(profile));
+  console.log("Company Name: ", lastName);
+
+  if (lastName == null) {
+    document.getElementById("companyNameC").innerText = "Something went wrong. Unable to load the company name.";
+  } else {
+    document.getElementById("companyNameC").innerText = "You logged in as: " + " " + lastName;
+  }
+}
+
 
     redirectAllExpenses(){
             window.location.href = '/expenses.html';
@@ -81,6 +87,10 @@ class ViewProfile extends BindingClass {
 
     redirectRunningBalance(){
         window.location.href = '/runningbalance.html';
+    }
+
+    redirectEditProfile() {
+        window.location.href = '/createProfile.html';
     }
 
 

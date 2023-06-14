@@ -31,6 +31,7 @@ public class ModelConverter {
                 .withLastName(profile.getLastName())
                 .withCompanyName(profile.getCompanyName())
                 .withTruckId(profile.getTruckId())
+                .withStartingBalance(profile.getStartingBalance())
                 .build();
     }
 

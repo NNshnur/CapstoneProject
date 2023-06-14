@@ -12,12 +12,15 @@ public class UpdateProfileRequest {
     private final List<String> truckId;
     private final String profileId;
 
-    private UpdateProfileRequest(String firstName, String lastName, String companyName, List<String> truckId, String profileId) {
+    private final double startingBalance;
+
+    private UpdateProfileRequest(String firstName, String lastName, String companyName, List<String> truckId, String profileId, double startingBalance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.companyName = companyName;
         this.truckId = truckId;
         this.profileId = profileId;
+        this.startingBalance = startingBalance;
 
     }
 
@@ -41,14 +44,19 @@ public class UpdateProfileRequest {
         return profileId;
     }
 
+    public double getStartingBalance() {
+        return startingBalance;
+    }
+
     @Override
     public String toString() {
         return "UpdateProfileRequest{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", companyName='" + companyName + '\'' +
-                ", truckId=" + truckId +
+                ", truckId=" + truckId + '\'' +
                 ", profileId='" + profileId + '\'' +
+                ", startingBalance='" + startingBalance +
                 '}';
     }
 
@@ -63,6 +71,7 @@ public class UpdateProfileRequest {
         private String companyName;
         private List<String> truckId;
         private String profileId;
+        private double startingBalance;
 
         public Builder withFirstName(String firstName){
             this.firstName = firstName;
@@ -84,8 +93,13 @@ public class UpdateProfileRequest {
             this.profileId = profileId;
             return this;
         }
+
+        public Builder withStartingBalance(double startingBalance){
+            this.startingBalance = startingBalance;
+            return this;
+        }
         public UpdateProfileRequest build(){
-            return new UpdateProfileRequest(firstName,lastName, companyName, truckId,profileId);
+            return new UpdateProfileRequest(firstName,lastName, companyName, truckId,profileId, startingBalance);
         }
     }
 }
