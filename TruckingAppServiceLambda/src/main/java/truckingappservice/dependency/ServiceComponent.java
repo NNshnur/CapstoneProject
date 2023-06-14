@@ -35,4 +35,6 @@ public interface ServiceComponent {
 
     DeleteIncomeActivity provideDeleteIncomeActivity();
 
+    FilterExpenseByCategoryActivity provideFilterExpenseByCategoryActivity();
+
 }

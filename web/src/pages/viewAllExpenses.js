@@ -14,7 +14,7 @@ class ViewAllExpenses extends BindingClass {
               'redirectCreateExpense',
               'logout',
               'displayExpenses',
-              'redirectEditProfile',
+//              'redirectEditProfile',
               'getHTMLForSearchResults',
               'deleteEntryExpense',
             ];
@@ -80,8 +80,6 @@ class ViewAllExpenses extends BindingClass {
         }
     }
 }
-
-
 
 
     getHTMLForSearchResults(searchResults) {
@@ -165,9 +163,9 @@ async deleteEntryExpense(event) {
     window.location.href = '/updateExpense.html';
     }
 
-    redirectEditProfile(){
-        window.location.href = '/createProfile.html';
-    }
+//    redirectEditProfile(){
+//        window.location.href = '/createProfile.html';
+//    }
 
     redirectAllExpenses(){
         window.location.href = '/expenses.html';

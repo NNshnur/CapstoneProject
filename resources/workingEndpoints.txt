@@ -46,3 +46,13 @@ curl -v -X POST http://127.0.0.1:3000/incomes/create \
 curl -v -X PUT http://127.0.0.1:3000/incomes/{incomeId} \
 -H 'Authorization: TOKEN' \
 -d '{"profileId":"nataliashnur@gmail.com" , "incomeId":"AYCZ4", "truckId":"777-55-33", "date":"2023-03-31","deadHeadMiles":25.00, "loadedMiles":607.08, "grossIncome":4200.00}'
+
+'Delete income entry endpoint' -> DELETE incomes/removeIncome
+curl -v -X DELETE http://127.0.0.1:3000/expenses/removeExpense \
+-H 'Authorization: TOKEN' \
+-d '{"incomeId":"8N51O"}'
+
+'Filter expenses by Category endpoint' -> GET expenses/filter
+curl -v -X GET http://127.0.0.1:3000/expenses/filter \
+-H 'Authorization: TOKEN' \
+-d '{"id":"nataliashnur@gmail.com", "category":"WASH"}'

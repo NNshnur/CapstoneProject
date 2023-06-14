@@ -139,6 +139,20 @@ public List<String> deleteExpense(String expenseId) {
     return stringList;
 }
 
+    public List<Expense> getExpensesByCategory(List<String> truckIds, Category category) {
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        List<Expense> expenseList = dynamoDbMapper.scan(Expense.class, scanExpression);
+
+       // Filter expenses based on the truck IDs and category
+        List<Expense> filteredExpenses = new ArrayList<>();
+        for (Expense expense : expenseList) {
+           if (truckIds.contains(expense.getTruckId()) && expense.getCategory() == category) {
+              filteredExpenses.add(expense);
+             }
+      }
+
+            return filteredExpenses;
+        }
 }
 
 
