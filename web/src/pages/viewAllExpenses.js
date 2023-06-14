@@ -16,6 +16,7 @@ class ViewAllExpenses extends BindingClass {
               'displayExpenses',
 //              'redirectEditProfile',
               'getHTMLForSearchResults',
+              'filterExpensesByCategory',
               'deleteEntryExpense',
             ];
         this.bindClassMethods(methodsToBind, this);
@@ -50,6 +51,14 @@ class ViewAllExpenses extends BindingClass {
      */
     mount() {
         document.getElementById('expenses-link').addEventListener('click', this.redirectAllExpenses);
+        const categoryDropdown = document.getElementById('categoryDropdown');
+        const categoryItems = document.getElementsByClassName('dropdown-item');
+         for (let i = 0; i < categoryItems.length; i++) {
+            categoryItems[i].addEventListener('click', () => {
+              const selectedCategory = categoryItems[i].innerText;
+              this.filterExpensesByCategory(selectedCategory);
+            });
+          }
         document.getElementById('addEx').addEventListener('click', this.redirectCreateExpense);
         const deleteButtons = document.getElementsByClassName('delete-button');
                 for (let i = 0; i < deleteButtons.length; i++) {
@@ -158,6 +167,30 @@ async deleteEntryExpense(event) {
     console.error('Error deleting expense:', error);
   }
 }
+
+filterExpensesByCategory(selectedCategory) {
+  console.log("Filtering expenses by category:", selectedCategory);
+  const expenses = this.dataStore.get('expenses');
+  if (!expenses || !expenses.allExpenseList) {
+    return;
+  }
+
+  const filteredExpenses = expenses.allExpenseList.filter(
+    (expense) => expense.category.toLowerCase() === selectedCategory.toLowerCase()
+  );
+
+  const expenseListElement = document.getElementById('expense-list');
+  if (!expenseListElement) {
+    return;
+  }
+
+  if (filteredExpenses.length === 0) {
+    expenseListElement.innerHTML = '<tr><td colspan="8">No expenses found for the selected category: ' + selectedCategory + '</td></tr>';
+  } else {
+    expenseListElement.innerHTML = this.getHTMLForSearchResults({ allExpenseList: filteredExpenses });
+  }
+}
+
 
     redirectEditUpdate() {
     window.location.href = '/updateExpense.html';

@@ -16,7 +16,7 @@ export default class TruckingClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity','login', 'logout', 'getProfile', 'getAllExpenses', 'createExpense', 'createProfile','updateProfile',
-        'updateExpense', 'deleteExpense', 'getAllIncome', 'createIncome', 'updateIncome', 'deleteIncome', 'isLoggedIn'];
+        'updateExpense', 'deleteExpense', 'getAllIncome', 'createIncome', 'updateIncome', 'deleteIncome', 'filterExpenseByCategory','isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -111,6 +111,21 @@ export default class TruckingClient extends BindingClass {
                 this.handleError(error, errorCallback)
             }
         }
+
+    async filterExpenseByCategory(errorCallback) {
+            try {
+                    const token = await this.getTokenOrThrow("Only authenticated users can filter expenses.");
+                    const response = await this.axiosClient.get(`expenses/filter`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    return response.data;
+                } catch (error) {
+                    this.handleError(error, errorCallback)
+                }
+     }
 
     async createProfile(companyName, firstName, lastName, truckId, startingBalance, errorCallback) {
             try {
