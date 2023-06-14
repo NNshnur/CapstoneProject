@@ -16,7 +16,7 @@ export default class TruckingClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity','login', 'logout', 'getProfile', 'getAllExpenses', 'createExpense', 'createProfile','updateProfile',
-        'updateExpense', 'deleteExpense', 'getAllIncome', 'createIncome', 'updateExpense', 'deleteExpense', 'isLoggedIn'];
+        'updateExpense', 'deleteExpense', 'getAllIncome', 'createIncome', 'updateIncome', 'deleteIncome', 'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -112,7 +112,7 @@ export default class TruckingClient extends BindingClass {
             }
         }
 
-    async createProfile(companyName, firstName, lastName, truckId, errorCallback) {
+    async createProfile(companyName, firstName, lastName, truckId, startingBalance, errorCallback) {
             try {
                 const token = await this.getTokenOrThrow("Only authenticated users can create a profile.");
                 const response = await this.axiosClient.post(`profiles/create`, {
@@ -120,6 +120,7 @@ export default class TruckingClient extends BindingClass {
                     firstName: firstName,
                     lastName: lastName,
                     truckId: truckId,
+                    startingBalance: startingBalance,
 
                 }, {
                     headers: {
@@ -134,7 +135,7 @@ export default class TruckingClient extends BindingClass {
             }
         }
 
-    async updateProfile(id, companyName, firstName, lastName, truckId, errorCallback) {
+    async updateProfile(id, companyName, firstName, lastName, truckId, startingBalance, errorCallback) {
                 try {
                     const token = await this.getTokenOrThrow("Only authenticated users can update a profile.");
                     const response = await this.axiosClient.put(`profiles/${id}`, {
@@ -142,6 +143,7 @@ export default class TruckingClient extends BindingClass {
                         firstName: firstName,
                         lastName: lastName,
                         truckId: truckId,
+                        startingBalance: startingBalance,
                     }, {
                         headers: {
                             Authorization: `Bearer ${token}`,

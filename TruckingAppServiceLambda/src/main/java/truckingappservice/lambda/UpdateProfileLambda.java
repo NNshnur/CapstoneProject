@@ -33,6 +33,7 @@ public class UpdateProfileLambda extends LambdaActivityRunner<UpdateProfileReque
                             .withCompanyName(unauthenticatedRequest.getCompanyName())
                             .withTruckId(unauthenticatedRequest.getTruckId())
                             .withId(profileIdFromPath)
+                            .withStartingBalance(unauthenticatedRequest.getStartingBalance())
                             .build();
                 },
                 (request, serviceComponent) -> serviceComponent.provideUpdateProfileActivity().handleRequest(request)

@@ -48,21 +48,21 @@ class CreateProfile extends BindingClass {
 
 async submitFormData(evt) {
   evt.preventDefault();
-
   const firstName = document.getElementById('fname').value;
   const lastName = document.getElementById('lname').value;
   const companyName = document.getElementById('coname').value;
   const truckIds = document.getElementById('tid').value.split(",").map(id => id.trim());
+  const startingBalance = document.getElementById('strBal').value;
 
   try {
     let profile;
 
     if (document.getElementById('welcome').innerText == "Welcome! First of all, let us create your profile!") {
-      profile = await this.client.createProfile(firstName, lastName, companyName, truckIds);
+      profile = await this.client.createProfile(firstName, lastName, companyName, truckIds, startingBalance);
 
     } else {
       const id = this.dataStore.get('id');
-      profile = await this.client.updateProfile(id, firstName, lastName, companyName, truckIds);
+      profile = await this.client.updateProfile(id, firstName, lastName, companyName, truckIds, startingBalance);
 
     }
 
@@ -71,6 +71,7 @@ async submitFormData(evt) {
     document.getElementById('lnameC').innerText = lastName || profile.profileModel.lastName;
     document.getElementById('companyNameC').innerText = companyName || profile.profileModel.companyName;
     document.getElementById('truckIdsC').innerText = truckIds.join(",") || profile.profileModel.truckIds;
+    document.getElementById('startingBalC').innerText = startingBalance || profile.profileModel.startingBalance;
     document.getElementById('loading-modal').remove();
 
   } catch (error) {

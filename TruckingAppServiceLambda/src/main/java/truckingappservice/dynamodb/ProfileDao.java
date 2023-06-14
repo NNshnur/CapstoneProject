@@ -36,7 +36,7 @@ public class ProfileDao {
         return profile;
     }
 
-    public Profile saveProfile(boolean isNew, String id, String firstName, String lastName, String companyName, List<String> truckId) {
+    public Profile saveProfile(boolean isNew, String id, String firstName, String lastName, String companyName, List<String> truckId, double startingBalance) {
         Profile saveProfile = new Profile();
         saveProfile.setId(id);
         if (isNew) {
@@ -44,6 +44,7 @@ public class ProfileDao {
             saveProfile.setLastName(lastName);
             saveProfile.setCompanyName(companyName);
             saveProfile.setTruckId(truckId);
+            saveProfile.setStartingBalance(startingBalance);
             this.dynamoDbMapper.save(saveProfile);
         } else {
             if (firstName != null || !firstName.isEmpty()) {
@@ -57,6 +58,10 @@ public class ProfileDao {
             }
             if (truckId != null || !truckId.isEmpty()) {
                 saveProfile.setTruckId(truckId);
+            }
+
+            if (startingBalance != 0 ) {
+                saveProfile.setStartingBalance(startingBalance);
             }
             this.dynamoDbMapper.save(saveProfile);
         }

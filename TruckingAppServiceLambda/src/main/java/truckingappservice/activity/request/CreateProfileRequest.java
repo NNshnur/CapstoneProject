@@ -12,6 +12,7 @@ public class CreateProfileRequest {
     private final String firstName;
     private final String lastName;
     private final List<String> truckId;
+    private final double startingBalance;
 
 
     public String getId() {
@@ -34,6 +35,10 @@ public class CreateProfileRequest {
         return truckId;
     }
 
+    public double getStartingBalance() {
+        return startingBalance;
+    }
+
     @Override
     public String toString() {
         return "CreateProfileRequest{" +
@@ -42,16 +47,19 @@ public class CreateProfileRequest {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", truckId=" + truckId +
+                ", startingBalance=" + startingBalance +
                 '}';
     }
+
     private CreateProfileRequest(String id, String companyName, String firstName, String lastName,
-                                 List<String>truckId){
+                                 List<String>truckId, double startingBalance){
 
         this.id = id;
         this.companyName = companyName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.truckId = truckId;
+        this.startingBalance = startingBalance;
     }
     public static Builder builder() {
         return new Builder();
@@ -65,6 +73,7 @@ public class CreateProfileRequest {
         private String firstName;
         private String lastName;
         private List<String> truckId;
+        private double startingBalance;
 
 
         public Builder withId(String id){
@@ -89,10 +98,15 @@ public class CreateProfileRequest {
             return this;
         }
 
+        public Builder withStartingBalance(double startingBalance){
+            this.startingBalance = startingBalance;
+            return this;
+        }
+
 
 
         public CreateProfileRequest build(){
-            return new CreateProfileRequest(id, companyName, firstName, lastName, truckId);
+            return new CreateProfileRequest(id, companyName, firstName, lastName, truckId, startingBalance);
         }
     }
 }

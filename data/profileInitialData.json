@@ -10,7 +10,8 @@
           "truckId": {
             "L": [
               "Volvo2527"
-            ]}
+            ]},
+          "startingBalance": { "N": "12000" }
         }
       }
     }
@@ -25,7 +26,8 @@
           "truckId": {
             "L": [
               "9400i"
-            ]}
+            ]},
+          "startingBalance": { "N": "10000" }
         }
       }
     }
@@ -40,7 +42,8 @@
           "truckId": {
             "L": [
               "Volvo2017"
-            ]}
+            ]},
+          "startingBalance": { "N": "15000" }
         }
       }
     }

@@ -26,7 +26,7 @@ public class CreateProfileActivity {
         Profile newProfile = profileDao.saveProfile(true,
                 createProfileRequest.getId(), createProfileRequest.getFirstName(),
                 createProfileRequest.getLastName(), createProfileRequest.getCompanyName(),
-                createProfileRequest.getTruckId());
+                createProfileRequest.getTruckId(), createProfileRequest.getStartingBalance());
 
         ProfileModel profileModel = new ModelConverter().toProfileModel(newProfile);
         return CreateProfileResult.builder()
