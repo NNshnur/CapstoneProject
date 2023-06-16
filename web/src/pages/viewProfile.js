@@ -3,6 +3,7 @@ import BindingClass from "../util/bindingClass";
 import Header from '../components/truckingHeader';
 import DataStore from "../util/DataStore";
 
+
 class ViewProfile extends BindingClass {
     constructor() {
         super();
@@ -47,11 +48,14 @@ class ViewProfile extends BindingClass {
      */
     mount() {
        // document.getElementById('expenses').addEventListener('click', this.redirectAllExpenses);
+
         document.getElementById('income').addEventListener('click', this.redirectAllIncome);
         document.getElementById('backToProfile').addEventListener('click', this.redirectProfile);
         document.getElementById('running-balance').addEventListener('click', this.redirectRunningBalance);
         document.getElementById('logout').addEventListener('click', this.logout);
         document.getElementById('companyNameC').innerText = "Loading ...";
+
+
         this.client = new truckingClient();
         this.clientLoaded();
 
@@ -71,6 +75,8 @@ async addCompanyName() {
     document.getElementById("companyNameC").innerText = "You logged in as: " + " " + lastName;
   }
 }
+
+
 
 
     redirectAllExpenses(){
