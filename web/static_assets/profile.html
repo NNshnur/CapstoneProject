@@ -8,7 +8,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="shortcut icon" href="css/frontal-truck-svgrepo-com.svg">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-<title>TruckBizBook</title>
+    <title>TruckBizBook</title>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
 <script type="text/javascript" src="assets/viewProfile.js"></script>
 </head>
 
@@ -57,6 +60,31 @@
         cursor: pointer;
         text-decoration: none;
     }
+
+       .chart-container {
+        display: flex;
+        justify-content: center; /* Center the charts horizontally */
+        align-items: center; /* Center the charts vertically */
+        flex-wrap: wrap; /* Wrap the charts to a new line if necessary */
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 50 px;
+        margin-right: 50px;
+    }
+
+    .chart-container canvas {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .chart-wrapper {
+    width: 600px;
+    height: 600px;
+    display: inline-block;
+    margin-left: 20px; /* Adjust the left margin as needed */
+    margin-right: 20px; /* Adjust the right margin as needed */
+
+    }
     </style>
 
 <div class="container-boxes">
@@ -71,7 +99,57 @@
     <a href="runningbalance.html" class="box" id="running-balance">
         RUNNING BALANCE
     </a>
+</div> <br>
+<div class="chart-container">
+    <div class="chart-wrapper">
+        <canvas id="myChart-expenses" style="width:100%;max-width:600px"></canvas>
+    </div>
+    <div class="chart-wrapper">
+        <canvas id="myChart-income" style="width:100%;max-width:600px"></canvas>
+    </div>
 </div>
+
+<script>
+    var xValues = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var yValues = [55, 49, 44, 24, 15];
+    var barColors = ["#203965", "#FEBF0E", "#203965", "#FEBF0E", "#203965", "#FEBF0E", "#203965", "#FEBF0E", "#203965", "#FEBF0E", "#203965", "#FEBF0E" ];
+
+    new Chart("myChart-expenses", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: {display: false},
+            title: {
+                display: true,
+                text: "Expenses YTD"
+            }
+        }
+    });
+
+    new Chart("myChart-income", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: {display: false},
+            title: {
+                display: true,
+                text: "Income YTD"
+            }
+        }
+    });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
