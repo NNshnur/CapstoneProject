@@ -5,7 +5,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import truckingappservice.utils.UniqueIdGenerator;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 @DynamoDBTable(tableName = "incomes")

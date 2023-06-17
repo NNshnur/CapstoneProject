@@ -3,6 +3,7 @@ import DataStore from '../util/DataStore';
 
 class ViewRunningBalance {
   constructor() {
+
     this.dataStore = new DataStore();
     this.dataStore.addChangeListener(this.displayRunningBalance.bind(this));
     this.client = new truckingClient();
@@ -14,10 +15,10 @@ class ViewRunningBalance {
   async clientLoaded() {
     const identity = await this.client.getIdentity();
     const profile = await this.client.getProfile(identity.email);
-//    if (profile == null) {
-//       redirectEditProfile();
-//       document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>";
-//      }
+    if (profile == null) {
+            window.location.href = '/createProfile.html';
+            document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>";
+         }
     const income = await this.client.getAllIncome();
     const expenses = await this.client.getAllExpenses();
     this.dataStore.set('email', identity.email);
@@ -103,6 +104,7 @@ displayRunningBalance() {
   tableBody.innerHTML = html;
 }
 
+
   async logout() {
     await this.client.logout();
     if (!this.client.isLoggedIn()) {
@@ -111,9 +113,7 @@ displayRunningBalance() {
   }
 }
 
-//redirectEditProfile() {
-//        window.location.href = '/createProfile.html';
-//    }
+
 
 /**
  * Main method to run when the page contents have loaded.

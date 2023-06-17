@@ -12,7 +12,7 @@ class ViewAllIncome extends BindingClass {
               'redirectAllIncomes',
               'logout',
               'displayIncomes',
-//              'redirectEditProfile',
+              'redirectEditProfile',
               'getHTMLForSearchResults',
               'redirectCreateIncome',
 
@@ -29,10 +29,11 @@ class ViewAllIncome extends BindingClass {
     async clientLoaded() {
             const identity = await this.client.getIdentity();
             const profile = await this.client.getProfile(identity.email);
-//              if (profile == null) {
-//                  redirectEditProfile();
-//                  document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>";
-//               }
+            if (profile == null) {
+                this.redirectEditProfile();
+                document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>";
+            }
+
             const income = await this.client.getAllIncome();
             this.dataStore.set("email", identity.email);
             this.dataStore.set('profile', profile);
@@ -85,7 +86,7 @@ class ViewAllIncome extends BindingClass {
             }
             let html = "<div id = 'incomeEditList'>";
             for (const res of searchResults.allIncomeList) {
-
+                const ratePerMileFormatted = res.ratePerMile.toFixed(2);
                 html += `
                 <tr>
                     <td class="text-center">
@@ -110,7 +111,7 @@ class ViewAllIncome extends BindingClass {
                           ${res.grossIncome}
                     </td>
                     <td>
-                         ${res.ratePerMile}
+                         ${ratePerMileFormatted }
                     </td>
                     <td>
                     <div class="d-flex justify-content-center">
@@ -163,9 +164,9 @@ class ViewAllIncome extends BindingClass {
         window.location.href = '/income.html';
     }
 
-//    redirectEditProfile() {
-//        window.location.href = '/createProfile.html';
-//    }
+    redirectEditProfile() {
+        window.location.href = '/createProfile.html';
+    }
 
     redirectCreateIncome() {
         window.location.href = '/createIncome.html';

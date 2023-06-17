@@ -4,16 +4,16 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import truckingappservice.dynamodb.models.Expense;
 import truckingappservice.dynamodb.models.Income;
-import truckingappservice.exceptions.ExpenseNotFoundException;
 import truckingappservice.exceptions.IncomeNotFoundException;
 import truckingappservice.metrics.MetricsConstants;
 import truckingappservice.metrics.MetricsPublisher;
-import truckingappservice.models.Category;
+import java.text.DecimalFormat;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class IncomeDao {
@@ -52,15 +52,20 @@ public class IncomeDao {
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         List<Income> incomeList = dynamoDbMapper.scan(Income.class, scanExpression);
 
-        // Filter expenses based on the truck IDs and email address
-        List<Income> filteredExpenses = new ArrayList<>();
+        List<Income> filteredIncome = new ArrayList<>();
         for (Income income : incomeList) {
             if (truckIds.contains(income.getTruckId())) {
-                filteredExpenses.add(income);
+                filteredIncome.add(income);
             }
         }
+        Collections.sort(filteredIncome, new Comparator<Income>() {
+            @Override
+            public int compare(Income incomeOne, Income incomeTwo) {
+                return incomeOne.getDate().compareTo(incomeTwo.getDate());
+            }
+        });
 
-        return filteredExpenses;
+        return filteredIncome;
     }
 
     public Income saveIncome(boolean isNew, String incomeId, String truckId, String date, double deadHeadMiles,
@@ -76,7 +81,7 @@ public class IncomeDao {
             income.setLoadedMiles(loadedMiles);
             income.setTotalMiles(loadedMiles + deadHeadMiles);
             income.setGrossIncome(grossIncome);
-            income.setRatePerMile(grossIncome/totalMiles);
+            income.setRatePerMile(Double.parseDouble(new DecimalFormat("0.00").format(grossIncome / totalMiles)));
 
 
         } else {
@@ -108,8 +113,9 @@ public class IncomeDao {
             }
 
             if (ratePerMile != 0) {
-                income.setRatePerMile(grossIncome/totalMiles);
+                income.setRatePerMile(Double.parseDouble(new DecimalFormat("0.00").format(grossIncome / totalMiles)));
             }
+
 
         }
         this.dynamoDbMapper.save(income);
