@@ -14,7 +14,7 @@ class ViewAllExpenses extends BindingClass {
               'redirectCreateExpense',
               'logout',
               'displayExpenses',
-//              'redirectEditProfile',
+              'redirectEditProfile',
               'getHTMLForSearchResults',
               'filterExpensesByCategory',
               'deleteEntryExpense',
@@ -33,10 +33,10 @@ class ViewAllExpenses extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         const profile = await this.client.getProfile(identity.email);
-//        if (profile == null) {
-//              redirectEditProfile();
-//              document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>";
-//            }
+        if (profile == null) {
+            this.redirectEditProfile();
+            document.getElementById("welcome").innerHTML = "<em>Welcome! First of all, let us create your profile!</em>";
+         }
         const expenses = await this.client.getAllExpenses();
         this.dataStore.set("email", identity.email);
         this.dataStore.set('profile', profile);
@@ -196,9 +196,9 @@ filterExpensesByCategory(selectedCategory) {
     window.location.href = '/updateExpense.html';
     }
 
-//    redirectEditProfile(){
-//        window.location.href = '/createProfile.html';
-//    }
+     redirectEditProfile() {
+        window.location.href = '/createProfile.html';
+    }
 
     redirectAllExpenses(){
         window.location.href = '/expenses.html';
