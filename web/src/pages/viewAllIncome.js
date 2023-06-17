@@ -85,7 +85,7 @@ class ViewAllIncome extends BindingClass {
             }
             let html = "<div id = 'incomeEditList'>";
             for (const res of searchResults.allIncomeList) {
-
+                const ratePerMileFormatted = res.ratePerMile.toFixed(2);
                 html += `
                 <tr>
                     <td class="text-center">
@@ -110,7 +110,7 @@ class ViewAllIncome extends BindingClass {
                           ${res.grossIncome}
                     </td>
                     <td>
-                         ${res.ratePerMile}
+                         ${ratePerMileFormatted }
                     </td>
                     <td>
                     <div class="d-flex justify-content-center">

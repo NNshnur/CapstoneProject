@@ -4,13 +4,11 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import truckingappservice.dynamodb.models.Expense;
 import truckingappservice.dynamodb.models.Income;
-import truckingappservice.exceptions.ExpenseNotFoundException;
 import truckingappservice.exceptions.IncomeNotFoundException;
 import truckingappservice.metrics.MetricsConstants;
 import truckingappservice.metrics.MetricsPublisher;
-import truckingappservice.models.Category;
+import java.text.DecimalFormat;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -83,7 +81,7 @@ public class IncomeDao {
             income.setLoadedMiles(loadedMiles);
             income.setTotalMiles(loadedMiles + deadHeadMiles);
             income.setGrossIncome(grossIncome);
-            income.setRatePerMile(grossIncome/totalMiles);
+            income.setRatePerMile(Double.parseDouble(new DecimalFormat("0.00").format(grossIncome / totalMiles)));
 
 
         } else {
@@ -115,8 +113,9 @@ public class IncomeDao {
             }
 
             if (ratePerMile != 0) {
-                income.setRatePerMile(grossIncome/totalMiles);
+                income.setRatePerMile(Double.parseDouble(new DecimalFormat("0.00").format(grossIncome / totalMiles)));
             }
+
 
         }
         this.dynamoDbMapper.save(income);
