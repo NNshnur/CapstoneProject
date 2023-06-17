@@ -64,6 +64,13 @@ public class ExpenseDao {
             }
         }
 
+        Collections.sort(filteredExpenses, new Comparator<Expense>() {
+            @Override
+            public int compare(Expense expenseOne, Expense expenseTwo) {
+                return expenseOne.getDate().compareTo(expenseTwo.getDate());
+            }
+        });
+
         return filteredExpenses;
     }
     public Expense saveExpense(boolean isNew, String expenseId, String truckId, String vendorName, Category category,
