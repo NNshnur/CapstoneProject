@@ -20,6 +20,7 @@ class UpdateExpense extends BindingClass {
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         this.urlParams = new URLSearchParams(window.location.search);
+
     }
 
   /**
