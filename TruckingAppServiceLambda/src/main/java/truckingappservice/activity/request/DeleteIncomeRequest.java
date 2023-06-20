@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class DeleteIncomeRequest {
     private final String incomeId;
 
-    private DeleteIncomeRequest(String incomeId) {
+    public DeleteIncomeRequest(String incomeId) {
         this.incomeId = incomeId;
     }
 
