@@ -48,6 +48,7 @@ public class Expense {
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
     }
+
     @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "category")
     @DynamoDBIndexHashKey(globalSecondaryIndexName = CATEGORY_INDEX, attributeName = "category")
@@ -76,8 +77,7 @@ public class Expense {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-//    @DynamoDBTypeConvertedEnum
-//    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.S)
+
     @DynamoDBAttribute(attributeName = "paymentType")
     public String getPaymentType() {
         return paymentType;
@@ -105,14 +105,16 @@ public class Expense {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Expense expense = (Expense) o;
-        return Double.compare(expense.amount, amount) == 0 && Objects.equals(expenseId, expense.expenseId) && Objects.equals(truckId, expense.truckId) && Objects.equals(vendorName, expense.vendorName) && category == expense.category && Objects.equals(date, expense.date) && paymentType == expense.paymentType;
+        return Double.compare(expense.amount, amount) == 0 && Objects.equals(expenseId, expense.expenseId) && Objects.equals(truckId, expense.truckId) && Objects.equals(vendorName, expense.vendorName) && category == expense.category && Objects.equals(date, expense.date) && Objects.equals(paymentType, expense.paymentType);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(expenseId, truckId, vendorName, category, date, amount, paymentType);
     }
+
 }
+
 
 
 
