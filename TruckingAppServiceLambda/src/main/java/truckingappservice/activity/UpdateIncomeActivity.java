@@ -2,9 +2,7 @@ package truckingappservice.activity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import truckingappservice.activity.request.UpdateExpenseRequest;
 import truckingappservice.activity.request.UpdateIncomeRequest;
-import truckingappservice.activity.results.UpdateExpenseResult;
 import truckingappservice.activity.results.UpdateIncomeResult;
 import truckingappservice.converters.ModelConverter;
 import truckingappservice.dynamodb.IncomeDao;
@@ -27,7 +25,6 @@ public class UpdateIncomeActivity {
 
 
     public UpdateIncomeResult handleRequest(final UpdateIncomeRequest updateIncomeRequest) {
-        log.info("Received updateIncomeRequest {}", updateIncomeRequest);
 
         Income updateIncome = incomeDao.saveIncome(false, updateIncomeRequest.getIncomeId(), updateIncomeRequest.getTruckId(),
                 updateIncomeRequest.getDate(), updateIncomeRequest.getDeadHeadMiles(), updateIncomeRequest.getLoadedMiles(),

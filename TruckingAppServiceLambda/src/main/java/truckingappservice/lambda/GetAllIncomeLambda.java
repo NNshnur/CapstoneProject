@@ -4,9 +4,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import truckingappservice.activity.request.GetAllExpensesRequest;
 import truckingappservice.activity.request.GetAllIncomeRequest;
-import truckingappservice.activity.results.GetAllExpensesResult;
 import truckingappservice.activity.results.GetAllIncomeResult;
 
 public class GetAllIncomeLambda extends LambdaActivityRunner<GetAllIncomeRequest, GetAllIncomeResult>

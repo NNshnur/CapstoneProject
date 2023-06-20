@@ -26,14 +26,12 @@ public class GetAllIncomeActivity {
 
     public GetAllIncomeResult handleRequest(GetAllIncomeRequest request){
         Profile profile = profileDao.getProfile(request.getId());
-        log.error("profile{}", profile);
         if (profile == null) {
             log.error("Profile not found for id: {}", request.getId());
             return GetAllIncomeResult.builder().withIncomeList(Collections.emptyList()).build();
         }
 
         List<Income> listIncomes = incomeDao.getAllIncome(profile.getTruckId());
-        log.error("listIncomes {}", listIncomes);
 
         return GetAllIncomeResult.builder()
                 .withIncomeList(listIncomes)

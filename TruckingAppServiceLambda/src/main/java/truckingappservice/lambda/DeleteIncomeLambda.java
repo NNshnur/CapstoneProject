@@ -2,9 +2,7 @@ package truckingappservice.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import truckingappservice.activity.request.DeleteExpenseRequest;
 import truckingappservice.activity.request.DeleteIncomeRequest;
-import truckingappservice.activity.results.DeleteExpenseResult;
 import truckingappservice.activity.results.DeleteIncomeResult;
 
 public class DeleteIncomeLambda extends LambdaActivityRunner<DeleteIncomeRequest, DeleteIncomeResult>

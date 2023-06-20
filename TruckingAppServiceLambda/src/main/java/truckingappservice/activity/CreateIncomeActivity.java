@@ -23,7 +23,6 @@ public class CreateIncomeActivity {
 
 
     public CreateIncomeResult handleRequest(final CreateIncomeRequest createIncomeRequest) {
-        log.info("Received createIncomeRequest {}", createIncomeRequest);
 
         Income newIncome = incomeDao.saveIncome(true, null, createIncomeRequest.getTruckId(),
                 createIncomeRequest.getDate(), createIncomeRequest.getDeadHeadMiles(), createIncomeRequest.getLoadedMiles(),

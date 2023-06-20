@@ -1,7 +1,5 @@
 package truckingappservice.activity.results;
 
-import truckingappservice.models.IncomeModel;
-
 import java.util.List;
 
 public class DeleteIncomeResult {

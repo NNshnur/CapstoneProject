@@ -11,7 +11,6 @@ import truckingappservice.metrics.MetricsConstants;
 import truckingappservice.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
-import java.time.ZonedDateTime;
 
 public class UpdateProfileActivity {
     private final Logger log = LogManager.getLogger();
@@ -25,7 +24,6 @@ public class UpdateProfileActivity {
     }
 
     public UpdateProfileResult handleRequest(final UpdateProfileRequest updateProfileRequest)  {
-        log.info("Received UpdateProfileRequest{}", updateProfileRequest);
 
         Profile profile = profileDao.getProfile(updateProfileRequest.getProfileId());
 
@@ -39,7 +37,6 @@ public class UpdateProfileActivity {
                 .build();
     }
 
-    //see above - this needs work to be a valid method to track any useful metric
     private void publishExceptionMetrics(final boolean isInvalidAttributeValue,
                                          final boolean isInvalidAttributeChange) {
         metricsPublisher.addCount(MetricsConstants.UPDATEPROFILE_INVALIDATTRIBUTEVALUE_COUNT,

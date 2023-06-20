@@ -136,7 +136,6 @@ public List<String> deleteExpense(String expenseId) {
         dynamoDbMapper.delete(expenseToRemove);
     }
 
-    // Remove the deleted expense from the list
     expenseList.remove(expenseToRemove);
 
     List<String> stringList = new ArrayList<>();

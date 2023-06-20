@@ -24,9 +24,7 @@ public class UpdateProfileLambda extends LambdaActivityRunner<UpdateProfileReque
         return super.runActivity(
                 () -> {
                     UpdateProfileRequest unauthenticatedRequest = input.fromBody(UpdateProfileRequest.class);
-                    log.error("unauthenticatedRequest {}", unauthenticatedRequest);
                     String profileIdFromPath = input.getPathParameters().get("id");
-                    log.error("profileIdFromPath {}", profileIdFromPath);
                     return UpdateProfileRequest.builder()
                             .withFirstName(unauthenticatedRequest.getFirstName())
                             .withLastName(unauthenticatedRequest.getLastName())
