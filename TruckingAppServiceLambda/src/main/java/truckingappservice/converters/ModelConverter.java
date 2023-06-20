@@ -10,8 +10,6 @@ import truckingappservice.models.ProfileModel;
 public class ModelConverter {
 
 
-
-
     public ExpenseModel toExpenseModel(Expense expense) {
         return ExpenseModel.builder()
                 .withCategory(expense.getCategory())

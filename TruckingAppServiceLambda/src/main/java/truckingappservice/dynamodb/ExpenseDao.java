@@ -2,6 +2,7 @@ package truckingappservice.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import truckingappservice.dynamodb.models.Expense;
@@ -132,11 +133,12 @@ public List<String> deleteExpense(String expenseId) {
         }
     }
 
+
     if (expenseToRemove != null) {
         dynamoDbMapper.delete(expenseToRemove);
+
     }
 
-    // Remove the deleted expense from the list
     expenseList.remove(expenseToRemove);
 
     List<String> stringList = new ArrayList<>();

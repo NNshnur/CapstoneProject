@@ -4,12 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import truckingappservice.activity.request.DeleteIncomeRequest;
 import truckingappservice.activity.results.DeleteIncomeResult;
-import truckingappservice.converters.ModelConverter;
 import truckingappservice.dynamodb.IncomeDao;
 import truckingappservice.dynamodb.models.Income;
-import truckingappservice.exceptions.ExpenseNotFoundException;
 import truckingappservice.exceptions.IncomeNotFoundException;
-import truckingappservice.models.IncomeModel;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -25,7 +22,6 @@ public class DeleteIncomeActivity {
     }
 
     public DeleteIncomeResult handleRequest(final DeleteIncomeRequest deleteIncomeRequest) {
-        log.info("Received deleteIncomeRequest {}", deleteIncomeRequest);
         String incomeId = deleteIncomeRequest.getIncomeId();
         Income income = incomeDao.getIncome(incomeId);
         if (income == null) {
@@ -34,7 +30,6 @@ public class DeleteIncomeActivity {
         List<String> list = incomeDao.deleteIncome(incomeId);
         List<String> updatedList = new ArrayList<>(list);
 
-        log.error("list {}", list);
         return DeleteIncomeResult.builder()
                 .withIncomeList(updatedList)
                 .build();

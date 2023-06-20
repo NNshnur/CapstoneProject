@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import truckingappservice.models.Category;
 
-import java.util.Set;
-
 @JsonDeserialize(builder = UpdateExpenseRequest.Builder.class)
 public class UpdateExpenseRequest {
     private final String profileId;

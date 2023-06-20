@@ -23,7 +23,6 @@ public class CreateExpenseActivity {
 
 
     public CreateExpenseResult handleRequest(final CreateExpenseRequest createExpenseRequest) {
-        log.info("Received CreateExpenseRequest {}", createExpenseRequest);
 
         Expense newExpense = expenseDao.saveExpense(true, null, createExpenseRequest.getTruckId(),
                 createExpenseRequest.getVendorName(), createExpenseRequest.getCategory(), createExpenseRequest.getDate(),

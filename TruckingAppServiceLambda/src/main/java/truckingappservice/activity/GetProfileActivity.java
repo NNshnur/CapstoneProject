@@ -27,7 +27,6 @@ public class GetProfileActivity {
      * @return a {@code GetProfileResult} object containing the retrieved user profile.
      */
     public GetProfileResult handleRequest(final GetProfileRequest getProfileRequest){
-        log.info("Receive GetProfileResult {} ", getProfileRequest);
 
         Profile profile = profileDao.getProfile(getProfileRequest.getProfileId());
 

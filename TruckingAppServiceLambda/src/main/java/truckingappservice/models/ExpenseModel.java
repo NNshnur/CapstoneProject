@@ -1,8 +1,6 @@
 package truckingappservice.models;
 
-import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 public class ExpenseModel {
     private String expenseId;

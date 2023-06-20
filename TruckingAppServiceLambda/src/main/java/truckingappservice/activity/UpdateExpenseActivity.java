@@ -9,7 +9,6 @@ import truckingappservice.dynamodb.ExpenseDao;
 import truckingappservice.dynamodb.models.Expense;
 import truckingappservice.metrics.MetricsConstants;
 import truckingappservice.metrics.MetricsPublisher;
-import truckingappservice.models.Category;
 
 import javax.inject.Inject;
 
@@ -26,7 +25,6 @@ public class UpdateExpenseActivity {
 
 
     public UpdateExpenseResult handleRequest(final UpdateExpenseRequest updateExpenseRequest) {
-        log.info("Received UpdateExpenseRequest {}", updateExpenseRequest);
 
         Expense updateExpense = expenseDao.saveExpense(false, updateExpenseRequest.getExpenseId(), updateExpenseRequest.getTruckId(),
                 updateExpenseRequest.getVendorName(), updateExpenseRequest.getCategory(), updateExpenseRequest.getDate(),

@@ -7,7 +7,7 @@ public class DeleteExpenseRequest {
 
     private final String expenseId;
 
-    private DeleteExpenseRequest(String expenseId) {
+    public DeleteExpenseRequest(String expenseId) {
         this.expenseId = expenseId;
     }
 

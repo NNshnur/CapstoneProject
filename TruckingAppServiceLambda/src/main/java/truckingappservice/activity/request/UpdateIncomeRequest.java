@@ -2,7 +2,7 @@ package truckingappservice.activity.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import truckingappservice.models.Category;
+
 
 @JsonDeserialize(builder = UpdateIncomeRequest.Builder.class)
 public class UpdateIncomeRequest {

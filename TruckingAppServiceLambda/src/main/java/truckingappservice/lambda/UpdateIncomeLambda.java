@@ -4,9 +4,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import truckingappservice.activity.request.UpdateExpenseRequest;
 import truckingappservice.activity.request.UpdateIncomeRequest;
-import truckingappservice.activity.results.UpdateExpenseResult;
 import truckingappservice.activity.results.UpdateIncomeResult;
 
 public class UpdateIncomeLambda extends LambdaActivityRunner<UpdateIncomeRequest, UpdateIncomeResult>

@@ -21,7 +21,6 @@ public class CreateProfileActivity {
         this.profileDao = profileDao;
     }
     public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest){
-        log.info("Received CreateProfileRequest{}", createProfileRequest);
 
         Profile newProfile = profileDao.saveProfile(true,
                 createProfileRequest.getId(), createProfileRequest.getFirstName(),

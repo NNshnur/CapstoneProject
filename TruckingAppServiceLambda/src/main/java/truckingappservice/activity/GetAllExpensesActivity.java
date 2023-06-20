@@ -27,14 +27,11 @@ public class GetAllExpensesActivity {
 
     public GetAllExpensesResult handleRequest(GetAllExpensesRequest request){
         Profile profile = profileDao.getProfile(request.getId());
-        log.error("profile{}", profile);
         if (profile == null) {
-            log.error("Profile not found for id: {}", request.getId());
             return GetAllExpensesResult.builder().withExpenseList(Collections.emptyList()).build();
         }
 
         List<Expense> listExpenses = expenseDao.getAllExpenses(profile.getTruckId());
-        log.error("listExpenses {}", listExpenses);
 
         return GetAllExpensesResult.builder()
                 .withExpenseList(listExpenses)

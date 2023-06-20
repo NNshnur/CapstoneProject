@@ -19,52 +19,53 @@ to go with?
 
 ## 3. Use Cases
 
-* U0. As an owner operator I want to create a profile and update it if/when need it, so that I can maintain
+* U1. As an owner operator I want to create a profile.
+* U2. As an owner operator I want to update a profile if/when need it, so that I can maintain
 accurate and up-to-date personal information.
-* U1. As an owner operator I want to create operating expense entry, so that I can easily record my operating 
+* U3. As an owner operator I want to create operating expense entry, so that I can easily record my operating 
 expenses, and it will enable me to track and manage my expenses effectively.
-* U2. As an owner operator I want to update operating expense entry, so that I can modify and correct any inaccuracies
+* U4. As an owner operator I want to update operating expense entry, so that I can modify and correct any inaccuracies
 or changes in my operating expenses.
-* U3. As an owner operator I want to view all operating expense, so that I can access a comprehensive list of my 
+* U5. As an owner operator I want to view all operating expense, so that I can access a comprehensive list of my 
 operating expenses to have a complete overview of my expenses, facilitating better financial analysis and 
 decision-making.
-* U4. As an owner operator I want to 'soft' delete expense entry, so that I can remove an expense entry without 
-permanently deleting it, that will offer flexibility and the ability to undo accidental deletions.
-* U5. As an owner operator I want to create an entry of income, so that I can easily record my income transactions.
-* U6. As an owner operator I want to delete an entry of income, so that I can remove specific income entries 
+* U6. As an owner operator I want to delete expense entry, so that I can remove specific expense entries
+when necessary. It will allow me to manage my expense records accurately.
+* U7. As an owner operator I want to create an entry of income, so that I can easily record my income transactions.
+* U8. As an owner operator I want to delete an entry of income, so that I can remove specific income entries 
 when necessary. It will allow me to manage my income records accurately.
-* U7. As an owner operator I want to update an entry of income, so that I can modify and correct income entries 
+* U9. As an owner operator I want to update an entry of income, so that I can modify and correct income entries 
 as needed, it will enable me to keep my income records accurate and up to date.
-* U8. As an owner operator I want to view all income entries, so that I can access a comprehensive list of my 
+* U10. As an owner operator I want to view all income entries, so that I can access a comprehensive list of my 
 income entries.
-* U9. As an owner operator I want to filter by category, so that I can easily sort and group entries based on specific
+* U11. As an owner operator I want to filter by category, so that I can easily sort and group entries based on specific
 categories.
-* U10. As an owner operator I want to filter by date, so that I can view entries within a specific date range.
-* U11. As an owner operator I want to see a graph representation of my expenses and income by month, so that
+* U12. As an owner operator I want to see a graph representation of my expenses and income by month, so that
 I can visualize my expenses and income trends over different months.
-* U12. As an owner operator I want to generate report and export it in PDF/CSV format, so that I can generate a 
+* U13. As an owner operator I want to generate report and export it in PDF format, so that I can generate a 
 comprehensive financial report and save it in a portable format.
 
 ## 4. Project Scope
 
 ### 4.1. In Scope
-0. As an owner operator I want to create a profile and update it if/when need it;
-1. As an owner operator I want to create operating expense entry; 
-2. As an owner operator  I want to update operating expense entry; 
-3. As an owner operator  I want to view all operating expense; 
-4. As an owner operator  I want to 'soft delete' expense entry. 
-5. As an owner operator  I want to create an entry of income; 
-6. As an owner operator  I want to delete an entry of income; 
-7. As an owner operator  I want to update an entry of income; 
-8. As an owner operator I want to view all income entries; 
-9. As an owner operator  I want to filter by category;
-10. As an owner operator  I want to filter by date.
+
+1. As an owner operator I want to create a profile.
+2. As an owner operator I want to update a profile.
+3. As an owner operator I want to create operating expense entry;
+4. As an owner operator  I want to update operating expense entry;
+5. As an owner operator  I want to view all operating expense;
+6. As an owner operator  I want to delete expense entry.
+7. As an owner operator  I want to create an entry of income;
+8. As an owner operator  I want to delete an entry of income;
+9. As an owner operator  I want to update an entry of income;
+10. As an owner operator I want to view all income entries;
+11. As an owner operator  I want to filter by category;
 
 
 ### 4.2. Out of Scope
 
-* Stretch Goal 1 - As an owner operator I want to see a graph representation of my expenses and income by month (analytics);
-* Stretch Goal 2 - As an owner operator I want to generate report and export it in PDF/CSV format.
+* Stretch Goal 1 - As an owner operator I want to see a graph representation of my expenses and income by month YTD;
+* Stretch Goal 2 - As an owner operator I want to generate report and export it in PDF format.
 
 # 5. Proposed Architecture Overview
 
@@ -84,20 +85,21 @@ tables.
 - String firstName;
 - String lastName;
 - List<String> truckId;
+- double startingBalance;
 
 **Expense Model**
 - String expenseId;
 - String truckId;
 - String vendorName;
 - enum category;
-- LocalDate date;
+- String date;
 - double amount;
 - enum paymentType;
 
 **Income Model**
 - String incomeId;
 - String truckId;
-- LocalDate date;
+- String date;
 - double deadheadMiles;
 - double loadedMiles;
 - double totalMiles;
@@ -142,12 +144,9 @@ by the Trucking App Service.
 * Accepts incomeId to be deleted from an income list. Returns the updated income list.
 
 ## 6.10. Filter expense by category endpoint
-#### GET/expenses?category=nameOfCategoryNeeded
+#### GET/expenses/filter
 * Accepts category to be filtered by, returns the updated filtered list.
 
-## 6.11. Filter expenses by date endpoint
-#### GET/expenses?date=dateNeeded
-* Accepts date to be filtered by, returns the updated filtered list.
 
 # 7. Tables
 
@@ -158,6 +157,7 @@ emailAddress // string, partition key
 firstName // string
 lastName // string
 truckId // List <String> 
+startingBalance // double
 
 ```
 
@@ -167,7 +167,7 @@ expenseId // partition key, string
 truckId // string 
 vendorName // string
 category // enum
-date // LocalDate
+date // String
 amount // double 
 payment type // enum 
 ```
@@ -176,7 +176,7 @@ payment type // enum
 ``` 
 incomeId // partition key, string
 truckId // string 
-date // LocalDate
+date // String
 deadHeadMiles // double
 loadedMiles // double
 totalMiles // double
@@ -195,25 +195,6 @@ amount //double
 payment type/enum
 ```
 
-`DateIndex`
-``` 
-date //partition key, LocalDate
-truckId // string
-category // enum
-vendorName //string
-amount //double
-payment type/enum
-```
-
-`TruckIndex`
-``` 
-truckId // partition key, string
-date // LocalDate
-vendorName // string
-category // enum
-amount // double 
-payment type // enum 
-```
 
 # 8. Pages
 ## Landing Page
@@ -229,5 +210,4 @@ payment type // enum
 ![](images/AppGrossIncomeSheet.png)
 ![](images/AppRunningBalanceSheet.png)
 ![](images/AppExpenseByCategoryView.png)
-![](images/AppExpenseByDateView.png)
-![](images/AppExpenseByTruckView.png)
+
