@@ -23,8 +23,8 @@ curl -v -X PUT http://127.0.0.1:3000/expenses/{id} \
 -H 'Authorization: TOKEN' \
 -d '{"profileId":"nataliashnur@gmail.com","expenseId":"TLX4Y","truckId":"Volvo775533","vendorName":"Frazier-Company","category":"FUEL","date":"2023-05-15","amount":500.05,"paymentType":"CREDIT_CARD"}'
 
-'Delete expense entry endpoint' -> DELETE expenses/removeExpense
-curl -v -X DELETE http://127.0.0.1:3000/expenses/removeExpense \
+'Delete expense entry endpoint' -> DELETE expenses/{expenseId}
+curl -v -X DELETE http://127.0.0.1:3000/expenses/{expenseId} \
 -H 'Authorization: TOKEN' \
 -d '{"expenseId":"8N51O"}'
 
@@ -47,8 +47,8 @@ curl -v -X PUT http://127.0.0.1:3000/incomes/{incomeId} \
 -H 'Authorization: TOKEN' \
 -d '{"profileId":"nataliashnur@gmail.com" , "incomeId":"AYCZ4", "truckId":"777-55-33", "date":"2023-03-31","deadHeadMiles":25.00, "loadedMiles":607.08, "grossIncome":4200.00}'
 
-'Delete income entry endpoint' -> DELETE incomes/removeIncome
-curl -v -X DELETE http://127.0.0.1:3000/expenses/removeExpense \
+'Delete income entry endpoint' -> DELETE incomes/{incomeId}
+curl -v -X DELETE http://127.0.0.1:3000/expenses/{incomeId} \
 -H 'Authorization: TOKEN' \
 -d '{"incomeId":"8N51O"}'
 
