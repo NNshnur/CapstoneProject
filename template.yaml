@@ -373,7 +373,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /expenses/{expenseId}
+            Path: /expenses/removeExpense/{expenseId}
             Method: delete
 
   GetAllIncomeLambda:
@@ -453,7 +453,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /incomes/{incomeId}
+            Path: /incomes/removeIncome/{incomeId}
             Method: delete
 
   FilterExpenseByCategoryLambda:
@@ -516,10 +516,7 @@ Resources:
               KeyType: "RANGE"
           Projection:
             ProjectionType: "ALL"
-#            NonKeyAttributes:
-#              - "vendorName"
-#              - "date"
-#              - "amount"
+
 
   IncomesTable:
     Type: AWS::DynamoDB::Table

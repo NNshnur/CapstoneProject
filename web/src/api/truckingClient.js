@@ -219,7 +219,7 @@ export default class TruckingClient extends BindingClass {
            const token = await this.getTokenOrThrow("Only authenticated users can remove an expense.");
            console.log('Token:', token); // Log the value of the token
 
-           const response = await this.axiosClient.delete(`expenses/${expenseId}`, {
+           const response = await this.axiosClient.delete(`expenses/removeExpense/${expenseId}`, {
                headers: {
                    Authorization: `Bearer ${token}`,
                    'Content-Type': 'application/json'
@@ -297,7 +297,7 @@ export default class TruckingClient extends BindingClass {
            const token = await this.getTokenOrThrow("Only authenticated users can remove an expense.");
            console.log('Token:', token); // Log the value of the token
 
-           const response = await this.axiosClient.delete(`incomes/${incomeId}`, {
+           const response = await this.axiosClient.delete(`incomes/removeIncome/${incomeId}`, {
                headers: {
                    Authorization: `Bearer ${token}`,
                    'Content-Type': 'application/json'
