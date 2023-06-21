@@ -36,7 +36,7 @@ Truck owner operators often struggle with managing their financial operations du
 - Safety Compliance Features: The application will include several safety compliance features to help truck owner operators maintain adherence to safety regulations. These features will include a Safety Checklist, Driver Training and Certification Tracking, and an Audit Trail and Record Keeping system.
 
 ## Design Document
-For a detailed overview of the project design, refer to the [Design Document](DesignDocument.md).
+For a detailed overview of the project design, refer to the [Design Document](resources/design-document.md).
 
 ## How to Run the Project
 To run and interact with the project, please follow these steps:
