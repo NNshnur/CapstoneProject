@@ -40,5 +40,5 @@ For a detailed overview of the project design, refer to the [Design Document](re
 
 ## How to Run the Project
 To run and interact with the project, please follow these steps:
-1. Access the project using the following link: [Project Link](https://d2uyd2ff0esz1h.cloudfront.net/)
+1. Access the project using the following link: [Project Link](https://d2ztpws491d6gq.cloudfront.net/) 
 2. Click on the link to access and use the project. Enjoy! :)
